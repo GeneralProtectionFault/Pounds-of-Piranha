@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://dpyygctguglj2"]
+
+[ext_resource type="Texture2D" uid="uid://csroi481kaqwi" path="res://Graphics/Numbers/8.png" id="1_ir0h3"]
+[ext_resource type="Texture2D" uid="uid://x3tfraxfo8si" path="res://Graphics/Numbers/NumberBoundary.png" id="2_c8hq1"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_tbp71"]
+a = Vector2(54, 31)
+b = Vector2(310, 31)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ph6w1"]
+a = Vector2(310, 38)
+b = Vector2(310, 254)
+
+[node name="8" type="Node2D" groups=["NumberScenes"]]
+
+[node name="8" type="Sprite2D" parent="."]
+position = Vector2(177, 252)
+texture = ExtResource("1_ir0h3")
+
+[node name="NumberBoundary" type="Sprite2D" parent="."]
+position = Vector2(176, 251)
+texture = ExtResource("2_c8hq1")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="Collision_Top" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-7, 0)
+shape = SubResource("SegmentShape2D_tbp71")
+
+[node name="Collision_Left_Top" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-264, -7)
+shape = SubResource("SegmentShape2D_ph6w1")
+
+[node name="Collision_Right_Top" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -7)
+shape = SubResource("SegmentShape2D_ph6w1")
+
+[node name="Collision_Left_Bottom" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-264, 220)
+shape = SubResource("SegmentShape2D_ph6w1")
+
+[node name="Collision_Right_Bottom" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1, 214)
+shape = SubResource("SegmentShape2D_ph6w1")
+
+[node name="Collision_Middle" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-7, 220)
+shape = SubResource("SegmentShape2D_tbp71")
+
+[node name="Collision_Bottom" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 442)
+shape = SubResource("SegmentShape2D_tbp71")

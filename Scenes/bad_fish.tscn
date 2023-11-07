@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dw5jqk5ku52ji"]
+
+[ext_resource type="Script" path="res://Scripts/Fish.cs" id="1_0xtko"]
+[ext_resource type="Texture2D" uid="uid://clil30mmibkvv" path="res://Graphics/BadFish.png" id="1_skffu"]
+
+[node name="BadFish" type="Node2D"]
+script = ExtResource("1_0xtko")
+
+[node name="BadFish" type="Sprite2D" parent="."]
+texture = ExtResource("1_skffu")
+
+[node name="NumberRayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(225, 0)
+collide_with_areas = true
+collide_with_bodies = false

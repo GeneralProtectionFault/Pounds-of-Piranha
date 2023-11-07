@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://ba3kwj5xb854u"]
+
+[ext_resource type="Texture2D" uid="uid://crb3nkgcxopuu" path="res://Graphics/Numbers/1.png" id="1_rujds"]
+[ext_resource type="Texture2D" uid="uid://x3tfraxfo8si" path="res://Graphics/Numbers/NumberBoundary.png" id="2_b1sl2"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ph6w1"]
+a = Vector2(310, 38)
+b = Vector2(310, 466)
+
+[node name="1" type="Node2D" groups=["NumberScenes"]]
+
+[node name="1" type="Sprite2D" parent="."]
+position = Vector2(177, 252)
+texture = ExtResource("1_rujds")
+
+[node name="NumberBoundary" type="Sprite2D" parent="."]
+position = Vector2(176, 251)
+texture = ExtResource("2_b1sl2")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="Collision_Right" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("SegmentShape2D_ph6w1")
