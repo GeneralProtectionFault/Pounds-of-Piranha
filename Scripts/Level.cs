@@ -2,10 +2,12 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class Level : Node
+public partial class Level : Node2D
 {
-	public static event EventHandler WeightMoved;
+	[Export] public bool ShowGridLines = false;
 
+
+	public static event EventHandler WeightMoved;
 
 
 	public static AStarGrid2D Grid;
@@ -22,8 +24,8 @@ public partial class Level : Node
 
 
 	// Size of a single number in pixels
-	public const int XResolution = 350;
-	public const int YResolution = 250;
+	public const int XResolution = 245;
+	public const int YResolution = 175;
 
 
 
@@ -41,7 +43,7 @@ public partial class Level : Node
 			NumberSpawnNodes.Add(SpawnNode);
 		}
 
-		SpawnNumber(0);
+		SpawnNumber(1029);
 		CreateGrid();
 
 	}
@@ -49,7 +51,7 @@ public partial class Level : Node
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		
+		// QueueRedraw();
 	}
 
 
@@ -57,6 +59,39 @@ public partial class Level : Node
 	public void TestButtonPressed()
 	{
 		WeightMoved?.Invoke(this, EventArgs.Empty);
+	}
+
+
+	public override void _Draw()
+	{
+		if (ShowGridLines)
+		{
+			// Show AstarGrid2D lines
+			// End.X & End.Y are the number of cells in the grid
+			for (int i = 0; i <= Grid.Region.End.X; i++)
+			{
+				for (int n = 0; n <= Grid.Region.End.Y; n++)
+				{
+					// Top-left corner of cell
+					var XCoord1 = GridTopLeft.X + (XResolution * i);
+					var YCoord1 = GridTopLeft.Y + (YResolution * n);
+					// Top-right corner of cell
+					var XCoord2 = XCoord1 + XResolution;
+					var YCoord2 = YCoord1;
+					// Bottom-left corner of cell
+					var XCoord3 = XCoord1;
+					var YCoord3 = YCoord1 + YResolution;
+					// Bottom-right corner of cell
+					var XCoord4 = XCoord2;
+					var YCoord4 = YCoord3;
+
+					DrawLine(new Vector2(XCoord1, YCoord1), new Vector2(XCoord2, YCoord2), Colors.Red, 1.0f);
+					DrawLine(new Vector2(XCoord1, YCoord1), new Vector2(XCoord3, YCoord3), Colors.Red, 1.0f);
+					DrawLine(new Vector2(XCoord2, YCoord2), new Vector2(XCoord4, YCoord4), Colors.Red, 1.0f);
+					DrawLine(new Vector2(XCoord3, YCoord3), new Vector2(XCoord4, YCoord4), Colors.Red, 1.0f);
+				}
+			}
+		}
 	}
 
 
@@ -96,7 +131,7 @@ public partial class Level : Node
 		foreach (var Number in GetTree().GetNodesInGroup("NumberScenes"))
 		{
 			var NumberPosition = (Number as Node2D).GlobalPosition;
-			GD.Print($"{Number.Name}: {NumberPosition}");
+			GD.Print($"{Number.Name} (Global) Position: {NumberPosition}");
 
 			if (TopLeftXPosition == -1f || NumberPosition.X < TopLeftXPosition)
 			{
@@ -146,10 +181,7 @@ public partial class Level : Node
 		GD.Print($"Grid Offset: {Grid.Offset}");
 		GD.Print($"Grid Cell Size: {Grid.CellSize}");
 		GD.Print($"Grid Top Left: {GridTopLeft}");
-		GD.Print($"Grid Bottom Right: {GridBottomRight}");		
-
-
-
+		GD.Print($"Grid Bottom Right: {GridBottomRight}");	
 		
 	}
 
@@ -182,12 +214,12 @@ public partial class Level : Node
 
 	public static Vector2 CoordinatesFromCell(Vector2I Cell)
 	{
-		GD.Print($"Passed in Cell: {Cell}");
+		// GD.Print($"Passed in Cell: {Cell}");
 
 		var XTopLeft = GridTopLeft.X + (Cell.X * XResolution);
 		var YTopLeft = GridTopLeft.Y + (Cell.Y * YResolution);
 
-		GD.Print($"Grid Top Left: {GridTopLeft}");
+		// GD.Print($"Grid Top Left: {GridTopLeft}");
 		
 
 		var XPostion = XTopLeft + (XResolution / 2);

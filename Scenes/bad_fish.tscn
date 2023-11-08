@@ -7,6 +7,7 @@
 script = ExtResource("1_0xtko")
 
 [node name="BadFish" type="Sprite2D" parent="."]
+scale = Vector2(0.76, 0.76)
 texture = ExtResource("1_skffu")
 
 [node name="NumberRayCast2D" type="RayCast2D" parent="."]

@@ -105,24 +105,24 @@ public partial class Fish : Node2D
     {
 		// ********* For testing navigation by clicking the mouse on the destination ************
 
-		// if (@event is InputEventMouseButton MouseEvent)
-		// {
-		// 	if (!MouseEvent.IsActionPressed("click"))
-		// 		return;
+		if (@event is InputEventMouseButton MouseEvent)
+		{
+			if (!MouseEvent.IsActionPressed("click"))
+				return;
 
-		// 	GD.Print($"Fish position: {GlobalPosition}");
-		// 	GD.Print($"Mouse clicked at: {MouseEvent.Position}");
-
-			
-		// 	// Need to get the cell by index-ey position, not coordinates, because that makes sense
-		// 	IDPath = Level.Grid.GetIdPath(Level.CellFromCoordinates(GlobalPosition), Level.CellFromCoordinates(MouseEvent.Position));
-		// 	// Removes the current position
-		// 	IDPath = IDPath.Slice(1);
+			// GD.Print($"Fish position: {GlobalPosition}");
+			GD.Print($"Mouse clicked at: {MouseEvent.Position}");
 
 			
+			// Need to get the cell by index-ey position, not coordinates, because that makes sense
+			// IDPath = Level.Grid.GetIdPath(Level.CellFromCoordinates(GlobalPosition), Level.CellFromCoordinates(MouseEvent.Position));
+			// Removes the current position
+			// IDPath = IDPath.Slice(1);
 
-		// 	GD.Print(IDPath);
-		// }
+			
+
+			// GD.Print(IDPath);
+		}
     }
 
 

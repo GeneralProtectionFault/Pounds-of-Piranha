@@ -3,13 +3,12 @@
 [node name="NumberSpawns" type="Node2D"]
 
 [node name="Digit_1" type="Node2D" parent="." groups=["NumberSpawns"]]
-position = Vector2(-220, -300)
 
 [node name="Digit_2" type="Node2D" parent="." groups=["NumberSpawns"]]
-position = Vector2(129, -300)
+position = Vector2(244, 0)
 
 [node name="Digit_3" type="Node2D" parent="." groups=["NumberSpawns"]]
-position = Vector2(478, -300)
+position = Vector2(489, 0)
 
 [node name="Digit_4" type="Node2D" parent="." groups=["NumberSpawns"]]
-position = Vector2(827, -300)
+position = Vector2(733, 0)
