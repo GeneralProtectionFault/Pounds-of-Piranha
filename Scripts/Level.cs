@@ -33,6 +33,9 @@ public partial class Level : Node2D
 	private static List<Node2D> NumberNodes = new List<Node2D>();
 
 
+	private static List<Line2D> GridDebugLines = new List<Line2D>();
+	private static bool LinesPopulated = false;
+
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -43,9 +46,7 @@ public partial class Level : Node2D
 			NumberSpawnNodes.Add(SpawnNode);
 		}
 
-		SpawnNumber(0);
-		CreateGrid();
-
+		SpawnNumber(71);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -61,47 +62,77 @@ public partial class Level : Node2D
 		WeightMoved?.Invoke(this, EventArgs.Empty);
 	}
 
+	public void NumberSetButtonPressed()
+	{
+		LinesPopulated = false;
+
+		var NumberOverride = GetNode<TextEdit>("NumberOverride");
+		try 
+		{
+			var Number = Convert.ToInt32(NumberOverride.Text);
+			SpawnNumber(Number);
+		}
+		catch
+		{
+			GD.Print("Converting override to an integer failure.  Don't be a jerk, but in an integer!");
+		}
+	}
+
+	public void TestNumberChanged()
+	{
+		QueueRedraw();
+	}
+
 
 	public override void _Draw()
 	{
-		if (ShowGridLines)
-		{
-			// Show AstarGrid2D lines
-			// End.X & End.Y are the number of cells in the grid
-			for (int i = 0; i < Grid.Region.End.X; i++)
-			{
-				for (int n = 0; n < Grid.Region.End.Y; n++)
-				{
-					// Top-left corner of cell
-					var XCoord1 = GridTopLeft.X + (XResolution * i);
-					var YCoord1 = GridTopLeft.Y + (YResolution * n);
-					// Top-right corner of cell
-					var XCoord2 = XCoord1 + XResolution;
-					var YCoord2 = YCoord1;
-					// Bottom-left corner of cell
-					var XCoord3 = XCoord1;
-					var YCoord3 = YCoord1 + YResolution;
-					// Bottom-right corner of cell
-					var XCoord4 = XCoord2;
-					var YCoord4 = YCoord3;
+		// GD.Print("Drawing!");
 
-					DrawLine(new Vector2(XCoord1, YCoord1), new Vector2(XCoord2, YCoord2), Colors.Red, 1.0f);
-					DrawLine(new Vector2(XCoord1, YCoord1), new Vector2(XCoord3, YCoord3), Colors.Red, 1.0f);
-					DrawLine(new Vector2(XCoord2, YCoord2), new Vector2(XCoord4, YCoord4), Colors.Red, 1.0f);
-					DrawLine(new Vector2(XCoord3, YCoord3), new Vector2(XCoord4, YCoord4), Colors.Red, 1.0f);
-				}
+		if (ShowGridLines && !LinesPopulated)
+			DrawAstarGrid();
+	}
+
+	
+	private void DrawAstarGrid()
+	{
+		// Show AstarGrid2D lines
+		// End.X & End.Y are the number of cells in the grid
+		for (int i = 0; i < Grid.Region.End.X; i++)
+		{
+			for (int n = 0; n < Grid.Region.End.Y; n++)
+			{
+				// Top-left corner of cell
+				var XCoord1 = GridTopLeft.X + (XResolution * i);
+				var YCoord1 = GridTopLeft.Y + (YResolution * n);
+				// Top-right corner of cell
+				var XCoord2 = XCoord1 + XResolution;
+				var YCoord2 = YCoord1;
+				// Bottom-left corner of cell
+				var XCoord3 = XCoord1;
+				var YCoord3 = YCoord1 + YResolution;
+				// Bottom-right corner of cell
+				var XCoord4 = XCoord2;
+				var YCoord4 = YCoord3;
+
+				DrawLine(new Vector2(XCoord1, YCoord1), new Vector2(XCoord2, YCoord2), Colors.Red, 1.0f);
+				DrawLine(new Vector2(XCoord1, YCoord1), new Vector2(XCoord3, YCoord3), Colors.Red, 1.0f);
+				DrawLine(new Vector2(XCoord2, YCoord2), new Vector2(XCoord4, YCoord4), Colors.Red, 1.0f);
+				DrawLine(new Vector2(XCoord3, YCoord3), new Vector2(XCoord4, YCoord4), Colors.Red, 1.0f);
 			}
 		}
+
+		LinesPopulated = true;
 	}
 
 
 	
-	private void SpawnNumber(int number)
+	private async void SpawnNumber(int number)
 	{
 		// First, clear 'em
 		foreach(var Number in NumberNodes)
 		{
 			Number.QueueFree();
+			await ToSignal(Number, "tree_exited");
 		}
 
 		NumberNodes.Clear();
@@ -114,8 +145,10 @@ public partial class Level : Node2D
 			var NumberScene = ResourceLoader.Load<PackedScene>($"res://Scenes/Numbers/{Digit}.tscn").Instantiate();
 			NumberNodes.Add((Node2D)NumberScene);
 			NumberSpawnNodes[i].AddChild(NumberScene);
+			
 		}
 
+		CreateGrid();
 	}
 
 
@@ -123,34 +156,40 @@ public partial class Level : Node2D
 	private void CreateGrid()
 	{
 		Grid = new AStarGrid2D();
-		
-
 		Node2D TopLeftNumber = new Node2D();
+
+		TopLeftNumber_X = -1;
+		TopLeftNumber_Y = -1;
+		BottomRightNumber_X = -1;
+		BottomRightNumber_Y = -1;
+
 
 		// Get the top-left number on the screen
 		foreach (var Number in GetTree().GetNodesInGroup("NumberScenes"))
 		{
+			GD.Print($"Number in NumberScenes that is in tree: {Number}");
+
 			var NumberPosition = (Number as Node2D).GlobalPosition;
 			GD.Print($"{Number.Name} (Global) Position: {NumberPosition}");
 
-			if (TopLeftNumber_X == -1f || NumberPosition.X < TopLeftNumber_X)
+			if (TopLeftNumber_X == -1 || NumberPosition.X < TopLeftNumber_X)
 			{
 				TopLeftNumber_X = (int)NumberPosition.X;
 				TopLeftNumber = Number as Node2D;
 			}
 
-			if (TopLeftNumber_Y == -1f || NumberPosition.Y < TopLeftNumber_Y)		
+			if (TopLeftNumber_Y == -1 || NumberPosition.Y < TopLeftNumber_Y)		
 			{
 				TopLeftNumber_Y = (int)NumberPosition.Y;
 				TopLeftNumber = Number as Node2D;
 			}
 
-			if (BottomRightNumber_X == -1f || NumberPosition.X > BottomRightNumber_X)
+			if (BottomRightNumber_X == -1 || NumberPosition.X > BottomRightNumber_X)
 			{
 				BottomRightNumber_X = (int)NumberPosition.X;
 			}
 
-			if (BottomRightNumber_Y == -1f || NumberPosition.Y > BottomRightNumber_Y)
+			if (BottomRightNumber_Y == -1 || NumberPosition.Y > BottomRightNumber_Y)
 			{
 				BottomRightNumber_Y = (int)NumberPosition.Y;
 			}
@@ -183,6 +222,7 @@ public partial class Level : Node2D
 		GD.Print($"Grid Top Left: {GridTopLeft}");
 		GD.Print($"Grid Bottom Right: {GridBottomRight}");	
 		
+		QueueRedraw();
 	}
 
 
@@ -192,9 +232,10 @@ public partial class Level : Node2D
 
     public static Vector2I CellFromCoordinates(Vector2 Coordinates)
 	{
-		var XOffset = Coordinates.X - GridTopLeft.X;
-		var YOffset = Coordinates.Y - GridTopLeft.Y;
 		// The +1 here is because rounding can yield us a pixel short, and casting to an int might get us the wrong number (1 too few)
+		var XOffset = Coordinates.X - GridTopLeft.X + 1;
+		var YOffset = Coordinates.Y - GridTopLeft.Y + 1;
+		
 		// var XCellCount = (GridBottomRight.X - GridTopLeft.X + 1) / XResolution;
 		// GD.Print($"X Cell Cnt: {XCellCount}");
 
@@ -221,7 +262,7 @@ public partial class Level : Node2D
 
 		// GD.Print($"Grid Top Left: {GridTopLeft}");
 		
-
+		// Get the CENTER of the cell
 		var XPostion = XTopLeft + (XResolution / 2);
 		var YPosition = YTopLeft + (YResolution / 2);
 
