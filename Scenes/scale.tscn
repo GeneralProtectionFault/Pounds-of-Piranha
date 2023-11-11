@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dx0rg7lgx7tl8"]
+
+[ext_resource type="Texture2D" uid="uid://c5hpejs8i4142" path="res://Graphics/Scale.png" id="1_li13e"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_q66qh"]
+a = Vector2(-31, 124)
+b = Vector2(113, 124)
+
+[node name="Scale" type="RigidBody2D"]
+
+[node name="Scale" type="Sprite2D" parent="."]
+texture = ExtResource("1_li13e")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-147, -122, -137, -120, -104, -46, -68, 3, -36, 24, 0, 32, 39, 23, 72, -1, 108, -51, 140, -119, 149, -119, 141, -66, 121, -28, 96, 2, 76, 21, 42, 37, 0, 44, -45, 35, -81, 18, -101, 0, -122, -33)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_q66qh")

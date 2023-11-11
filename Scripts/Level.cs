@@ -12,10 +12,10 @@ public partial class Level : Node2D
 
 	public static AStarGrid2D Grid;
 
-	public static int TopLeftXPosition = -1;
-	public static int TopLeftYPosition = -1;
-	public static int BottomRightXPosition = -1;
-	public static int BottomRightYPosition = -1;
+	public static int TopLeftNumber_X = -1;
+	public static int TopLeftNumber_Y = -1;
+	public static int BottomRightNumber_X = -1;
+	public static int BottomRightNumber_Y = -1;
 
 
 
@@ -43,7 +43,7 @@ public partial class Level : Node2D
 			NumberSpawnNodes.Add(SpawnNode);
 		}
 
-		SpawnNumber(1029);
+		SpawnNumber(0);
 		CreateGrid();
 
 	}
@@ -68,9 +68,9 @@ public partial class Level : Node2D
 		{
 			// Show AstarGrid2D lines
 			// End.X & End.Y are the number of cells in the grid
-			for (int i = 0; i <= Grid.Region.End.X; i++)
+			for (int i = 0; i < Grid.Region.End.X; i++)
 			{
-				for (int n = 0; n <= Grid.Region.End.Y; n++)
+				for (int n = 0; n < Grid.Region.End.Y; n++)
 				{
 					// Top-left corner of cell
 					var XCoord1 = GridTopLeft.X + (XResolution * i);
@@ -133,41 +133,41 @@ public partial class Level : Node2D
 			var NumberPosition = (Number as Node2D).GlobalPosition;
 			GD.Print($"{Number.Name} (Global) Position: {NumberPosition}");
 
-			if (TopLeftXPosition == -1f || NumberPosition.X < TopLeftXPosition)
+			if (TopLeftNumber_X == -1f || NumberPosition.X < TopLeftNumber_X)
 			{
-				TopLeftXPosition = (int)NumberPosition.X;
+				TopLeftNumber_X = (int)NumberPosition.X;
 				TopLeftNumber = Number as Node2D;
 			}
 
-			if (TopLeftYPosition == -1f || NumberPosition.Y < TopLeftYPosition)		
+			if (TopLeftNumber_Y == -1f || NumberPosition.Y < TopLeftNumber_Y)		
 			{
-				TopLeftYPosition = (int)NumberPosition.Y;
+				TopLeftNumber_Y = (int)NumberPosition.Y;
 				TopLeftNumber = Number as Node2D;
 			}
 
-			if (BottomRightXPosition == -1f || NumberPosition.X > BottomRightXPosition)
+			if (BottomRightNumber_X == -1f || NumberPosition.X > BottomRightNumber_X)
 			{
-				BottomRightXPosition = (int)NumberPosition.X;
+				BottomRightNumber_X = (int)NumberPosition.X;
 			}
 
-			if (BottomRightYPosition == -1f || NumberPosition.Y > BottomRightYPosition)
+			if (BottomRightNumber_Y == -1f || NumberPosition.Y > BottomRightNumber_Y)
 			{
-				BottomRightYPosition = (int)NumberPosition.Y;
+				BottomRightNumber_Y = (int)NumberPosition.Y;
 			}
 		}
 
 
 		GD.Print($"Top Left Number Scene: {TopLeftNumber.Name}");
-		GD.Print($"Top Left X: {TopLeftXPosition}");
-		GD.Print($"Top Left Y: {TopLeftYPosition}");
-		GD.Print($"Bottom Right X: {BottomRightXPosition}");
-		GD.Print($"Bottom Right Y: {BottomRightYPosition}");
+		GD.Print($"Top Left Number X Position: {TopLeftNumber_X}");
+		GD.Print($"Top Left Number Y Position: {TopLeftNumber_Y}");
+		GD.Print($"Bottom Right Number X Position: {BottomRightNumber_X}");
+		GD.Print($"Bottom Right Number Y Position: {BottomRightNumber_Y}");
 
-		GridTopLeft = new Vector2I(TopLeftXPosition - XResolution, TopLeftYPosition - YResolution);
+		GridTopLeft = new Vector2I(TopLeftNumber_X - XResolution, TopLeftNumber_Y - YResolution);
 		// The "*2" is because the origin of the image/scene is the upper left, so this will effectively
 		// set the point to an extra "blank" cell to the right & down of the actual bottom-right number
 		// The "*3" on the Y is because a number is broken into two vertical cells
-		GridBottomRight = new Vector2I(BottomRightXPosition + (XResolution*2), BottomRightYPosition + (YResolution*3));
+		GridBottomRight = new Vector2I(BottomRightNumber_X + (XResolution*2), BottomRightNumber_Y + (YResolution*3));
 
 		//Grid.Region = new Rect2I(GridTopLeft, GridBottomRight);
 		Grid.Region = new Rect2I(CellFromCoordinates(GridTopLeft), CellFromCoordinates(GridBottomRight));
@@ -192,10 +192,10 @@ public partial class Level : Node2D
 
     public static Vector2I CellFromCoordinates(Vector2 Coordinates)
 	{
-		var XOffset = Coordinates.X - GridTopLeft.X ;
+		var XOffset = Coordinates.X - GridTopLeft.X;
 		var YOffset = Coordinates.Y - GridTopLeft.Y;
 		// The +1 here is because rounding can yield us a pixel short, and casting to an int might get us the wrong number (1 too few)
-		var XCellCount = (GridBottomRight.X - GridTopLeft.X + 1) / XResolution;
+		// var XCellCount = (GridBottomRight.X - GridTopLeft.X + 1) / XResolution;
 		// GD.Print($"X Cell Cnt: {XCellCount}");
 
 		var XCellPosition = (int)Mathf.Floor(XOffset / XResolution);
@@ -203,7 +203,7 @@ public partial class Level : Node2D
 
 
 		var Cell = new Vector2I(XCellPosition, YCellPosition);
-		GD.Print($"Cell: {Cell}");
+		GD.Print($"Cell from Coordinates - {Coordinates} - {Cell}");
 
 		return Cell;
 	}

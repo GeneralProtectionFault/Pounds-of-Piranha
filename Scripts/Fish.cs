@@ -5,20 +5,18 @@ using System;
 
 public partial class Fish : Node2D
 {
+	public enum FishStatus {OnDeck, InPlay}
 	
 	[Export] public int RayCastLength = 225;
-	private RayCast2D NumberDetector;
-
-
-
-	private Godot.Collections.Array<Vector2I> IDPath = new Godot.Collections.Array<Vector2I>();
-
-	enum FishStatus {OnDeck, InPlay}
-	private FishStatus Status = FishStatus.OnDeck;
-	private Vector2I FishFacingDirection = new Vector2I(1,0); // Default to the right
-
+	[Export] public Vector2I FishFacingDirection = new Vector2I(1,0); // Default to the right
+	[Export] public FishStatus Status = FishStatus.OnDeck;
 
 	private bool Moving = false;
+	private RayCast2D NumberDetector;
+
+	// Stores the navigation points to the target location
+	private Godot.Collections.Array<Vector2I> IDPath = new Godot.Collections.Array<Vector2I>();
+	
 
 
 
@@ -62,8 +60,6 @@ public partial class Fish : Node2D
 			Moving = true;
 		}
 		
-
-
 	}
 
 

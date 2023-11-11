@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://2bwnyvis00j7"]
+
+[ext_resource type="Script" path="res://Scripts/Weight.cs" id="1_lgt8h"]
+[ext_resource type="Texture2D" uid="uid://cigy7ryfkbw5q" path="res://Graphics/Weight_1.png" id="1_pcu6s"]
+
+[sub_resource type="FontVariation" id="FontVariation_h3yea"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ascu1"]
+font = SubResource("FontVariation_h3yea")
+font_size = 20
+outline_size = 3
+outline_color = Color(0, 0.643137, 0.713726, 1)
+
+[node name="Weight" type="RigidBody2D"]
+script = ExtResource("1_lgt8h")
+Pounds = 1
+
+[node name="Weight1" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_pcu6s")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -31.0
+offset_right = 31.0
+offset_bottom = 31.0
+text = "1"
+label_settings = SubResource("LabelSettings_ascu1")
+horizontal_alignment = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2(0.25, 0.25)
+polygon = PackedVector2Array(-64, -69, 63, -70, 123, 116, -123, 116)
