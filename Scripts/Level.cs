@@ -232,11 +232,11 @@ public partial class Level : Node2D
 
     public static Vector2I CellFromCoordinates(Vector2 Coordinates)
 	{
-		// The +1 here is because rounding can yield us a pixel short, and casting to an int might get us the wrong number (1 too few)
+		// The +1 here is because rounding can yield us a pixel short, and casting to an int might get us the wrong number
 		var XOffset = Coordinates.X - GridTopLeft.X + 1;
 		var YOffset = Coordinates.Y - GridTopLeft.Y + 1;
 		
-		// var XCellCount = (GridBottomRight.X - GridTopLeft.X + 1) / XResolution;
+		// var XCellCount = (GridBottomRight.X - GridTopLeft.X + 2) / XResolution;
 		// GD.Print($"X Cell Cnt: {XCellCount}");
 
 		var XCellPosition = (int)Mathf.Floor(XOffset / XResolution);

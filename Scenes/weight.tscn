@@ -11,7 +11,7 @@ font_size = 20
 outline_size = 3
 outline_color = Color(0, 0.643137, 0.713726, 1)
 
-[node name="Weight" type="RigidBody2D"]
+[node name="Weight" type="RigidBody2D" groups=["Weights"]]
 script = ExtResource("1_lgt8h")
 Pounds = 1
 

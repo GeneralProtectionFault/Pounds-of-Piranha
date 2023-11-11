@@ -5,10 +5,10 @@
 [node name="Digit_1" type="Node2D" parent="." groups=["NumberSpawns"]]
 
 [node name="Digit_2" type="Node2D" parent="." groups=["NumberSpawns"]]
-position = Vector2(244, 0)
+position = Vector2(245, 0)
 
 [node name="Digit_3" type="Node2D" parent="." groups=["NumberSpawns"]]
-position = Vector2(489, 0)
+position = Vector2(490, 0)
 
 [node name="Digit_4" type="Node2D" parent="." groups=["NumberSpawns"]]
-position = Vector2(733, 0)
+position = Vector2(735, 0)

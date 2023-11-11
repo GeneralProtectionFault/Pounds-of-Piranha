@@ -1,10 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://dx0rg7lgx7tl8"]
+[gd_scene load_steps=4 format=3 uid="uid://dx0rg7lgx7tl8"]
 
 [ext_resource type="Texture2D" uid="uid://c5hpejs8i4142" path="res://Graphics/Scale.png" id="1_li13e"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_q66qh"]
 a = Vector2(-31, 124)
 b = Vector2(113, 124)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xq4pc"]
+size = Vector2(298, 296)
 
 [node name="Scale" type="RigidBody2D"]
 
@@ -16,3 +19,9 @@ polygon = PackedVector2Array(-147, -122, -137, -120, -104, -46, -68, 3, -36, 24,
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("SegmentShape2D_q66qh")
+
+[node name="Weight_Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Weight_Area2D"]
+position = Vector2(0, -108)
+shape = SubResource("RectangleShape2D_xq4pc")
