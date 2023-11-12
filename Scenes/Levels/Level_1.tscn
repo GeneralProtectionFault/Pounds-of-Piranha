@@ -76,7 +76,7 @@ Pounds = 2
 
 [node name="Weight2" parent="." instance=ExtResource("6_bksep")]
 position = Vector2(701, 115)
-Pounds = 3
+Pounds = 30
 
 [node name="Shelf2" type="StaticBody2D" parent="."]
 

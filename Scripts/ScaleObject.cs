@@ -26,6 +26,8 @@ public partial class ScaleObject : RigidBody2D
 
 	private void AddWeight(Node2D EnteringBody)
 	{
+		Level.LinesPopulated = false;
+
 		if (EnteringBody.IsInGroup("Weights"))
 		{
 			var Amount = Convert.ToInt32((EnteringBody as Weight).Pounds);
@@ -39,6 +41,8 @@ public partial class ScaleObject : RigidBody2D
 
 	private void RemoveWeight(Node2D LeavingBody)
 	{
+		Level.LinesPopulated = false;
+		
 		if (LeavingBody.IsInGroup("Weights"))
 		{
 			var Amount = Convert.ToInt32((LeavingBody as Weight).Pounds);

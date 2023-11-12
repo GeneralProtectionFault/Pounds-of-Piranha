@@ -35,7 +35,7 @@ public partial class Level : Node2D
 
 
 	private static List<Line2D> GridDebugLines = new List<Line2D>();
-	private static bool LinesPopulated = false;
+	public static bool LinesPopulated = false;
 
 
 	// Called when the node enters the scene tree for the first time.
@@ -153,6 +153,7 @@ public partial class Level : Node2D
 		}
 
 		CreateGrid();
+		QueueRedraw();
 	}
 
 
