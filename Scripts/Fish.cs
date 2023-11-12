@@ -1,16 +1,21 @@
 using Godot;
 using System;
+using System.Linq;
 
 
 
 public partial class Fish : Node2D
 {
 	public enum FishStatus {OnDeck, InPlay}
+	public enum FishType {Bad, Good}
 	
 	[Export] public int RayCastLength = 225;
 	[Export] public Vector2I FishFacingDirection = new Vector2I(1,0); // Default to the right
 	[Export] public FishStatus Status = FishStatus.OnDeck;
+	[Export] public FishType Type = FishType.Good;
 
+
+	private Area2D FishCollider;
 	private bool Moving = false;
 	private RayCast2D NumberDetector;
 
@@ -33,6 +38,7 @@ public partial class Fish : Node2D
 		// ScaleObject.WeightChanged += MoveFish;
 
 		NumberDetector = GetNode<RayCast2D>("NumberRayCast2D");
+		FishCollider = GetNode<Area2D>("Area2D");
 		SetFacingDirection(FishFacingDirection);
 	}
 
@@ -66,6 +72,13 @@ public partial class Fish : Node2D
 	}
 
 
+	private void EatFish(Fish Consumer, Fish Consumee)
+	{
+		// TODO:  Play an animation FFS
+		Consumee.QueueFree();
+	}
+
+
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
@@ -86,6 +99,34 @@ public partial class Fish : Node2D
 				// This means we've reached the next navigation point
 				if (GlobalPosition == Level.CoordinatesFromCell(TargetPosition))
 				{
+					// Fish consumption check
+					var OtherAreas = FishCollider.GetOverlappingAreas();
+
+					if (OtherAreas.Count > 0)
+					{
+						Fish OtherFish = OtherAreas.FirstOrDefault().GetParent() as Fish;
+						if (this.Type != OtherFish.Type)
+						{
+							Fish Bad;
+							Fish Good;
+
+							if (this.Type == FishType.Bad)
+							{
+								Bad = this;
+								Good = OtherFish;
+							}
+							else
+							{
+								Bad = OtherFish;
+								Good = this;
+							}
+
+
+							EatFish(Bad, Good);
+						}
+					}
+
+
 					if (NumberDetector.IsColliding())
 						Moving = false;
 					

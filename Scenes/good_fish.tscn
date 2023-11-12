@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://ci0bnasby43pq"]
+[gd_scene load_steps=4 format=3 uid="uid://ci0bnasby43pq"]
 
 [ext_resource type="Script" path="res://Scripts/Fish.cs" id="1_kps8k"]
 [ext_resource type="Texture2D" uid="uid://by2asgv64hqt0" path="res://Graphics/GoodFish.png" id="2_g1v6n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bwo2g"]
+size = Vector2(70, 72)
 
 [node name="GoodFish" type="Node2D"]
 script = ExtResource("1_kps8k")
@@ -13,5 +16,13 @@ texture = ExtResource("2_g1v6n")
 
 [node name="NumberRayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(225, 0)
+collision_mask = 2
 collide_with_areas = true
 collide_with_bodies = false
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_bwo2g")
