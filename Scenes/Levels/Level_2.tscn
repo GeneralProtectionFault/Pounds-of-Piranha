@@ -1,13 +1,12 @@
-[gd_scene load_steps=15 format=3 uid="uid://dna4xnrfgbqde"]
+[gd_scene load_steps=14 format=3 uid="uid://tagwrfvia4d6"]
 
-[ext_resource type="Script" path="res://Scripts/Level.cs" id="1_5i0au"]
-[ext_resource type="PackedScene" uid="uid://ruo4xpphyqgw" path="res://Scenes/NumberSpawnLocations.tscn" id="2_q75m3"]
-[ext_resource type="Texture2D" uid="uid://co5p7opdcjgmg" path="res://Graphics/Background1.png" id="4_47hxb"]
-[ext_resource type="PackedScene" uid="uid://c40ieljxsy8lr" path="res://Scenes/bad_fish.tscn" id="4_47pgn"]
-[ext_resource type="Shader" path="res://Graphics/Shaders/Water.gdshader" id="4_qrgve"]
-[ext_resource type="PackedScene" path="res://Scenes/weight.tscn" id="6_bksep"]
-[ext_resource type="PackedScene" path="res://Scenes/scale.tscn" id="7_3e4ep"]
-[ext_resource type="PackedScene" path="res://Scenes/good_fish.tscn" id="8_c4kuh"]
+[ext_resource type="Script" path="res://Scripts/Level.cs" id="1_civ2n"]
+[ext_resource type="PackedScene" uid="uid://ruo4xpphyqgw" path="res://Scenes/NumberSpawnLocations.tscn" id="2_baklx"]
+[ext_resource type="Shader" path="res://Graphics/Shaders/Water.gdshader" id="3_phi53"]
+[ext_resource type="Texture2D" uid="uid://co5p7opdcjgmg" path="res://Graphics/Background1.png" id="4_djppu"]
+[ext_resource type="PackedScene" path="res://Scenes/weight.tscn" id="5_3063y"]
+[ext_resource type="PackedScene" path="res://Scenes/scale.tscn" id="6_rn0r8"]
+[ext_resource type="PackedScene" path="res://Scenes/good_fish.tscn" id="7_r8c8o"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_oormi"]
 
@@ -16,7 +15,7 @@ seamless = true
 noise = SubResource("FastNoiseLite_oormi")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3km26"]
-shader = ExtResource("4_qrgve")
+shader = ExtResource("3_phi53")
 shader_parameter/water_color = Color(0, 0, 0, 0.227451)
 shader_parameter/scale = Vector2(18, 5)
 shader_parameter/noise = SubResource("NoiseTexture2D_e3wqu")
@@ -29,11 +28,10 @@ size = Vector2(1370, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2hvfy"]
 size = Vector2(418, 20)
 
-[node name="Level_Test" type="Node2D"]
-script = ExtResource("1_5i0au")
-ShowGridLines = true
+[node name="Level_2" type="Node2D"]
+script = ExtResource("1_civ2n")
 
-[node name="NumberSpawns" parent="." instance=ExtResource("2_q75m3")]
+[node name="NumberSpawns" parent="." instance=ExtResource("2_baklx")]
 position = Vector2(661, 532)
 
 [node name="TurnButton" type="Button" parent="."]
@@ -61,22 +59,15 @@ offset_bottom = 130.0
 text = "0
 "
 
-[node name="BadFish" parent="." instance=ExtResource("4_47pgn")]
-position = Vector2(545, 787)
-
 [node name="Background1" type="Sprite2D" parent="."]
 z_index = -1
 material = SubResource("ShaderMaterial_3km26")
 position = Vector2(960, 540)
-texture = ExtResource("4_47hxb")
+texture = ExtResource("4_djppu")
 
-[node name="Weight" parent="." instance=ExtResource("6_bksep")]
+[node name="Weight" parent="." instance=ExtResource("5_3063y")]
 position = Vector2(818, 115)
-Pounds = 2
-
-[node name="Weight2" parent="." instance=ExtResource("6_bksep")]
-position = Vector2(701, 115)
-Pounds = 30
+Pounds = 4
 
 [node name="Shelf2" type="StaticBody2D" parent="."]
 
@@ -97,13 +88,10 @@ shape = SubResource("RectangleShape2D_dcr1y")
 position = Vector2(206, 903)
 shape = SubResource("RectangleShape2D_2hvfy")
 
-[node name="Scale" parent="." instance=ExtResource("7_3e4ep")]
+[node name="Scale" parent="." instance=ExtResource("6_rn0r8")]
 position = Vector2(206, 757)
 
-[node name="Weight3" parent="." instance=ExtResource("6_bksep")]
-position = Vector2(938, 114)
-
-[node name="GoodFish" parent="." instance=ExtResource("8_c4kuh")]
+[node name="GoodFish" parent="." instance=ExtResource("7_r8c8o")]
 position = Vector2(787, 452)
 
 [connection signal="pressed" from="TurnButton" to="." method="TestButtonPressed"]

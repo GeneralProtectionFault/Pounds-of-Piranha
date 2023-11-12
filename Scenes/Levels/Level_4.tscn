@@ -1,13 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://dna4xnrfgbqde"]
+[gd_scene load_steps=16 format=3 uid="uid://d0fuex03u7jem"]
 
-[ext_resource type="Script" path="res://Scripts/Level.cs" id="1_5i0au"]
-[ext_resource type="PackedScene" uid="uid://ruo4xpphyqgw" path="res://Scenes/NumberSpawnLocations.tscn" id="2_q75m3"]
-[ext_resource type="Texture2D" uid="uid://co5p7opdcjgmg" path="res://Graphics/Background1.png" id="4_47hxb"]
-[ext_resource type="PackedScene" uid="uid://c40ieljxsy8lr" path="res://Scenes/bad_fish.tscn" id="4_47pgn"]
-[ext_resource type="Shader" path="res://Graphics/Shaders/Water.gdshader" id="4_qrgve"]
-[ext_resource type="PackedScene" path="res://Scenes/weight.tscn" id="6_bksep"]
-[ext_resource type="PackedScene" path="res://Scenes/scale.tscn" id="7_3e4ep"]
-[ext_resource type="PackedScene" path="res://Scenes/good_fish.tscn" id="8_c4kuh"]
+[ext_resource type="Script" path="res://Scripts/Level.cs" id="1_hpvyh"]
+[ext_resource type="PackedScene" uid="uid://ruo4xpphyqgw" path="res://Scenes/NumberSpawnLocations.tscn" id="2_banh3"]
+[ext_resource type="Shader" path="res://Graphics/Shaders/Water.gdshader" id="3_xdh43"]
+[ext_resource type="Texture2D" uid="uid://co5p7opdcjgmg" path="res://Graphics/Background1.png" id="4_ccios"]
+[ext_resource type="PackedScene" uid="uid://cthqrcjuob4vq" path="res://Scenes/weight.tscn" id="5_p4t20"]
+[ext_resource type="PackedScene" uid="uid://jcrnqotjmqcc" path="res://Scenes/scale.tscn" id="6_6v0re"]
+[ext_resource type="PackedScene" path="res://Scenes/good_fish.tscn" id="7_ppgps"]
+[ext_resource type="PackedScene" uid="uid://c40ieljxsy8lr" path="res://Scenes/bad_fish.tscn" id="8_t5r1l"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_oormi"]
 
@@ -16,7 +16,7 @@ seamless = true
 noise = SubResource("FastNoiseLite_oormi")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3km26"]
-shader = ExtResource("4_qrgve")
+shader = ExtResource("3_xdh43")
 shader_parameter/water_color = Color(0, 0, 0, 0.227451)
 shader_parameter/scale = Vector2(18, 5)
 shader_parameter/noise = SubResource("NoiseTexture2D_e3wqu")
@@ -29,11 +29,13 @@ size = Vector2(1370, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2hvfy"]
 size = Vector2(418, 20)
 
-[node name="Level_Test" type="Node2D"]
-script = ExtResource("1_5i0au")
-ShowGridLines = true
+[sub_resource type="LabelSettings" id="LabelSettings_b5nxn"]
+font_size = 24
 
-[node name="NumberSpawns" parent="." instance=ExtResource("2_q75m3")]
+[node name="Level_4" type="Node2D"]
+script = ExtResource("1_hpvyh")
+
+[node name="NumberSpawns" parent="." instance=ExtResource("2_banh3")]
 position = Vector2(661, 532)
 
 [node name="TurnButton" type="Button" parent="."]
@@ -61,22 +63,18 @@ offset_bottom = 130.0
 text = "0
 "
 
-[node name="BadFish" parent="." instance=ExtResource("4_47pgn")]
-position = Vector2(545, 787)
-
 [node name="Background1" type="Sprite2D" parent="."]
 z_index = -1
 material = SubResource("ShaderMaterial_3km26")
 position = Vector2(960, 540)
-texture = ExtResource("4_47hxb")
+texture = ExtResource("4_ccios")
 
-[node name="Weight" parent="." instance=ExtResource("6_bksep")]
+[node name="Weight" parent="." instance=ExtResource("5_p4t20")]
 position = Vector2(818, 115)
-Pounds = 2
 
-[node name="Weight2" parent="." instance=ExtResource("6_bksep")]
-position = Vector2(701, 115)
-Pounds = 30
+[node name="Weight2" parent="." instance=ExtResource("5_p4t20")]
+position = Vector2(907, 115)
+Pounds = 6
 
 [node name="Shelf2" type="StaticBody2D" parent="."]
 
@@ -97,14 +95,32 @@ shape = SubResource("RectangleShape2D_dcr1y")
 position = Vector2(206, 903)
 shape = SubResource("RectangleShape2D_2hvfy")
 
-[node name="Scale" parent="." instance=ExtResource("7_3e4ep")]
+[node name="Scale" parent="." instance=ExtResource("6_6v0re")]
 position = Vector2(206, 757)
 
-[node name="Weight3" parent="." instance=ExtResource("6_bksep")]
-position = Vector2(938, 114)
-
-[node name="GoodFish" parent="." instance=ExtResource("8_c4kuh")]
+[node name="GoodFish" parent="." instance=ExtResource("7_ppgps")]
 position = Vector2(787, 452)
+
+[node name="TutorialText" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PlaceOnScale" type="Label" parent="TutorialText"]
+layout_mode = 0
+offset_left = 317.0
+offset_top = 732.0
+offset_right = 654.0
+offset_bottom = 803.0
+text = "Bad fish eat good fish.
+Keep them away!"
+label_settings = SubResource("LabelSettings_b5nxn")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BadFish" parent="." instance=ExtResource("8_t5r1l")]
+position = Vector2(598, 646)
 
 [connection signal="pressed" from="TurnButton" to="." method="TestButtonPressed"]
 [connection signal="pressed" from="NumberSetButton" to="." method="NumberSetButtonPressed"]

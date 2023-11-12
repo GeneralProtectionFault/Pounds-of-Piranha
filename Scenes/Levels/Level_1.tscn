@@ -1,9 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://dna4xnrfgbqde"]
+[gd_scene load_steps=15 format=3 uid="uid://ds1jbwvuuoyy1"]
 
 [ext_resource type="Script" path="res://Scripts/Level.cs" id="1_5i0au"]
 [ext_resource type="PackedScene" uid="uid://ruo4xpphyqgw" path="res://Scenes/NumberSpawnLocations.tscn" id="2_q75m3"]
 [ext_resource type="Texture2D" uid="uid://co5p7opdcjgmg" path="res://Graphics/Background1.png" id="4_47hxb"]
-[ext_resource type="PackedScene" uid="uid://c40ieljxsy8lr" path="res://Scenes/bad_fish.tscn" id="4_47pgn"]
 [ext_resource type="Shader" path="res://Graphics/Shaders/Water.gdshader" id="4_qrgve"]
 [ext_resource type="PackedScene" path="res://Scenes/weight.tscn" id="6_bksep"]
 [ext_resource type="PackedScene" path="res://Scenes/scale.tscn" id="7_3e4ep"]
@@ -29,9 +28,11 @@ size = Vector2(1370, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2hvfy"]
 size = Vector2(418, 20)
 
-[node name="Level_Test" type="Node2D"]
+[sub_resource type="LabelSettings" id="LabelSettings_b5nxn"]
+font_size = 24
+
+[node name="Level_1" type="Node2D"]
 script = ExtResource("1_5i0au")
-ShowGridLines = true
 
 [node name="NumberSpawns" parent="." instance=ExtResource("2_q75m3")]
 position = Vector2(661, 532)
@@ -61,9 +62,6 @@ offset_bottom = 130.0
 text = "0
 "
 
-[node name="BadFish" parent="." instance=ExtResource("4_47pgn")]
-position = Vector2(545, 787)
-
 [node name="Background1" type="Sprite2D" parent="."]
 z_index = -1
 material = SubResource("ShaderMaterial_3km26")
@@ -72,11 +70,6 @@ texture = ExtResource("4_47hxb")
 
 [node name="Weight" parent="." instance=ExtResource("6_bksep")]
 position = Vector2(818, 115)
-Pounds = 2
-
-[node name="Weight2" parent="." instance=ExtResource("6_bksep")]
-position = Vector2(701, 115)
-Pounds = 30
 
 [node name="Shelf2" type="StaticBody2D" parent="."]
 
@@ -100,11 +93,48 @@ shape = SubResource("RectangleShape2D_2hvfy")
 [node name="Scale" parent="." instance=ExtResource("7_3e4ep")]
 position = Vector2(206, 757)
 
-[node name="Weight3" parent="." instance=ExtResource("6_bksep")]
-position = Vector2(938, 114)
-
 [node name="GoodFish" parent="." instance=ExtResource("8_c4kuh")]
 position = Vector2(787, 452)
+
+[node name="TutorialText" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="DragWeights" type="Label" parent="TutorialText"]
+layout_mode = 0
+offset_left = 554.0
+offset_top = 16.0
+offset_right = 891.0
+offset_bottom = 64.0
+text = "1. Click and drag the weights."
+label_settings = SubResource("LabelSettings_b5nxn")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlaceOnScale" type="Label" parent="TutorialText"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 505.0
+offset_right = 377.0
+offset_bottom = 553.0
+text = "2. Add or remove weights 
+from the scale."
+label_settings = SubResource("LabelSettings_b5nxn")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ClearPath" type="Label" parent="TutorialText"]
+layout_mode = 0
+offset_left = 600.0
+offset_top = 874.0
+offset_right = 993.0
+offset_bottom = 922.0
+text = "3. Clear the path for the good fish."
+label_settings = SubResource("LabelSettings_b5nxn")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="TurnButton" to="." method="TestButtonPressed"]
 [connection signal="pressed" from="NumberSetButton" to="." method="NumberSetButtonPressed"]

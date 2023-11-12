@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://2bwnyvis00j7"]
+[gd_scene load_steps=5 format=3 uid="uid://cthqrcjuob4vq"]
 
 [ext_resource type="Script" path="res://Scripts/Weight.cs" id="1_lgt8h"]
 [ext_resource type="Texture2D" uid="uid://cigy7ryfkbw5q" path="res://Graphics/Weight_1.png" id="1_pcu6s"]
@@ -12,6 +12,7 @@ outline_size = 3
 outline_color = Color(0, 0.643137, 0.713726, 1)
 
 [node name="Weight" type="RigidBody2D" groups=["Weights"]]
+lock_rotation = true
 script = ExtResource("1_lgt8h")
 Pounds = 1
 

@@ -56,6 +56,11 @@ public partial class Level : Node2D
 	public override void _Process(double delta)
 	{
 		// QueueRedraw();
+
+		if (Input.IsActionJustPressed("reset"))
+		{
+			GetTree().ReloadCurrentScene();
+		}
 	}
 
 
