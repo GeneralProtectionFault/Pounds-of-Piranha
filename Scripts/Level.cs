@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 public partial class Level : Node2D
 {
@@ -128,6 +129,9 @@ public partial class Level : Node2D
 	}
 
 
+
+
+	// private Thread NewNumbersThread;
 	
 	private async void SpawnNumber(object sender, int number)
 	{
@@ -138,9 +142,25 @@ public partial class Level : Node2D
 			await ToSignal(Number, "tree_exited");
 		}
 
-		
 		NumberNodes.Clear();
 		
+		//ParameterizedThreadStart NumbersStart = new ParameterizedThreadStart(RepopulateNumbers);
+
+		// var Start = new ParameterizedThreadStart(RepopulateNumbers);
+		// NewNumbersThread = new Thread(Start);
+		// NewNumbersThread.Start(number);
+		
+		// RepopulateNumbers(number);
+		CallDeferred("RepopulateNumbers", number);
+	}
+
+
+	
+
+	private async void RepopulateNumbers(int number)
+	{
+		GD.Print("Repopulating Numbers");
+
 		var NumberAsString = number.ToString();
 
 		for (int i = 0; i < NumberAsString.Length; i++)
@@ -148,17 +168,36 @@ public partial class Level : Node2D
 			var Digit = NumberAsString[i];
 			var NumberScene = ResourceLoader.Load<PackedScene>($"res://Scenes/Numbers/{Digit}.tscn").Instantiate();
 			NumberNodes.Add((Node2D)NumberScene);
+
+			await ToSignal(GetTree(), "process_frame");
 			NumberSpawnNodes[i].AddChild(NumberScene);
-			
+
+			// CallDeferred("add_child", NumberSpawnNodes[i]);
 		}
 
+
+		// await Task.Run(() => {  });
 		CreateGrid();
 		QueueRedraw();
+
+		// CallDeferred("FireTurnEvent");
+		Tween DumbDelayTween = GetTree().CreateTween();
+		DumbDelayTween.TweenCallback(Callable.From(() => 
+            FireTurnEvent()
+        )).SetDelay(.15f);
+	}
+
+	private async void FireTurnEvent()
+	{
+		// var Result = NewNumbersThread.WaitToFinish();
+
+		// Fire to automatically move after weight change
+		CommenceTurn?.Invoke(this, EventArgs.Empty);
 	}
 
 
 
-	private void CreateGrid()
+	private async void CreateGrid()
 	{
 		Grid = new AStarGrid2D();
 		Node2D TopLeftNumber = new Node2D();
