@@ -50,29 +50,31 @@ public partial class Fish : Node2D
 	{
 		// TODO:  Do a raycast in the direction the fish is facing.
 		// The raycast should be a chunk more than half the XResolution in order to reach into the next number, but not to the other side of it.
-		if (NumberDetector.IsColliding())
+		if (IsInstanceValid(NumberDetector))
 		{
-			GD.Print("Fish cannot move, there is an impassable number in the way.");
+			if (NumberDetector.IsColliding())
+			{
+				GD.Print("Fish cannot move, there is an impassable number in the way.");
+			}
+			else
+			{
+				// To determine the desired cell, first get the current one, then treat it like a normalized vector2
+				Vector2I CurrentCell = Level.CellFromCoordinates(GlobalPosition);
+				Vector2I DestinationCell = CurrentCell + FishFacingDirection;
+
+
+				// If the fish can move, set the IDPath/destination, do the movement, repeat check, etc...
+				// Need to get the cell by index-ey position, not coordinates, because that makes sense
+				IDPath = Level.Grid.GetIdPath(CurrentCell, DestinationCell);
+				// Removes the current position
+				IDPath = IDPath.Slice(1);
+
+			
+				GD.Print(IDPath);
+
+				Moving = true;
+			}
 		}
-		else
-		{
-			// To determine the desired cell, first get the current one, then treat it like a normalized vector2
-			Vector2I CurrentCell = Level.CellFromCoordinates(GlobalPosition);
-			Vector2I DestinationCell = CurrentCell + FishFacingDirection;
-
-
-			// If the fish can move, set the IDPath/destination, do the movement, repeat check, etc...
-			// Need to get the cell by index-ey position, not coordinates, because that makes sense
-			IDPath = Level.Grid.GetIdPath(CurrentCell, DestinationCell);
-			// Removes the current position
-			IDPath = IDPath.Slice(1);
-
-		
-			GD.Print(IDPath);
-
-			Moving = true;
-		}
-		
 	}
 
 
