@@ -1,13 +1,14 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class Level : Node2D
 {
 	[Export] public bool ShowGridLines = false;
 
 
-	public static event EventHandler WeightMoved;
+	public static event EventHandler CommenceTurn;
 
 
 	public static AStarGrid2D Grid;
@@ -40,13 +41,15 @@ public partial class Level : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		ScaleObject.WeightChanged += SpawnNumber;
+
 		// This gets the nodes that are the spawn locations
 		foreach(Node2D SpawnNode in GetTree().GetNodesInGroup("NumberSpawns"))
 		{
 			NumberSpawnNodes.Add(SpawnNode);
 		}
 
-		SpawnNumber(71);
+		SpawnNumber(this, 0);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -59,7 +62,7 @@ public partial class Level : Node2D
 
 	public void TestButtonPressed()
 	{
-		WeightMoved?.Invoke(this, EventArgs.Empty);
+		CommenceTurn?.Invoke(this, EventArgs.Empty);
 	}
 
 	public void NumberSetButtonPressed()
@@ -70,7 +73,7 @@ public partial class Level : Node2D
 		try 
 		{
 			var Number = Convert.ToInt32(NumberOverride.Text);
-			SpawnNumber(Number);
+			SpawnNumber(this, Number);
 		}
 		catch
 		{
@@ -126,15 +129,16 @@ public partial class Level : Node2D
 
 
 	
-	private async void SpawnNumber(int number)
+	private async void SpawnNumber(object sender, int number)
 	{
 		// First, clear 'em
-		foreach(var Number in NumberNodes)
+		foreach(var Number in NumberNodes.ToList())
 		{
 			Number.QueueFree();
 			await ToSignal(Number, "tree_exited");
 		}
 
+		
 		NumberNodes.Clear();
 		
 		var NumberAsString = number.ToString();

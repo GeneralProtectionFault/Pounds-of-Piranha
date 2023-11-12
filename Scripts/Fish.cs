@@ -29,8 +29,11 @@ public partial class Fish : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		Level.WeightMoved += MoveFish;
+		Level.CommenceTurn += MoveFish;
+		// ScaleObject.WeightChanged += MoveFish;
+
 		NumberDetector = GetNode<RayCast2D>("NumberRayCast2D");
+		SetFacingDirection(FishFacingDirection);
 	}
 
 	private void MoveFish(object sender, EventArgs e)

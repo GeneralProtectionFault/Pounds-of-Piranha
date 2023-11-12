@@ -1,15 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://dx0rg7lgx7tl8"]
+[gd_scene load_steps=5 format=3 uid="uid://dx0rg7lgx7tl8"]
 
+[ext_resource type="Script" path="res://Scripts/ScaleObject.cs" id="1_03sko"]
 [ext_resource type="Texture2D" uid="uid://c5hpejs8i4142" path="res://Graphics/Scale.png" id="1_li13e"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_q66qh"]
-a = Vector2(-31, 124)
-b = Vector2(113, 124)
+a = Vector2(-278, 124)
+b = Vector2(359, 123)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xq4pc"]
 size = Vector2(298, 296)
 
 [node name="Scale" type="RigidBody2D"]
+mass = 100.0
+script = ExtResource("1_03sko")
 
 [node name="Scale" type="Sprite2D" parent="."]
 texture = ExtResource("1_li13e")

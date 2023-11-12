@@ -30,3 +30,11 @@ horizontal_alignment = 1
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 scale = Vector2(0.25, 0.25)
 polygon = PackedVector2Array(-64, -69, 63, -70, 123, 116, -123, 116)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-16, -17, 16, -17, 31, 29, -31, 29)
+
+[connection signal="mouse_entered" from="Area2D" to="." method="SetMouseInWeight"]
+[connection signal="mouse_exited" from="Area2D" to="." method="SetMouseOutOfWeight"]
