@@ -86,15 +86,22 @@ public partial class Fish : Node2D
 				// This means we've reached the next navigation point
 				if (GlobalPosition == Level.CoordinatesFromCell(TargetPosition))
 				{
-					Moving = false;
+					if (NumberDetector.IsColliding())
+						Moving = false;
+					
+					
 					IDPath = IDPath.Slice(1);
+
+
+					if (!NumberDetector.IsColliding())
+						MoveFish(this, EventArgs.Empty);
 
 					// TODO:  Any changing in facing direction should happen here, followed by a check for collision before enabling movement again
 					// If no obstructions, set Moving to true again
 				}
 			}
-			else
-				Moving = false;
+			// else
+			// 	Moving = false;
 		}
     }
 
