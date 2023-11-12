@@ -33,6 +33,7 @@ public partial class Level : Node2D
 
 	private static List<Node2D> NumberSpawnNodes = new List<Node2D>();
 	private static List<Node2D> NumberNodes = new List<Node2D>();
+	private static Node2D NegativeSymbol;
 
 
 	private static List<Line2D> GridDebugLines = new List<Line2D>();
@@ -43,6 +44,8 @@ public partial class Level : Node2D
 	public override void _Ready()
 	{
 		ScaleObject.WeightChanged += SpawnNumber;
+
+		NegativeSymbol = GetNode<Node2D>("NumberSpawns/Negative");
 
 		// This gets the nodes that are the spawn locations
 		foreach(Node2D SpawnNode in GetTree().GetNodesInGroup("NumberSpawns"))
@@ -161,7 +164,16 @@ public partial class Level : Node2D
 	{
 		GD.Print("Repopulating Numbers");
 
-		var NumberAsString = number.ToString();
+		if (number < 0)
+		{
+			NegativeSymbol.Visible = true;
+		}
+		else
+		{
+			NegativeSymbol.Visible = false;
+		}
+
+		var NumberAsString = Mathf.Abs(number).ToString();
 
 		for (int i = 0; i < NumberAsString.Length; i++)
 		{
@@ -173,6 +185,16 @@ public partial class Level : Node2D
 			NumberSpawnNodes[i].AddChild(NumberScene);
 
 			// CallDeferred("add_child", NumberSpawnNodes[i]);
+
+			var Sprite = NumberScene.GetNode<Sprite2D>($"{NumberScene.Name}");
+			if (number < 0)
+			{
+				Sprite.Modulate = new Color(0xd41e48ff);
+			}
+			else
+			{
+				Sprite.Modulate = new Color(0xffffffff);
+			}
 		}
 
 
