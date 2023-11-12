@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dna4xnrfgbqde"]
+[gd_scene load_steps=15 format=3 uid="uid://c1nenigsti0ha"]
 
 [ext_resource type="Script" path="res://Scripts/Level.cs" id="1_5i0au"]
 [ext_resource type="PackedScene" uid="uid://ruo4xpphyqgw" path="res://Scenes/NumberSpawnLocations.tscn" id="2_q75m3"]
@@ -76,7 +76,10 @@ Pounds = 2
 
 [node name="Weight2" parent="." instance=ExtResource("6_bksep")]
 position = Vector2(701, 115)
-Pounds = 30
+Pounds = 5
+
+[node name="Weight3" parent="." instance=ExtResource("6_bksep")]
+position = Vector2(938, 114)
 
 [node name="Shelf2" type="StaticBody2D" parent="."]
 
@@ -100,11 +103,12 @@ shape = SubResource("RectangleShape2D_2hvfy")
 [node name="Scale" parent="." instance=ExtResource("7_3e4ep")]
 position = Vector2(206, 757)
 
-[node name="Weight3" parent="." instance=ExtResource("6_bksep")]
-position = Vector2(938, 114)
-
 [node name="GoodFish" parent="." instance=ExtResource("8_c4kuh")]
 position = Vector2(787, 452)
+
+[node name="BadFish2" parent="." instance=ExtResource("4_47pgn")]
+position = Vector2(1027, 632)
+FishFacingDirection = Vector2i(-1, 0)
 
 [connection signal="pressed" from="TurnButton" to="." method="TestButtonPressed"]
 [connection signal="pressed" from="NumberSetButton" to="." method="NumberSetButtonPressed"]

@@ -23,6 +23,10 @@ public partial class Fish : Node2D
 	private Godot.Collections.Array<Vector2I> IDPath = new Godot.Collections.Array<Vector2I>();
 	
 
+	public void FishLeavingScene()
+	{
+		Level.CommenceTurn -= MoveFish;
+	}
 
 
 	private void SetFacingDirection(Vector2I Direction)
