@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://ruo4xpphyqgw"]
+[gd_scene load_steps=2 format=3 uid="uid://ruo4xpphyqgw"]
+
+[ext_resource type="Texture2D" uid="uid://cmy4x0hgnfpdp" path="res://Graphics/Numbers/Negative.png" id="1_4ax2g"]
 
 [node name="NumberSpawns" type="Node2D"]
 
@@ -12,3 +14,12 @@ position = Vector2(490, 0)
 
 [node name="Digit_4" type="Node2D" parent="." groups=["NumberSpawns"]]
 position = Vector2(735, 0)
+
+[node name="Negative" type="Node2D" parent="."]
+visible = false
+position = Vector2(-180, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Negative"]
+modulate = Color(0.831373, 0.117647, 0.282353, 1)
+position = Vector2(89, 126)
+texture = ExtResource("1_4ax2g")
