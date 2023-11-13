@@ -36,7 +36,7 @@ public partial class Level : Node2D
 	private static Node2D NegativeSymbol;
 
 
-	private static List<Line2D> GridDebugLines = new List<Line2D>();
+	// private static List<Line2D> GridDebugLines = new List<Line2D>();
 	public static bool LinesPopulated = false;
 
 
@@ -63,13 +63,35 @@ public partial class Level : Node2D
 
 		if (Input.IsActionJustPressed("reset"))
 		{
-			GetTree().ReloadCurrentScene();
+			// GetTree().ChangeSceneToFile(GetTree().CurrentScene.SceneFilePath);
+			Grid = null;
+
+			TopLeftNumber_X = -1;
+			TopLeftNumber_Y = -1;
+			BottomRightNumber_X = -1;
+			BottomRightNumber_Y = -1;
+			GridTopLeft = new Vector2I(0,0);
+			GridBottomRight = new Vector2I(0,0);
+			NumberSpawnNodes = new List<Node2D>();
+			NumberNodes = new List<Node2D>();
+			NegativeSymbol = null;
+			LinesPopulated = false;
+
+			var ReloadResult = GetTree().ReloadCurrentScene();
+			GD.Print($"Reloading scene.\nReolad Result: {ReloadResult}");
 		}
 	}
 
 
 
-	public void TestButtonPressed()
+	public void TreeExit()
+	{
+		GD.Print("Level exiting tree...");
+		ScaleObject.WeightChanged -= SpawnNumber;
+	}
+
+
+    public void TestButtonPressed()
 	{
 		CommenceTurn?.Invoke(this, EventArgs.Empty);
 	}
