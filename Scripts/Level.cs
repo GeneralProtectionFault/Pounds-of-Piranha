@@ -7,6 +7,7 @@ using System.Threading;
 public partial class Level : Node2D
 {
 	[Export] public bool ShowGridLines = false;
+	[Export] public int Digits = 1;
 
 
 	public static event EventHandler CommenceTurn;
@@ -202,39 +203,66 @@ public partial class Level : Node2D
 
 		var NumberAsString = Mathf.Abs(number).ToString();
 
-		for (int i = 0; i < NumberAsString.Length; i++)
+		// Populate the desired leading 0s
+		var WeightDigits = NumberAsString.Length;
+		var ExtraDigits = Digits - WeightDigits;
+
+		GD.Print($"Weight Digits: {WeightDigits}");
+		GD.Print($"Extra Digits: {ExtraDigits}");
+
+		for (int i = 0; i < ExtraDigits; i++)
 		{
-			var Digit = NumberAsString[i];
-			var NumberScene = ResourceLoader.Load<PackedScene>($"res://Scenes/Numbers/{Digit}.tscn").Instantiate();
-			NumberNodes.Add((Node2D)NumberScene);
-
-			await ToSignal(GetTree(), "process_frame");
-			NumberSpawnNodes[i].AddChild(NumberScene);
-
-			// CallDeferred("add_child", NumberSpawnNodes[i]);
-
-			var Sprite = NumberScene.GetNode<Sprite2D>($"{NumberScene.Name}");
-			if (number < 0)
-			{
-				Sprite.Modulate = new Color(0xd41e48ff);
-			}
-			else
-			{
-				Sprite.Modulate = new Color(0xffffffff);
-			}
+			//var ZeroScene = ResourceLoader.Load<PackedScene>($"res://Scenes/Numbers/0.tscn").Instantiate();
+			//NumberNodes.Add((Node2D)ZeroScene);
+			PopulateSingleNumber(number, '0', i);
 		}
 
 
-		// await Task.Run(() => {  });
-		CreateGrid();
-		QueueRedraw();
+		for (int i = 0; i < WeightDigits; i++)
+		{
+			var Digit = NumberAsString[i];
+			PopulateSingleNumber(number, Digit, i + ExtraDigits);
+		}
+
+
+		Tween DumbDelayTween1 = GetTree().CreateTween();
+		DumbDelayTween1.TweenCallback(Callable.From(() => {
+				// await Task.Run(() => {  });
+				CreateGrid();
+				QueueRedraw();
+			}
+        )).SetDelay(.15f);
+
 
 		// CallDeferred("FireTurnEvent");
-		Tween DumbDelayTween = GetTree().CreateTween();
-		DumbDelayTween.TweenCallback(Callable.From(() => 
+		Tween DumbDelayTween2 = GetTree().CreateTween();
+		DumbDelayTween2.TweenCallback(Callable.From(() => 
             FireTurnEvent()
         )).SetDelay(.15f);
 	}
+
+	private async void PopulateSingleNumber(int number, char Digit, int NumberPosition)
+	{
+		var NumberScene = ResourceLoader.Load<PackedScene>($"res://Scenes/Numbers/{Digit}.tscn").Instantiate();
+		NumberNodes.Add((Node2D)NumberScene);
+
+		await ToSignal(GetTree(), "process_frame");
+		NumberSpawnNodes[NumberPosition].AddChild(NumberScene);
+
+		// CallDeferred("add_child", NumberSpawnNodes[i]);
+
+		var Sprite = NumberScene.GetNode<Sprite2D>($"{NumberScene.Name}");
+		if (number < 0)
+		{
+			Sprite.Modulate = new Color(0xd41e48ff);
+		}
+		else
+		{
+			Sprite.Modulate = new Color(0xffffffff);
+		}
+	}
+
+
 
 	private async void FireTurnEvent()
 	{

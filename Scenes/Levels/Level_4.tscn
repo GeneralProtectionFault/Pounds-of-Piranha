@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://d0fuex03u7jem"]
+[gd_scene load_steps=16 format=3 uid="uid://bqoplhn4jfq7a"]
 
 [ext_resource type="Script" path="res://Scripts/Level.cs" id="1_hpvyh"]
 [ext_resource type="PackedScene" uid="uid://ruo4xpphyqgw" path="res://Scenes/NumberSpawnLocations.tscn" id="2_banh3"]
@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://co5p7opdcjgmg" path="res://Graphics/Background1.png" id="4_ccios"]
 [ext_resource type="PackedScene" uid="uid://cthqrcjuob4vq" path="res://Scenes/weight.tscn" id="5_p4t20"]
 [ext_resource type="PackedScene" uid="uid://jcrnqotjmqcc" path="res://Scenes/scale.tscn" id="6_6v0re"]
-[ext_resource type="PackedScene" path="res://Scenes/good_fish.tscn" id="7_ppgps"]
+[ext_resource type="PackedScene" uid="uid://ci0bnasby43pq" path="res://Scenes/good_fish.tscn" id="7_ppgps"]
 [ext_resource type="PackedScene" uid="uid://c40ieljxsy8lr" path="res://Scenes/bad_fish.tscn" id="8_t5r1l"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_oormi"]
