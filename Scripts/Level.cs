@@ -7,7 +7,7 @@ using System.Threading;
 public partial class Level : Node2D
 {
 	[Export] public bool ShowGridLines = false;
-	[Export] public int Digits = 1;
+	[Export(PropertyHint.Range, "1,4")] public int Digits = 1;
 
 
 	public static event EventHandler CommenceTurn;
