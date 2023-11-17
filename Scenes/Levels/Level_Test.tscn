@@ -32,7 +32,6 @@ size = Vector2(418, 20)
 
 [node name="Level_Test" type="Node2D"]
 script = ExtResource("1_5i0au")
-ShowGridLines = true
 
 [node name="NumberSpawns" parent="." instance=ExtResource("2_q75m3")]
 position = Vector2(661, 532)
@@ -62,6 +61,10 @@ offset_bottom = 130.0
 text = "0
 "
 
+[node name="Turn" parent="." instance=ExtResource("9_1qekb")]
+position = Vector2(787, 649)
+ArrowDirection = Vector2(1, 0)
+
 [node name="BadFish" parent="." instance=ExtResource("4_47pgn")]
 position = Vector2(545, 787)
 
@@ -70,6 +73,7 @@ z_index = -1
 material = SubResource("ShaderMaterial_3km26")
 position = Vector2(960, 540)
 texture = ExtResource("4_47hxb")
+metadata/_edit_lock_ = true
 
 [node name="Weight" parent="." instance=ExtResource("6_bksep")]
 position = Vector2(818, 115)
@@ -110,11 +114,6 @@ position = Vector2(787, 452)
 [node name="BadFish2" parent="." instance=ExtResource("4_47pgn")]
 position = Vector2(1027, 632)
 FishFacingDirection = Vector2i(-1, 0)
-
-[node name="Turn" parent="." instance=ExtResource("9_1qekb")]
-position = Vector2(787, 649)
-ArrowDirection = Vector2(1, 0)
-AffectedFishType = 1
 
 [connection signal="tree_exiting" from="." to="." method="TreeExit"]
 [connection signal="pressed" from="TurnButton" to="." method="TestButtonPressed"]

@@ -7,6 +7,7 @@ public partial class Turner : Node2D
 	private Vector2 InitialRightVector = new Vector2(1,0);
 	[Export] public Vector2 ArrowDirection;
 	[Export] public Fish.FishType AffectedFishType { get; set; }
+	[Export] public bool OverrideBothFishTypes = false;
 
 	private Sprite2D ArrowSprite;
 
@@ -27,7 +28,7 @@ public partial class Turner : Node2D
 	{
 		Fish CollidingFish = (Fish)OtherArea.GetParent();
 		
-		if (CollidingFish.Type == AffectedFishType)
+		if (CollidingFish.Type == AffectedFishType || OverrideBothFishTypes)
 		{		
 			CollidingFish.SetFacingDirection((Vector2I)ArrowDirection);
 			CollidingFish.Status = Fish.FishStatus.Turning;
