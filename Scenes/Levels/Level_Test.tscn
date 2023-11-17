@@ -64,6 +64,7 @@ text = "0
 [node name="Turn" parent="." instance=ExtResource("9_1qekb")]
 position = Vector2(787, 649)
 ArrowDirection = Vector2(1, 0)
+OverrideBothFishTypes = true
 
 [node name="BadFish" parent="." instance=ExtResource("4_47pgn")]
 position = Vector2(545, 787)
@@ -85,6 +86,10 @@ Pounds = -5
 
 [node name="Weight3" parent="." instance=ExtResource("6_bksep")]
 position = Vector2(938, 114)
+
+[node name="Weight4" parent="." instance=ExtResource("6_bksep")]
+position = Vector2(1038, 114)
+Pounds = 5
 
 [node name="Shelf2" type="StaticBody2D" parent="."]
 
