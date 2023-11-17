@@ -114,6 +114,7 @@ FishFacingDirection = Vector2i(-1, 0)
 [node name="Turn" parent="." instance=ExtResource("9_1qekb")]
 position = Vector2(787, 649)
 ArrowDirection = Vector2(1, 0)
+AffectedFishType = 1
 
 [connection signal="tree_exiting" from="." to="." method="TreeExit"]
 [connection signal="pressed" from="TurnButton" to="." method="TestButtonPressed"]
