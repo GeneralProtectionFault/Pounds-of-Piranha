@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 
 public partial class Level : Node2D
 {
@@ -123,7 +124,7 @@ public partial class Level : Node2D
 	{
 		// GD.Print("Drawing!");
 
-		if (ShowGridLines && !LinesPopulated)
+		if (ShowGridLines && !LinesPopulated && Grid is not null)
 			DrawAstarGrid();
 	}
 
@@ -162,7 +163,6 @@ public partial class Level : Node2D
 
 
 
-	// private Thread NewNumbersThread;
 	
 	private async void SpawnNumber(object sender, int number)
 	{
@@ -229,11 +229,12 @@ public partial class Level : Node2D
 		DumbDelayTween1.TweenCallback(Callable.From(() => {
 				// await Task.Run(() => {  });
 				CreateGrid();
-				QueueRedraw();
 			}
         )).SetDelay(.15f);
-
-
+		
+		// await Task.Run(() => {  }); 
+		// CreateGrid().WaitToFinish();
+				
 		// CallDeferred("FireTurnEvent");
 		Tween DumbDelayTween2 = GetTree().CreateTween();
 		DumbDelayTween2.TweenCallback(Callable.From(() => 
@@ -246,7 +247,6 @@ public partial class Level : Node2D
 		var NumberScene = ResourceLoader.Load<PackedScene>($"res://Scenes/Numbers/{Digit}.tscn").Instantiate();
 		NumberNodes.Add((Node2D)NumberScene);
 
-		await ToSignal(GetTree(), "process_frame");
 		NumberSpawnNodes[NumberPosition].AddChild(NumberScene);
 
 		// CallDeferred("add_child", NumberSpawnNodes[i]);
@@ -260,6 +260,8 @@ public partial class Level : Node2D
 		{
 			Sprite.Modulate = new Color(0xffffffff);
 		}
+
+		await ToSignal(GetTree(), "process_frame");
 	}
 
 

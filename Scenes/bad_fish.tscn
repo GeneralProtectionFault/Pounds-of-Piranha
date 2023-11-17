@@ -6,8 +6,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yv4wh"]
 size = Vector2(70, 72)
 
-[node name="BadFish" type="Node2D"]
+[node name="BadFish" type="Node2D" groups=["BadFish"]]
 script = ExtResource("1_0xtko")
+Status = 1
 Type = 0
 
 [node name="BadFish" type="Sprite2D" parent="."]

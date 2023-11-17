@@ -6,7 +6,7 @@ using System.Linq;
 
 public partial class Fish : Node2D
 {
-	public enum FishStatus {OnDeck, InPlay}
+	public enum FishStatus {OnDeck, InPlay, Turning}
 	public enum FishType {Bad, Good}
 	
 	[Export] public int RayCastLength = 225;
@@ -29,7 +29,7 @@ public partial class Fish : Node2D
 	}
 
 
-	private void SetFacingDirection(Vector2I Direction)
+	public void SetFacingDirection(Vector2I Direction)
 	{
 		FishFacingDirection = Direction;
 		NumberDetector.TargetPosition = FishFacingDirection * RayCastLength;
@@ -48,6 +48,11 @@ public partial class Fish : Node2D
 
 	private void MoveFish(object sender, EventArgs e)
 	{
+		// Resume from turning status here, only after the event to move fires off again.
+		// This prevents the fish from moving immediately after changing direciton all in 1 turn
+		if (Status == FishStatus.Turning)
+			Status = FishStatus.InPlay;
+
 		// TODO:  Do a raycast in the direction the fish is facing.
 		// The raycast should be a chunk more than half the XResolution in order to reach into the next number, but not to the other side of it.
 		if (IsInstanceValid(NumberDetector))
@@ -56,7 +61,7 @@ public partial class Fish : Node2D
 			{
 				GD.Print("Fish cannot move, there is an impassable number in the way.");
 			}
-			else
+			else if (Status == FishStatus.InPlay)
 			{
 				// To determine the desired cell, first get the current one, then treat it like a normalized vector2
 				Vector2I CurrentCell = Level.CellFromCoordinates(GlobalPosition);
@@ -110,25 +115,30 @@ public partial class Fish : Node2D
 
 					if (OtherAreas.Count > 0)
 					{
-						Fish OtherFish = OtherAreas.FirstOrDefault().GetParent() as Fish;
-						if (this.Type != OtherFish.Type)
+						Node OtherThing = OtherAreas.FirstOrDefault().GetParent();
+						if (OtherThing.Name != "Turn")
 						{
-							Fish Bad;
-							Fish Good;
+							var OtherFish = OtherThing as Fish;
 
-							if (this.Type == FishType.Bad)
+							if (this.Type != OtherFish.Type)
 							{
-								Bad = this;
-								Good = OtherFish;
-							}
-							else
-							{
-								Bad = OtherFish;
-								Good = this;
-							}
+								Fish Bad;
+								Fish Good;
+
+								if (this.Type == FishType.Bad)
+								{
+									Bad = this;
+									Good = OtherFish;
+								}
+								else
+								{
+									Bad = OtherFish;
+									Good = this;
+								}
 
 
-							EatFish(Bad, Good);
+								EatFish(Bad, Good);
+							}
 						}
 					}
 
@@ -140,11 +150,13 @@ public partial class Fish : Node2D
 					IDPath = IDPath.Slice(1);
 
 
-					if (!NumberDetector.IsColliding())
+					if (!NumberDetector.IsColliding() && Status == FishStatus.InPlay)
+					{
 						MoveFish(this, EventArgs.Empty);
 
-					// TODO:  Any changing in facing direction should happen here, followed by a check for collision before enabling movement again
-					// If no obstructions, set Moving to true again
+						// TODO:  Any changing in facing direction should happen here, followed by a check for collision before enabling movement again
+						// If no obstructions, set Moving to true again
+					}
 				}
 			}
 			// else

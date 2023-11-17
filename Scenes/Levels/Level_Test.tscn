@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c1nenigsti0ha"]
+[gd_scene load_steps=16 format=3 uid="uid://c1nenigsti0ha"]
 
 [ext_resource type="Script" path="res://Scripts/Level.cs" id="1_5i0au"]
 [ext_resource type="PackedScene" uid="uid://ruo4xpphyqgw" path="res://Scenes/NumberSpawnLocations.tscn" id="2_q75m3"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cthqrcjuob4vq" path="res://Scenes/weight.tscn" id="6_bksep"]
 [ext_resource type="PackedScene" uid="uid://jcrnqotjmqcc" path="res://Scenes/scale.tscn" id="7_3e4ep"]
 [ext_resource type="PackedScene" uid="uid://ci0bnasby43pq" path="res://Scenes/good_fish.tscn" id="8_c4kuh"]
+[ext_resource type="PackedScene" uid="uid://d1v7hqlvp1ql7" path="res://Scenes/turn.tscn" id="9_1qekb"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_oormi"]
 
@@ -32,7 +33,6 @@ size = Vector2(418, 20)
 [node name="Level_Test" type="Node2D"]
 script = ExtResource("1_5i0au")
 ShowGridLines = true
-Digits = 3
 
 [node name="NumberSpawns" parent="." instance=ExtResource("2_q75m3")]
 position = Vector2(661, 532)
@@ -110,6 +110,10 @@ position = Vector2(787, 452)
 [node name="BadFish2" parent="." instance=ExtResource("4_47pgn")]
 position = Vector2(1027, 632)
 FishFacingDirection = Vector2i(-1, 0)
+
+[node name="Turn" parent="." instance=ExtResource("9_1qekb")]
+position = Vector2(787, 649)
+ArrowDirection = Vector2(1, 0)
 
 [connection signal="tree_exiting" from="." to="." method="TreeExit"]
 [connection signal="pressed" from="TurnButton" to="." method="TestButtonPressed"]

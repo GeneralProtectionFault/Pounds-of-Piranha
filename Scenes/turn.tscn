@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1v7hqlvp1ql7"]
+
+[ext_resource type="Script" path="res://Scripts/Turner.cs" id="1_5x4uo"]
+[ext_resource type="Texture2D" uid="uid://d37de1hv6iwp5" path="res://Graphics/TurnArrow.png" id="2_qpd5c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ilppj"]
+size = Vector2(100, 40)
+
+[node name="Turn" type="Node2D"]
+script = ExtResource("1_5x4uo")
+ArrowDirection = Vector2(0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_qpd5c")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_ilppj")
+
+[connection signal="area_entered" from="Area2D" to="." method="ArrowCollided"]
