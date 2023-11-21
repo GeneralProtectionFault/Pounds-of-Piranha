@@ -9,9 +9,9 @@ size = Vector2(70, 72)
 [node name="GoodFish" type="Node2D" groups=["GoodFish"]]
 script = ExtResource("1_kps8k")
 FishFacingDirection = Vector2i(0, 1)
-Status = 1
 
 [node name="GoodFish" type="Sprite2D" parent="."]
+z_index = 1
 scale = Vector2(0.76, 0.76)
 texture = ExtResource("2_g1v6n")
 
