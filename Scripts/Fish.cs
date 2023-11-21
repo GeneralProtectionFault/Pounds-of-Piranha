@@ -99,6 +99,39 @@ public partial class Fish : Node2D
     {
 		if (Moving)
 		{
+			// Fish consumption check
+			var OtherAreas = FishCollider.GetOverlappingAreas();
+
+			if (OtherAreas.Count > 0)
+			{
+				Node OtherThing = OtherAreas.FirstOrDefault().GetParent();
+				if (OtherThing.Name != "Turn")
+				{
+					var OtherFish = OtherThing as Fish;
+
+					if (this.Type != OtherFish.Type)
+					{
+						Fish Bad;
+						Fish Good;
+
+						if (this.Type == FishType.Bad)
+						{
+							Bad = this;
+							Good = OtherFish;
+						}
+						else
+						{
+							Bad = OtherFish;
+							Good = this;
+						}
+
+
+						EatFish(Bad, Good);
+					}
+				}
+			}
+
+			
 			// If there are more cells to navigate to...
 			if (IDPath.Count > 0)
 			{
@@ -110,39 +143,6 @@ public partial class Fish : Node2D
 				// This means we've reached the next navigation point
 				if (GlobalPosition == Level.CoordinatesFromCell(TargetPosition))
 				{
-					// Fish consumption check
-					var OtherAreas = FishCollider.GetOverlappingAreas();
-
-					if (OtherAreas.Count > 0)
-					{
-						Node OtherThing = OtherAreas.FirstOrDefault().GetParent();
-						if (OtherThing.Name != "Turn")
-						{
-							var OtherFish = OtherThing as Fish;
-
-							if (this.Type != OtherFish.Type)
-							{
-								Fish Bad;
-								Fish Good;
-
-								if (this.Type == FishType.Bad)
-								{
-									Bad = this;
-									Good = OtherFish;
-								}
-								else
-								{
-									Bad = OtherFish;
-									Good = this;
-								}
-
-
-								EatFish(Bad, Good);
-							}
-						}
-					}
-
-
 					if (NumberDetector.IsColliding())
 						Moving = false;
 					
