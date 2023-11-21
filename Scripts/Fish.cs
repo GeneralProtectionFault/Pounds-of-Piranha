@@ -105,7 +105,7 @@ public partial class Fish : Node2D
 			if (OtherAreas.Count > 0)
 			{
 				Node OtherThing = OtherAreas.FirstOrDefault().GetParent();
-				if (OtherThing.Name != "Turn")
+				if (!OtherThing.IsInGroup("Turn"))
 				{
 					var OtherFish = OtherThing as Fish;
 

@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ilppj"]
 size = Vector2(100, 40)
 
-[node name="Turn" type="Node2D"]
+[node name="Turn" type="Node2D" groups=["Turn"]]
 script = ExtResource("1_5x4uo")
 ArrowDirection = Vector2(0, 1)
 
