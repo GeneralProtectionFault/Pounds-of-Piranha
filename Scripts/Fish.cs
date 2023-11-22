@@ -148,7 +148,7 @@ public partial class Fish : Node2D
 					{
 						Moving = false;
 
-						if (!CheckMovingFish())
+						if (Level.CurrentLevelState == Level.LevelState.FishMoving && !CheckMovingFish())
 							Level.CurrentLevelState = Level.LevelState.Play;
 					}
 					
@@ -169,7 +169,7 @@ public partial class Fish : Node2D
 			{
 				Moving = false;
 				
-				if (!CheckMovingFish())
+				if (Level.CurrentLevelState == Level.LevelState.FishMoving && !CheckMovingFish())
 					Level.CurrentLevelState = Level.LevelState.Play;
 			}
 			

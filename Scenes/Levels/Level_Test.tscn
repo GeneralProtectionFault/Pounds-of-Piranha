@@ -68,7 +68,6 @@ OverrideBothFishTypes = true
 
 [node name="BadFish" parent="." instance=ExtResource("4_47pgn")]
 position = Vector2(545, 787)
-Status = 1
 
 [node name="Background1" type="Sprite2D" parent="."]
 z_index = -1
@@ -116,12 +115,10 @@ position = Vector2(206, 757)
 
 [node name="GoodFish" parent="." instance=ExtResource("8_c4kuh")]
 position = Vector2(787, 452)
-Status = 1
 
 [node name="BadFish2" parent="." instance=ExtResource("4_47pgn")]
 position = Vector2(1027, 632)
 FishFacingDirection = Vector2i(-1, 0)
-Status = 1
 
 [connection signal="tree_exiting" from="." to="." method="TreeExit"]
 [connection signal="pressed" from="TurnButton" to="." method="TestButtonPressed"]
