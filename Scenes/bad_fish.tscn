@@ -8,6 +8,7 @@ size = Vector2(70, 72)
 
 [node name="BadFish" type="Node2D" groups=["BadFish"]]
 script = ExtResource("1_0xtko")
+Status = 1
 Type = 0
 
 [node name="BadFish" type="Sprite2D" parent="."]

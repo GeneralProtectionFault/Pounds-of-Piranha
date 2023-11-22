@@ -9,6 +9,7 @@ size = Vector2(70, 72)
 [node name="GoodFish" type="Node2D" groups=["GoodFish"]]
 script = ExtResource("1_kps8k")
 FishFacingDirection = Vector2i(0, 1)
+Status = 1
 
 [node name="GoodFish" type="Sprite2D" parent="."]
 z_index = 1

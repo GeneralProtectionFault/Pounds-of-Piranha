@@ -1,14 +1,14 @@
 [gd_scene load_steps=16 format=3 uid="uid://x852u1r0e735"]
 
-[ext_resource type="Script" path="res://Scripts/Level.cs" id="1_req4u"]
-[ext_resource type="PackedScene" uid="uid://ruo4xpphyqgw" path="res://Scenes/NumberSpawnLocations.tscn" id="2_165kl"]
-[ext_resource type="Shader" path="res://Graphics/Shaders/Water.gdshader" id="3_4eqgl"]
-[ext_resource type="Texture2D" uid="uid://co5p7opdcjgmg" path="res://Graphics/Background1.png" id="4_melbo"]
-[ext_resource type="PackedScene" uid="uid://cthqrcjuob4vq" path="res://Scenes/weight.tscn" id="5_47vjp"]
-[ext_resource type="PackedScene" uid="uid://jcrnqotjmqcc" path="res://Scenes/scale.tscn" id="6_vta0u"]
-[ext_resource type="PackedScene" uid="uid://ci0bnasby43pq" path="res://Scenes/good_fish.tscn" id="7_v3ikf"]
-[ext_resource type="PackedScene" path="res://Scenes/turn.tscn" id="8_52urj"]
-[ext_resource type="PackedScene" uid="uid://c40ieljxsy8lr" path="res://Scenes/bad_fish.tscn" id="9_osv7u"]
+[ext_resource type="Script" path="res://Scripts/Level.cs" id="1_to0pw"]
+[ext_resource type="PackedScene" uid="uid://ruo4xpphyqgw" path="res://Scenes/NumberSpawnLocations.tscn" id="2_b157v"]
+[ext_resource type="Shader" path="res://Graphics/Shaders/Water.gdshader" id="3_gun8t"]
+[ext_resource type="Texture2D" uid="uid://co5p7opdcjgmg" path="res://Graphics/Background1.png" id="4_yidqg"]
+[ext_resource type="PackedScene" uid="uid://cthqrcjuob4vq" path="res://Scenes/weight.tscn" id="5_78dq5"]
+[ext_resource type="PackedScene" uid="uid://jcrnqotjmqcc" path="res://Scenes/scale.tscn" id="6_ycps7"]
+[ext_resource type="PackedScene" uid="uid://ci0bnasby43pq" path="res://Scenes/good_fish.tscn" id="7_5clvy"]
+[ext_resource type="PackedScene" uid="uid://c40ieljxsy8lr" path="res://Scenes/bad_fish.tscn" id="8_odbhp"]
+[ext_resource type="PackedScene" path="res://Scenes/turn.tscn" id="9_qvoom"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_oormi"]
 
@@ -17,7 +17,7 @@ seamless = true
 noise = SubResource("FastNoiseLite_oormi")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3km26"]
-shader = ExtResource("3_4eqgl")
+shader = ExtResource("3_gun8t")
 shader_parameter/water_color = Color(0, 0, 0, 0.227451)
 shader_parameter/scale = Vector2(18, 5)
 shader_parameter/noise = SubResource("NoiseTexture2D_e3wqu")
@@ -31,9 +31,9 @@ size = Vector2(1370, 20)
 size = Vector2(418, 20)
 
 [node name="Level_11" type="Node2D"]
-script = ExtResource("1_req4u")
+script = ExtResource("1_to0pw")
 
-[node name="NumberSpawns" parent="." instance=ExtResource("2_165kl")]
+[node name="NumberSpawns" parent="." instance=ExtResource("2_b157v")]
 position = Vector2(661, 532)
 
 [node name="TurnButton" type="Button" parent="."]
@@ -65,27 +65,26 @@ text = "0
 z_index = -1
 material = SubResource("ShaderMaterial_3km26")
 position = Vector2(960, 540)
-texture = ExtResource("4_melbo")
+texture = ExtResource("4_yidqg")
 
-[node name="Weight" parent="." instance=ExtResource("5_47vjp")]
+[node name="Weight" parent="." instance=ExtResource("5_78dq5")]
 position = Vector2(818, 115)
-Pounds = 4
-
-[node name="Weight2" parent="." instance=ExtResource("5_47vjp")]
-position = Vector2(906, 115)
 Pounds = 2
 
-[node name="Weight3" parent="." instance=ExtResource("5_47vjp")]
-position = Vector2(986, 115)
+[node name="Weight3" parent="." instance=ExtResource("5_78dq5")]
+position = Vector2(729, 115)
+Pounds = -2
 
-[node name="Weight4" parent="." instance=ExtResource("5_47vjp")]
-position = Vector2(1062, 115)
+[node name="Weight2" parent="." instance=ExtResource("5_78dq5")]
+position = Vector2(901, 115)
+Pounds = 4
 
-[node name="Weight5" parent="." instance=ExtResource("5_47vjp")]
-position = Vector2(732, 115)
+[node name="Weight4" parent="." instance=ExtResource("5_78dq5")]
+position = Vector2(982, 115)
+Pounds = -5
 
-[node name="Weight6" parent="." instance=ExtResource("5_47vjp")]
-position = Vector2(1138, 115)
+[node name="Weight5" parent="." instance=ExtResource("5_78dq5")]
+position = Vector2(1065, 115)
 
 [node name="Shelf2" type="StaticBody2D" parent="."]
 
@@ -106,29 +105,38 @@ shape = SubResource("RectangleShape2D_dcr1y")
 position = Vector2(206, 903)
 shape = SubResource("RectangleShape2D_2hvfy")
 
-[node name="Scale" parent="." instance=ExtResource("6_vta0u")]
+[node name="Scale" parent="." instance=ExtResource("6_ycps7")]
 position = Vector2(206, 757)
 
-[node name="GoodFish3" parent="." instance=ExtResource("7_v3ikf")]
+[node name="GoodFish3" parent="." instance=ExtResource("7_5clvy")]
 position = Vector2(982, 631)
 FishFacingDirection = Vector2i(-1, 0)
 
-[node name="GoodFish4" parent="." instance=ExtResource("7_v3ikf")]
-position = Vector2(601, 636)
-FishFacingDirection = Vector2i(1, 0)
+[node name="GoodFish5" parent="." instance=ExtResource("7_5clvy")]
+position = Vector2(982, 794)
+FishFacingDirection = Vector2i(-1, 0)
 
-[node name="Turn" parent="." instance=ExtResource("8_52urj")]
-position = Vector2(781, 649)
+[node name="GoodFish4" parent="." instance=ExtResource("7_5clvy")]
+position = Vector2(784, 441)
+
+[node name="Turn" parent="." instance=ExtResource("9_qvoom")]
+position = Vector2(781, 795)
+OverrideBothFishTypes = true
+
+[node name="Turn2" parent="." instance=ExtResource("9_qvoom")]
+position = Vector2(781, 630)
 ArrowDirection = Vector2(0, -1)
 OverrideBothFishTypes = true
 
-[node name="Turn2" parent="." instance=ExtResource("8_52urj")]
-position = Vector2(781, 798)
-ArrowDirection = Vector2(0, -1)
-OverrideBothFishTypes = true
-
-[node name="BadFish" parent="." instance=ExtResource("9_osv7u")]
+[node name="BadFish" parent="." instance=ExtResource("8_odbhp")]
 position = Vector2(602, 793)
+
+[node name="BadFish3" parent="." instance=ExtResource("8_odbhp")]
+position = Vector2(788, 969)
+FishFacingDirection = Vector2i(0, -1)
+
+[node name="BadFish2" parent="." instance=ExtResource("8_odbhp")]
+position = Vector2(596, 631)
 
 [connection signal="pressed" from="TurnButton" to="." method="TestButtonPressed"]
 [connection signal="pressed" from="NumberSetButton" to="." method="NumberSetButtonPressed"]
