@@ -11,6 +11,10 @@ public partial class Level : Node2D
 	[Export(PropertyHint.Range, "1,4")] public int Digits = 1;
 
 
+	public enum LevelState {Play, FishMoving}
+	public static LevelState CurrentLevelState = LevelState.Play;
+
+
 	public static event EventHandler CommenceTurn;
 
 

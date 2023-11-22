@@ -16,7 +16,7 @@ public partial class Fish : Node2D
 
 
 	private Area2D FishCollider;
-	private bool Moving = false;
+	public bool Moving { get; set; } = false;
 	private RayCast2D NumberDetector;
 
 	// Stores the navigation points to the target location
@@ -78,6 +78,7 @@ public partial class Fish : Node2D
 				GD.Print(IDPath);
 
 				Moving = true;
+				Level.CurrentLevelState = Level.LevelState.FishMoving;
 			}
 		}
 	}
@@ -144,7 +145,12 @@ public partial class Fish : Node2D
 				if (GlobalPosition == Level.CoordinatesFromCell(TargetPosition))
 				{
 					if (NumberDetector.IsColliding())
+					{
 						Moving = false;
+
+						if (!CheckMovingFish())
+							Level.CurrentLevelState = Level.LevelState.Play;
+					}
 					
 					
 					IDPath = IDPath.Slice(1);
@@ -159,10 +165,37 @@ public partial class Fish : Node2D
 					}
 				}
 			}
-			// else
-			// 	Moving = false;
+			else
+			{
+				Moving = false;
+				
+				if (!CheckMovingFish())
+					Level.CurrentLevelState = Level.LevelState.Play;
+			}
+			
 		}
     }
+
+
+	public bool CheckMovingFish()
+	{
+		bool FishStillMoving = false;
+
+		// 	Moving = false;
+		foreach (var BadFish in GetTree().GetNodesInGroup("BadFish"))
+		{
+			if ((BadFish as Fish).Moving)
+				FishStillMoving = true;
+		}
+
+		foreach(var GoodFish in GetTree().GetNodesInGroup("GoodFish"))
+		{
+			if ((GoodFish as Fish).Moving)
+				FishStillMoving = true;
+		}
+
+		return FishStillMoving;
+	}
 
 
 
