@@ -1,0 +1,145 @@
+[gd_scene load_steps=17 format=3 uid="uid://b3o7hdxu80ft1"]
+
+[ext_resource type="Script" path="res://Scripts/Level.cs" id="1_wdyan"]
+[ext_resource type="PackedScene" uid="uid://ruo4xpphyqgw" path="res://Scenes/NumberSpawnLocations.tscn" id="2_b4oed"]
+[ext_resource type="Shader" path="res://Graphics/Shaders/Water.gdshader" id="3_rsqxq"]
+[ext_resource type="Texture2D" uid="uid://co5p7opdcjgmg" path="res://Graphics/Background1.png" id="4_8lh7j"]
+[ext_resource type="PackedScene" uid="uid://cthqrcjuob4vq" path="res://Scenes/weight.tscn" id="5_pjkxf"]
+[ext_resource type="PackedScene" uid="uid://jcrnqotjmqcc" path="res://Scenes/scale.tscn" id="6_6vwxq"]
+[ext_resource type="PackedScene" uid="uid://ci0bnasby43pq" path="res://Scenes/good_fish.tscn" id="7_yby4o"]
+[ext_resource type="PackedScene" uid="uid://c40ieljxsy8lr" path="res://Scenes/bad_fish.tscn" id="8_u5bnn"]
+[ext_resource type="PackedScene" path="res://Scenes/turn.tscn" id="9_4sy3m"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_oormi"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_e3wqu"]
+seamless = true
+noise = SubResource("FastNoiseLite_oormi")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3km26"]
+shader = ExtResource("3_rsqxq")
+shader_parameter/water_color = Color(0, 0, 0, 0.227451)
+shader_parameter/scale = Vector2(18, 5)
+shader_parameter/noise = SubResource("NoiseTexture2D_e3wqu")
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yx308"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dcr1y"]
+size = Vector2(1370, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2hvfy"]
+size = Vector2(418, 20)
+
+[sub_resource type="LabelSettings" id="LabelSettings_iq5o5"]
+font_size = 24
+
+[node name="Level_10" type="Node2D"]
+script = ExtResource("1_wdyan")
+
+[node name="NumberSpawns" parent="." instance=ExtResource("2_b4oed")]
+position = Vector2(661, 532)
+
+[node name="TurnButton" type="Button" parent="."]
+offset_left = 1645.0
+offset_right = 1909.0
+offset_bottom = 65.0
+text = "Initiate Turn
+"
+
+[node name="NumberSetButton" type="Button" parent="."]
+visible = false
+offset_left = 1645.0
+offset_top = 84.0
+offset_right = 1802.0
+offset_bottom = 130.0
+text = "Set Number
+"
+
+[node name="NumberOverride" type="TextEdit" parent="."]
+visible = false
+offset_left = 1817.0
+offset_top = 84.0
+offset_right = 1907.0
+offset_bottom = 130.0
+text = "0
+"
+
+[node name="Background1" type="Sprite2D" parent="."]
+z_index = -1
+material = SubResource("ShaderMaterial_3km26")
+position = Vector2(960, 540)
+texture = ExtResource("4_8lh7j")
+
+[node name="Weight2" parent="." instance=ExtResource("5_pjkxf")]
+position = Vector2(906, 115)
+Pounds = 6
+
+[node name="Weight3" parent="." instance=ExtResource("5_pjkxf")]
+position = Vector2(986, 115)
+Pounds = 2
+
+[node name="Weight4" parent="." instance=ExtResource("5_pjkxf")]
+position = Vector2(1062, 115)
+Pounds = -4
+
+[node name="Weight5" parent="." instance=ExtResource("5_pjkxf")]
+position = Vector2(1143, 115)
+Pounds = -4
+
+[node name="Weight6" parent="." instance=ExtResource("5_pjkxf")]
+position = Vector2(1220, 115)
+Pounds = -1
+
+[node name="Shelf2" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Shelf2"]
+position = Vector2(1219, 160.5)
+scale = Vector2(2.63281, 0.0566406)
+texture = SubResource("NoiseTexture2D_yx308")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shelf2"]
+position = Vector2(1225, 158)
+shape = SubResource("RectangleShape2D_dcr1y")
+
+[node name="Shelf" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Shelf"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shelf"]
+position = Vector2(206, 903)
+shape = SubResource("RectangleShape2D_2hvfy")
+
+[node name="Scale" parent="." instance=ExtResource("6_6vwxq")]
+position = Vector2(206, 757)
+
+[node name="GoodFish" parent="." instance=ExtResource("7_yby4o")]
+position = Vector2(779, 475)
+
+[node name="BadFish2" parent="." instance=ExtResource("8_u5bnn")]
+position = Vector2(779, 947)
+FishFacingDirection = Vector2i(0, -1)
+
+[node name="TutorialText" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="FollowArrows" type="Label" parent="TutorialText"]
+layout_mode = 0
+offset_left = 585.0
+offset_top = 331.0
+offset_right = 978.0
+offset_bottom = 379.0
+text = "Fish will follow the arrows."
+label_settings = SubResource("LabelSettings_iq5o5")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Turn" parent="." instance=ExtResource("9_4sy3m")]
+position = Vector2(781, 649)
+OverrideBothFishTypes = true
+
+[connection signal="pressed" from="TurnButton" to="." method="TestButtonPressed"]
+[connection signal="pressed" from="NumberSetButton" to="." method="NumberSetButtonPressed"]
+[connection signal="text_changed" from="NumberOverride" to="." method="TestNumberChanged"]
