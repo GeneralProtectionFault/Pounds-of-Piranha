@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://usbrevuimjw7"]
+[gd_scene load_steps=15 format=3 uid="uid://b6amh3lsd5joo"]
 
 [ext_resource type="Script" path="res://Scripts/Level.cs" id="1_mlrbx"]
 [ext_resource type="PackedScene" uid="uid://ruo4xpphyqgw" path="res://Scenes/NumberSpawnLocations.tscn" id="2_u4j7q"]
@@ -32,6 +32,7 @@ size = Vector2(418, 20)
 [node name="Level_13" type="Node2D"]
 script = ExtResource("1_mlrbx")
 Digits = 2
+metadata/Sequence = 13
 
 [node name="NumberSpawns" parent="." instance=ExtResource("2_u4j7q")]
 position = Vector2(661, 532)

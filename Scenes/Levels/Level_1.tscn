@@ -33,6 +33,7 @@ font_size = 24
 
 [node name="Level_1" type="Node2D"]
 script = ExtResource("1_5i0au")
+metadata/Sequence = 1
 
 [node name="NumberSpawns" parent="." instance=ExtResource("2_q75m3")]
 position = Vector2(661, 532)

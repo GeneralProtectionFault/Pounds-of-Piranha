@@ -30,6 +30,7 @@ size = Vector2(418, 20)
 
 [node name="Level_3" type="Node2D"]
 script = ExtResource("1_3os6o")
+metadata/Sequence = 3
 
 [node name="NumberSpawns" parent="." instance=ExtResource("2_aia27")]
 position = Vector2(661, 532)
