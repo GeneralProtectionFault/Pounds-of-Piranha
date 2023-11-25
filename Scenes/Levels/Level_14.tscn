@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ctfamb5rhpuov"]
+[gd_scene load_steps=16 format=3 uid="uid://bfqq6e167bjhp"]
 
 [ext_resource type="Script" path="res://Scripts/Level.cs" id="1_0leoj"]
 [ext_resource type="PackedScene" uid="uid://ruo4xpphyqgw" path="res://Scenes/NumberSpawnLocations.tscn" id="2_ei668"]
@@ -6,9 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://co5p7opdcjgmg" path="res://Graphics/Background1.png" id="4_4upb7"]
 [ext_resource type="PackedScene" uid="uid://cthqrcjuob4vq" path="res://Scenes/weight.tscn" id="5_8bf08"]
 [ext_resource type="PackedScene" uid="uid://jcrnqotjmqcc" path="res://Scenes/scale.tscn" id="6_n0s2s"]
-[ext_resource type="PackedScene" uid="uid://ci0bnasby43pq" path="res://Scenes/good_fish.tscn" id="7_wmt3k"]
-[ext_resource type="PackedScene" uid="uid://c40ieljxsy8lr" path="res://Scenes/bad_fish.tscn" id="8_eucfl"]
 [ext_resource type="PackedScene" uid="uid://d1v7hqlvp1ql7" path="res://Scenes/turn.tscn" id="9_nawh8"]
+[ext_resource type="PackedScene" uid="uid://cmdmxf1qlgiv0" path="res://Scenes/good_fish_2.tscn" id="9_o4tpp"]
+[ext_resource type="PackedScene" uid="uid://cntr1ko2bgjfv" path="res://Scenes/bad_fish_2.tscn" id="10_fsg36"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_oormi"]
 
@@ -106,35 +106,6 @@ shape = SubResource("RectangleShape2D_2hvfy")
 [node name="Scale" parent="." instance=ExtResource("6_n0s2s")]
 position = Vector2(206, 757)
 
-[node name="GoodFish2" parent="." instance=ExtResource("7_wmt3k")]
-position = Vector2(1034, 469)
-
-[node name="BadFish" parent="." instance=ExtResource("8_eucfl")]
-position = Vector2(590, 634)
-
-[node name="BadFish2" parent="." instance=ExtResource("8_eucfl")]
-position = Vector2(587, 790)
-
-[node name="BadFish3" parent="." instance=ExtResource("8_eucfl")]
-position = Vector2(1204, 624)
-FishFacingDirection = Vector2i(-1, 0)
-
-[node name="BadFish4" parent="." instance=ExtResource("8_eucfl")]
-position = Vector2(1201, 780)
-FishFacingDirection = Vector2i(-1, 0)
-
-[node name="BadFish5" parent="." instance=ExtResource("8_eucfl")]
-position = Vector2(745, 466)
-FishFacingDirection = Vector2i(0, 1)
-
-[node name="BadFish6" parent="." instance=ExtResource("8_eucfl")]
-position = Vector2(760, 953)
-FishFacingDirection = Vector2i(0, -1)
-
-[node name="BadFish7" parent="." instance=ExtResource("8_eucfl")]
-position = Vector2(1029, 952)
-FishFacingDirection = Vector2i(0, -1)
-
 [node name="Turn" parent="." instance=ExtResource("9_nawh8")]
 position = Vector2(1025, 625)
 ArrowDirection = Vector2(-1, 0)
@@ -152,6 +123,35 @@ OverrideBothFishTypes = true
 [node name="Turn4" parent="." instance=ExtResource("9_nawh8")]
 position = Vector2(1021, 784)
 OverrideBothFishTypes = true
+
+[node name="BadFish" parent="." instance=ExtResource("10_fsg36")]
+position = Vector2(587, 634)
+
+[node name="BadFish2" parent="." instance=ExtResource("10_fsg36")]
+position = Vector2(587, 790)
+
+[node name="BadFish3" parent="." instance=ExtResource("10_fsg36")]
+position = Vector2(760, 466)
+FishFacingDirection = Vector2i(0, 1)
+
+[node name="BadFish4" parent="." instance=ExtResource("10_fsg36")]
+position = Vector2(760, 956)
+FishFacingDirection = Vector2i(0, -1)
+
+[node name="BadFish5" parent="." instance=ExtResource("10_fsg36")]
+position = Vector2(1034, 953)
+FishFacingDirection = Vector2i(0, -1)
+
+[node name="BadFish6" parent="." instance=ExtResource("10_fsg36")]
+position = Vector2(1225, 625)
+FishFacingDirection = Vector2i(-1, 0)
+
+[node name="BadFish7" parent="." instance=ExtResource("10_fsg36")]
+position = Vector2(1224, 780)
+FishFacingDirection = Vector2i(-1, 0)
+
+[node name="GoodFish" parent="." instance=ExtResource("9_o4tpp")]
+position = Vector2(1033, 466)
 
 [connection signal="pressed" from="TurnButton" to="." method="TestButtonPressed"]
 [connection signal="pressed" from="NumberSetButton" to="." method="NumberSetButtonPressed"]
