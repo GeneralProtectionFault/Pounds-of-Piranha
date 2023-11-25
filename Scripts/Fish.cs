@@ -34,8 +34,37 @@ public partial class Fish : AnimatedSprite2D
 		FishFacingDirection = Direction;
 		NumberDetector.TargetPosition = FishFacingDirection * RayCastLength;
 
-		this.Play("Idle_Right");
+		SetFishAnimation(Direction);
 	}
+
+
+	private void SetFishAnimation(Vector2I Direction)
+	{
+		string AnimationName_Idle = Direction switch
+        {
+            { X: -1 } and { Y: 0 } => "Idle_Left",
+            { X: 1 } and { Y: 0 }  => "Idle_Right",
+            { X: 0 } and { Y: 1 } => "Idle_Down",
+            { X: 0 } and { Y: -1} => "Idle_Up",
+            _ => "None"
+        };
+
+		string AnimationName_Moving = Direction switch
+        {
+            { X: -1 } and { Y: 0 } => "Swim_Left",
+            { X: 1 } and { Y: 0 }  => "Swim_Right",
+            { X: 0 } and { Y: 1 } => "Swim_Down",
+            { X: 0 } and { Y: -1} => "Swim_Up",
+            _ => "None"
+        };
+
+		if (Moving)
+			this.Play(AnimationName_Moving);
+		else
+			this.Play(AnimationName_Idle);
+	}
+
+
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -80,6 +109,7 @@ public partial class Fish : AnimatedSprite2D
 				GD.Print(IDPath);
 
 				Moving = true;
+				SetFacingDirection(FishFacingDirection);
 				Level.CurrentLevelState = Level.LevelState.FishMoving;
 			}
 		}
@@ -108,10 +138,9 @@ public partial class Fish : AnimatedSprite2D
 			if (OtherAreas.Count > 0)
 			{
 				Node OtherThing = OtherAreas.FirstOrDefault().GetParent();
-				GD.Print(OtherThing.GetGroups());
+				
 				if (!OtherThing.IsInGroup("Turn"))
 				{
-					GD.Print("OtherFish!");
 					var OtherFish = OtherThing as Fish;
 
 					if (this.Type != OtherFish.Type)
@@ -151,6 +180,7 @@ public partial class Fish : AnimatedSprite2D
 					if (NumberDetector.IsColliding())
 					{
 						Moving = false;
+						SetFacingDirection(FishFacingDirection);
 
 						if (Level.CurrentLevelState == Level.LevelState.FishMoving && !CheckMovingFish())
 							Level.CurrentLevelState = Level.LevelState.Play;
@@ -172,6 +202,7 @@ public partial class Fish : AnimatedSprite2D
 			else
 			{
 				Moving = false;
+				SetFacingDirection(FishFacingDirection);
 				
 				if (Level.CurrentLevelState == Level.LevelState.FishMoving && !CheckMovingFish())
 					Level.CurrentLevelState = Level.LevelState.Play;

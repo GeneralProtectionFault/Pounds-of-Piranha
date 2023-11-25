@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bqoplhn4jfq7a"]
+[gd_scene load_steps=16 format=3 uid="uid://bqoplhn4jfq7a"]
 
 [ext_resource type="Script" path="res://Scripts/Level.cs" id="1_hpvyh"]
 [ext_resource type="PackedScene" uid="uid://ruo4xpphyqgw" path="res://Scenes/NumberSpawnLocations.tscn" id="2_banh3"]
@@ -6,9 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://co5p7opdcjgmg" path="res://Graphics/Background1.png" id="4_ccios"]
 [ext_resource type="PackedScene" uid="uid://cthqrcjuob4vq" path="res://Scenes/weight.tscn" id="5_p4t20"]
 [ext_resource type="PackedScene" uid="uid://jcrnqotjmqcc" path="res://Scenes/scale.tscn" id="6_6v0re"]
-[ext_resource type="PackedScene" uid="uid://ci0bnasby43pq" path="res://Scenes/good_fish.tscn" id="7_ppgps"]
-[ext_resource type="PackedScene" uid="uid://c40ieljxsy8lr" path="res://Scenes/bad_fish.tscn" id="8_t5r1l"]
-[ext_resource type="PackedScene" uid="uid://c0ncg6oys3lk0" path="res://Graphics/Aseprite/BadFish2.aseprite" id="9_v6co6"]
+[ext_resource type="PackedScene" uid="uid://cmdmxf1qlgiv0" path="res://Scenes/good_fish_2.tscn" id="7_geptx"]
+[ext_resource type="PackedScene" uid="uid://cntr1ko2bgjfv" path="res://Scenes/bad_fish_2.tscn" id="8_it7xh"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_oormi"]
 
@@ -99,9 +98,6 @@ shape = SubResource("RectangleShape2D_2hvfy")
 [node name="Scale" parent="." instance=ExtResource("6_6v0re")]
 position = Vector2(206, 757)
 
-[node name="GoodFish" parent="." instance=ExtResource("7_ppgps")]
-position = Vector2(787, 452)
-
 [node name="TutorialText" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -120,12 +116,11 @@ label_settings = SubResource("LabelSettings_b5nxn")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BadFish" parent="." instance=ExtResource("8_t5r1l")]
-position = Vector2(598, 646)
+[node name="GoodFish2" parent="." instance=ExtResource("7_geptx")]
+position = Vector2(787, 452)
 
-[node name="BadFish2" parent="." instance=ExtResource("9_v6co6")]
-position = Vector2(404, 431)
-animation = &"Idle_Right"
+[node name="BadFish2" parent="." instance=ExtResource("8_it7xh")]
+position = Vector2(515, 632)
 
 [connection signal="pressed" from="TurnButton" to="." method="TestButtonPressed"]
 [connection signal="pressed" from="NumberSetButton" to="." method="NumberSetButtonPressed"]

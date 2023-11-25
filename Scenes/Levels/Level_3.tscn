@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://co5p7opdcjgmg" path="res://Graphics/Background1.png" id="4_uwcnj"]
 [ext_resource type="PackedScene" uid="uid://cthqrcjuob4vq" path="res://Scenes/weight.tscn" id="5_0wfid"]
 [ext_resource type="PackedScene" uid="uid://jcrnqotjmqcc" path="res://Scenes/scale.tscn" id="6_0c6oi"]
-[ext_resource type="PackedScene" uid="uid://ci0bnasby43pq" path="res://Scenes/good_fish.tscn" id="7_rakfq"]
+[ext_resource type="PackedScene" uid="uid://cmdmxf1qlgiv0" path="res://Scenes/good_fish_2.tscn" id="7_nudni"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_oormi"]
 
@@ -95,7 +95,7 @@ shape = SubResource("RectangleShape2D_2hvfy")
 [node name="Scale" parent="." instance=ExtResource("6_0c6oi")]
 position = Vector2(206, 757)
 
-[node name="GoodFish" parent="." instance=ExtResource("7_rakfq")]
+[node name="GoodFish2" parent="." instance=ExtResource("7_nudni")]
 position = Vector2(787, 452)
 
 [connection signal="pressed" from="TurnButton" to="." method="TestButtonPressed"]
