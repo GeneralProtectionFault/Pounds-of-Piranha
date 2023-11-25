@@ -6,7 +6,7 @@
 [ext_resource type="Shader" path="res://Graphics/Shaders/Water.gdshader" id="4_qrgve"]
 [ext_resource type="PackedScene" uid="uid://cthqrcjuob4vq" path="res://Scenes/weight.tscn" id="6_bksep"]
 [ext_resource type="PackedScene" uid="uid://jcrnqotjmqcc" path="res://Scenes/scale.tscn" id="7_3e4ep"]
-[ext_resource type="PackedScene" uid="uid://cmdmxf1qlgiv0" path="res://Scenes/good_fish_2.tscn" id="7_tfjht"]
+[ext_resource type="PackedScene" path="res://Scenes/good_fish_2.tscn" id="7_tfjht"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_oormi"]
 
