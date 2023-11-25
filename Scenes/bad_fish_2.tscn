@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://cntr1ko2bgjfv"]
+
+[ext_resource type="PackedScene" uid="uid://c0ncg6oys3lk0" path="res://Graphics/Aseprite/BadFish2.aseprite" id="1_tgtdc"]
+[ext_resource type="Script" path="res://Scripts/Fish.cs" id="2_jara4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_01lfc"]
+size = Vector2(92, 101)
+
+[node name="BadFish2" groups=["BadFish"] instance=ExtResource("1_tgtdc")]
+top_level = true
+animation = &"Idle_Right"
+frame_progress = 0.788856
+script = ExtResource("2_jara4")
+Type = 0
+
+[node name="NumberRayCast2D" type="RayCast2D" parent="." index="0"]
+target_position = Vector2(225, 0)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Area2D" type="Area2D" parent="." index="1"]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+position = Vector2(-1, -0.5)
+shape = SubResource("RectangleShape2D_01lfc")
+
+[connection signal="tree_exiting" from="." to="." method="FishLeavingScene"]

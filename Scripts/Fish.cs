@@ -4,14 +4,14 @@ using System.Linq;
 
 
 
-public partial class Fish : Node2D
+public partial class Fish : AnimatedSprite2D
 {
 	public enum FishStatus {OnDeck, InPlay, Turning}
 	public enum FishType {Bad, Good}
 	
 	[Export] public int RayCastLength = 225;
 	[Export] public Vector2I FishFacingDirection = new Vector2I(1,0); // Default to the right
-	[Export] public FishStatus Status = FishStatus.OnDeck;
+	[Export] public FishStatus Status = FishStatus.InPlay;
 	[Export] public FishType Type = FishType.Good;
 
 
@@ -33,6 +33,8 @@ public partial class Fish : Node2D
 	{
 		FishFacingDirection = Direction;
 		NumberDetector.TargetPosition = FishFacingDirection * RayCastLength;
+
+		this.Play("Idle_Right");
 	}
 
 	// Called when the node enters the scene tree for the first time.
@@ -106,8 +108,10 @@ public partial class Fish : Node2D
 			if (OtherAreas.Count > 0)
 			{
 				Node OtherThing = OtherAreas.FirstOrDefault().GetParent();
+				GD.Print(OtherThing.GetGroups());
 				if (!OtherThing.IsInGroup("Turn"))
 				{
+					GD.Print("OtherFish!");
 					var OtherFish = OtherThing as Fish;
 
 					if (this.Type != OtherFish.Type)

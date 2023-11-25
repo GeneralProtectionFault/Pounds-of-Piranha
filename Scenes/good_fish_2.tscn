@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://cmdmxf1qlgiv0"]
+
+[ext_resource type="PackedScene" uid="uid://bg0m8o34xiira" path="res://Graphics/Aseprite/GoodFish2.aseprite" id="1_gilg2"]
+[ext_resource type="Script" path="res://Scripts/Fish.cs" id="2_apjoj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_14jma"]
+size = Vector2(113, 113)
+
+[node name="GoodFish2" groups=["GoodFish"] instance=ExtResource("1_gilg2")]
+animation = &"Idle_Right"
+frame_progress = 0.747251
+script = ExtResource("2_apjoj")
+FishFacingDirection = Vector2i(0, 1)
+
+[node name="NumberRayCast2D" type="RayCast2D" parent="." index="0"]
+target_position = Vector2(225, 0)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Area2D" type="Area2D" parent="." index="1"]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_14jma")
+
+[connection signal="tree_exiting" from="." to="." method="FishLeavingScene"]

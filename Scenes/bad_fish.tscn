@@ -8,10 +8,10 @@ size = Vector2(70, 72)
 
 [node name="BadFish" type="Node2D" groups=["BadFish"]]
 script = ExtResource("1_0xtko")
-Status = 1
 Type = 0
 
 [node name="BadFish" type="Sprite2D" parent="."]
+visible = false
 z_index = 1
 scale = Vector2(0.76, 0.76)
 texture = ExtResource("1_skffu")
