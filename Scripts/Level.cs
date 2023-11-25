@@ -85,6 +85,8 @@ public partial class Level : Node2D
 
 			var ReloadResult = GetTree().ReloadCurrentScene();
 			GD.Print($"Reloading scene.\nReolad Result: {ReloadResult}");
+
+			Level.CurrentLevelState = Level.LevelState.Play;
 		}
 	}
 
