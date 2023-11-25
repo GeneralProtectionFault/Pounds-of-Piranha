@@ -77,6 +77,7 @@ public partial class Fish : AnimatedSprite2D
 		SetFacingDirection(FishFacingDirection);
 	}
 
+
 	private void MoveFish(object sender, EventArgs e)
 	{
 		// Resume from turning status here, only after the event to move fires off again.
@@ -120,6 +121,8 @@ public partial class Fish : AnimatedSprite2D
 	{
 		// TODO:  Play an animation FFS
 		Consumee.QueueFree();
+
+		Level.CurrentLevelState = Level.LevelState.Play;
 	}
 
 
@@ -203,7 +206,7 @@ public partial class Fish : AnimatedSprite2D
 			{
 				Moving = false;
 				SetFacingDirection(FishFacingDirection);
-				
+
 				if (Level.CurrentLevelState == Level.LevelState.FishMoving && !CheckMovingFish())
 					Level.CurrentLevelState = Level.LevelState.Play;
 			}
