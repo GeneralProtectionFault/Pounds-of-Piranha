@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://60nrec67kxj7"]
+[gd_scene load_steps=15 format=3 uid="uid://exxexkvdoi0t"]
 
 [ext_resource type="Script" path="res://Scripts/Level.cs" id="1_7hbja"]
 [ext_resource type="PackedScene" uid="uid://ruo4xpphyqgw" path="res://Scenes/NumberSpawnLocations.tscn" id="2_htsgl"]
