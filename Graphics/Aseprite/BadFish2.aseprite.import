@@ -1,0 +1,25 @@
+[remap]
+
+importer="Aseprite AnimatedSprite2D Import"
+type="PackedScene"
+uid="uid://c0ncg6oys3lk0"
+path="res://.godot/imported/BadFish2.aseprite-7b0268f8af46ead28be7e0ca8299192d.scn"
+
+[deps]
+
+source_file="res://Graphics/Aseprite/BadFish2.aseprite"
+dest_files=["res://.godot/imported/BadFish2.aseprite-7b0268f8af46ead28be7e0ca8299192d.scn"]
+
+[params]
+
+spritesheet/layout=0
+spritesheet/fixed_rows_count=1
+spritesheet/fixed_columns_count=1
+spritesheet/border_type=0
+spritesheet/trim=false
+spritesheet/ignore_empty=false
+spritesheet/merge_duplicates=false
+animation/default/name="default"
+animation/default/direction=0
+animation/default/repeat_count=0
+animation/autoplay=""

@@ -6,7 +6,7 @@
 [ext_resource type="Shader" path="res://Graphics/Shaders/Water.gdshader" id="4_qrgve"]
 [ext_resource type="PackedScene" uid="uid://cthqrcjuob4vq" path="res://Scenes/weight.tscn" id="6_bksep"]
 [ext_resource type="PackedScene" uid="uid://jcrnqotjmqcc" path="res://Scenes/scale.tscn" id="7_3e4ep"]
-[ext_resource type="PackedScene" uid="uid://ci0bnasby43pq" path="res://Scenes/good_fish.tscn" id="8_c4kuh"]
+[ext_resource type="PackedScene" uid="uid://cmdmxf1qlgiv0" path="res://Scenes/good_fish_2.tscn" id="7_tfjht"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_oormi"]
 
@@ -93,9 +93,6 @@ shape = SubResource("RectangleShape2D_2hvfy")
 [node name="Scale" parent="." instance=ExtResource("7_3e4ep")]
 position = Vector2(206, 757)
 
-[node name="GoodFish" parent="." instance=ExtResource("8_c4kuh")]
-position = Vector2(787, 452)
-
 [node name="TutorialText" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -135,6 +132,9 @@ text = "3. Clear the path for the good fish."
 label_settings = SubResource("LabelSettings_b5nxn")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="GoodFish2" parent="." instance=ExtResource("7_tfjht")]
+position = Vector2(787, 452)
 
 [connection signal="pressed" from="TurnButton" to="." method="TestButtonPressed"]
 [connection signal="pressed" from="NumberSetButton" to="." method="NumberSetButtonPressed"]

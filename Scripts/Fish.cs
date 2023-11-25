@@ -4,14 +4,14 @@ using System.Linq;
 
 
 
-public partial class Fish : Node2D
+public partial class Fish : AnimatedSprite2D
 {
 	public enum FishStatus {OnDeck, InPlay, Turning}
 	public enum FishType {Bad, Good}
 	
 	[Export] public int RayCastLength = 225;
 	[Export] public Vector2I FishFacingDirection = new Vector2I(1,0); // Default to the right
-	[Export] public FishStatus Status = FishStatus.OnDeck;
+	[Export] public FishStatus Status = FishStatus.InPlay;
 	[Export] public FishType Type = FishType.Good;
 
 
@@ -33,7 +33,38 @@ public partial class Fish : Node2D
 	{
 		FishFacingDirection = Direction;
 		NumberDetector.TargetPosition = FishFacingDirection * RayCastLength;
+
+		SetFishAnimation(Direction);
 	}
+
+
+	private void SetFishAnimation(Vector2I Direction)
+	{
+		string AnimationName_Idle = Direction switch
+        {
+            { X: -1 } and { Y: 0 } => "Idle_Left",
+            { X: 1 } and { Y: 0 }  => "Idle_Right",
+            { X: 0 } and { Y: 1 } => "Idle_Down",
+            { X: 0 } and { Y: -1} => "Idle_Up",
+            _ => "None"
+        };
+
+		string AnimationName_Moving = Direction switch
+        {
+            { X: -1 } and { Y: 0 } => "Swim_Left",
+            { X: 1 } and { Y: 0 }  => "Swim_Right",
+            { X: 0 } and { Y: 1 } => "Swim_Down",
+            { X: 0 } and { Y: -1} => "Swim_Up",
+            _ => "None"
+        };
+
+		if (Moving)
+			this.Play(AnimationName_Moving);
+		else
+			this.Play(AnimationName_Idle);
+	}
+
+
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -45,6 +76,7 @@ public partial class Fish : Node2D
 		FishCollider = GetNode<Area2D>("Area2D");
 		SetFacingDirection(FishFacingDirection);
 	}
+
 
 	private void MoveFish(object sender, EventArgs e)
 	{
@@ -78,6 +110,7 @@ public partial class Fish : Node2D
 				GD.Print(IDPath);
 
 				Moving = true;
+				SetFacingDirection(FishFacingDirection);
 				Level.CurrentLevelState = Level.LevelState.FishMoving;
 			}
 		}
@@ -88,6 +121,8 @@ public partial class Fish : Node2D
 	{
 		// TODO:  Play an animation FFS
 		Consumee.QueueFree();
+
+		Level.CurrentLevelState = Level.LevelState.Play;
 	}
 
 
@@ -106,6 +141,7 @@ public partial class Fish : Node2D
 			if (OtherAreas.Count > 0)
 			{
 				Node OtherThing = OtherAreas.FirstOrDefault().GetParent();
+				
 				if (!OtherThing.IsInGroup("Turn"))
 				{
 					var OtherFish = OtherThing as Fish;
@@ -147,6 +183,7 @@ public partial class Fish : Node2D
 					if (NumberDetector.IsColliding())
 					{
 						Moving = false;
+						SetFacingDirection(FishFacingDirection);
 
 						if (Level.CurrentLevelState == Level.LevelState.FishMoving && !CheckMovingFish())
 							Level.CurrentLevelState = Level.LevelState.Play;
@@ -168,7 +205,8 @@ public partial class Fish : Node2D
 			else
 			{
 				Moving = false;
-				
+				SetFacingDirection(FishFacingDirection);
+
 				if (Level.CurrentLevelState == Level.LevelState.FishMoving && !CheckMovingFish())
 					Level.CurrentLevelState = Level.LevelState.Play;
 			}
