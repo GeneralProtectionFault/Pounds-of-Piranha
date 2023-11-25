@@ -7,8 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://cthqrcjuob4vq" path="res://Scenes/weight.tscn" id="6_bksep"]
 [ext_resource type="PackedScene" uid="uid://jcrnqotjmqcc" path="res://Scenes/scale.tscn" id="7_3e4ep"]
 [ext_resource type="PackedScene" uid="uid://d1v7hqlvp1ql7" path="res://Scenes/turn.tscn" id="9_1qekb"]
-[ext_resource type="PackedScene" uid="uid://cmdmxf1qlgiv0" path="res://Scenes/good_fish_2.tscn" id="9_rrhis"]
-[ext_resource type="PackedScene" uid="uid://cntr1ko2bgjfv" path="res://Scenes/bad_fish_2.tscn" id="10_y2uae"]
+[ext_resource type="PackedScene" path="res://Scenes/good_fish_2.tscn" id="9_rrhis"]
+[ext_resource type="PackedScene" path="res://Scenes/bad_fish_2.tscn" id="10_y2uae"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_oormi"]
 
