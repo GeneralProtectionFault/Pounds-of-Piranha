@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://shaxicr6dfpe"]
+[gd_scene load_steps=16 format=3 uid="uid://csagrrp6l1bc8"]
 
 [ext_resource type="Script" path="res://Scripts/Level.cs" id="1_evuvm"]
 [ext_resource type="PackedScene" uid="uid://ruo4xpphyqgw" path="res://Scenes/NumberSpawnLocations.tscn" id="2_45xtq"]
@@ -7,8 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://cthqrcjuob4vq" path="res://Scenes/weight.tscn" id="5_kghrf"]
 [ext_resource type="PackedScene" uid="uid://jcrnqotjmqcc" path="res://Scenes/scale.tscn" id="6_gvkxy"]
 [ext_resource type="PackedScene" uid="uid://d1v7hqlvp1ql7" path="res://Scenes/turn.tscn" id="7_d67vy"]
-[ext_resource type="PackedScene" path="res://Scenes/bad_fish_2.tscn" id="8_tmxgd"]
-[ext_resource type="PackedScene" path="res://Scenes/good_fish_2.tscn" id="9_c7po3"]
+[ext_resource type="PackedScene" uid="uid://cntr1ko2bgjfv" path="res://Scenes/bad_fish_2.tscn" id="8_tmxgd"]
+[ext_resource type="PackedScene" uid="uid://cmdmxf1qlgiv0" path="res://Scenes/good_fish_2.tscn" id="9_c7po3"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_oormi"]
 
@@ -112,18 +112,18 @@ shape = SubResource("RectangleShape2D_2hvfy")
 position = Vector2(206, 757)
 
 [node name="GoodFish2" parent="." instance=ExtResource("9_c7po3")]
-position = Vector2(769, 430)
+position = Vector2(787, 444)
 
 [node name="BadFish2" parent="." instance=ExtResource("8_tmxgd")]
-position = Vector2(768, 958)
+position = Vector2(780, 956)
 FishFacingDirection = Vector2i(0, -1)
 
 [node name="BadFish3" parent="." instance=ExtResource("8_tmxgd")]
-position = Vector2(1444, 757)
+position = Vector2(1514, 793)
 FishFacingDirection = Vector2i(-1, 0)
 
 [node name="GoodFish3" parent="." instance=ExtResource("9_c7po3")]
-position = Vector2(545, 757)
+position = Vector2(539, 785)
 FishFacingDirection = Vector2i(1, 0)
 
 [node name="Turn" parent="." instance=ExtResource("7_d67vy")]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://gdtp2w40q4pf"]
+[gd_scene load_steps=15 format=3 uid="uid://owv8a06kicxh"]
 
 [ext_resource type="Script" path="res://Scripts/Level.cs" id="1_mx3rk"]
 [ext_resource type="PackedScene" uid="uid://ruo4xpphyqgw" path="res://Scenes/NumberSpawnLocations.tscn" id="2_4qrhp"]
@@ -6,8 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://co5p7opdcjgmg" path="res://Graphics/Background1.png" id="4_uxuus"]
 [ext_resource type="PackedScene" uid="uid://cthqrcjuob4vq" path="res://Scenes/weight.tscn" id="5_hhc3l"]
 [ext_resource type="PackedScene" uid="uid://jcrnqotjmqcc" path="res://Scenes/scale.tscn" id="6_nth1s"]
-[ext_resource type="PackedScene" path="res://Scenes/good_fish_2.tscn" id="7_k3eud"]
-[ext_resource type="PackedScene" path="res://Scenes/bad_fish_2.tscn" id="8_uwpfc"]
+[ext_resource type="PackedScene" uid="uid://cmdmxf1qlgiv0" path="res://Scenes/good_fish_2.tscn" id="7_k3eud"]
+[ext_resource type="PackedScene" uid="uid://cntr1ko2bgjfv" path="res://Scenes/bad_fish_2.tscn" id="8_uwpfc"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_oormi"]
 
@@ -134,24 +134,24 @@ position = Vector2(1025, 951)
 FishFacingDirection = Vector2i(0, -1)
 
 [node name="GoodFish4" parent="." instance=ExtResource("7_k3eud")]
-position = Vector2(1265, 438)
+position = Vector2(1269, 438)
 
 [node name="GoodFish5" parent="." instance=ExtResource("7_k3eud")]
-position = Vector2(1539, 951)
+position = Vector2(1523, 951)
 FishFacingDirection = Vector2i(0, -1)
 
 [node name="BadFish2" parent="." instance=ExtResource("8_uwpfc")]
-position = Vector2(524, 783)
+position = Vector2(535, 794)
 
 [node name="BadFish3" parent="." instance=ExtResource("8_uwpfc")]
-position = Vector2(524, 605)
+position = Vector2(533, 621)
 
 [node name="BadFish4" parent="." instance=ExtResource("8_uwpfc")]
-position = Vector2(1720, 783)
+position = Vector2(1748, 790)
 FishFacingDirection = Vector2i(-1, 0)
 
 [node name="BadFish5" parent="." instance=ExtResource("8_uwpfc")]
-position = Vector2(1720, 605)
+position = Vector2(1748, 614)
 FishFacingDirection = Vector2i(-1, 0)
 
 [connection signal="pressed" from="TurnButton" to="." method="TestButtonPressed"]

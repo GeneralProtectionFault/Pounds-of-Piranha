@@ -59,7 +59,7 @@ public partial class Fish : AnimatedSprite2D
             _ => "None"
         };
 
-		if (Moving)
+		if (Moving || ReachedGoal)
 			this.Play(AnimationName_Moving);
 		else
 			this.Play(AnimationName_Idle);
@@ -218,6 +218,7 @@ public partial class Fish : AnimatedSprite2D
 				if (CurrentCell != StartingGridCell && Level.IsEdgeCell(Level.CellFromCoordinates(GlobalPosition)))
 				{
 					ReachedGoal = true;
+					SetFacingDirection(FishFacingDirection);
 				}
 
 				if (Level.CurrentLevelState == Level.LevelState.FishMoving && !CheckMovingFish())
