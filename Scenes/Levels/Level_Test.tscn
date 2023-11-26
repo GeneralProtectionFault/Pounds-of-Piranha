@@ -40,6 +40,13 @@ autoplay = true
 [node name="NumberSpawns" parent="." instance=ExtResource("2_q75m3")]
 position = Vector2(661, 532)
 
+[node name="ResetButton" type="Button" parent="."]
+offset_right = 255.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(1, 0.662745, 0.607843, 1)
+theme_override_font_sizes/font_size = 30
+text = "RESTART LEVEL!"
+
 [node name="TurnButton" type="Button" parent="."]
 visible = false
 offset_left = 1645.0
@@ -111,9 +118,10 @@ position = Vector2(791, 453)
 position = Vector2(534, 648)
 
 [node name="Shelf2" parent="." instance=ExtResource("10_mgd6o")]
-position = Vector2(1187, 198)
+position = Vector2(1244, 198)
 
 [connection signal="tree_exiting" from="." to="." method="TreeExit"]
+[connection signal="pressed" from="ResetButton" to="." method="RestartLevel"]
 [connection signal="pressed" from="TurnButton" to="." method="TestButtonPressed"]
 [connection signal="pressed" from="NumberSetButton" to="." method="NumberSetButtonPressed"]
 [connection signal="text_changed" from="NumberOverride" to="." method="TestNumberChanged"]

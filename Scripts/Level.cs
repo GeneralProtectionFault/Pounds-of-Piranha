@@ -68,28 +68,29 @@ public partial class Level : Node2D
 	public override void _Process(double delta)
 	{
 		// QueueRedraw();
+	}
 
-		if (Input.IsActionJustPressed("reset"))
-		{
-			// GetTree().ChangeSceneToFile(GetTree().CurrentScene.SceneFilePath);
-			Grid = null;
 
-			TopLeftNumber_X = -1;
-			TopLeftNumber_Y = -1;
-			BottomRightNumber_X = -1;
-			BottomRightNumber_Y = -1;
-			GridTopLeft = new Vector2I(0,0);
-			GridBottomRight = new Vector2I(0,0);
-			NumberSpawnNodes = new List<Node2D>();
-			NumberNodes = new List<Node2D>();
-			NegativeSymbol = null;
-			LinesPopulated = false;
+	public void RestartLevel()
+	{
+		// GetTree().ChangeSceneToFile(GetTree().CurrentScene.SceneFilePath);
+		Grid = null;
 
-			var ReloadResult = GetTree().ReloadCurrentScene();
-			GD.Print($"Reloading scene.\nReolad Result: {ReloadResult}");
+		TopLeftNumber_X = -1;
+		TopLeftNumber_Y = -1;
+		BottomRightNumber_X = -1;
+		BottomRightNumber_Y = -1;
+		GridTopLeft = new Vector2I(0,0);
+		GridBottomRight = new Vector2I(0,0);
+		NumberSpawnNodes = new List<Node2D>();
+		NumberNodes = new List<Node2D>();
+		NegativeSymbol = null;
+		LinesPopulated = false;
 
-			Level.CurrentLevelState = Level.LevelState.Play;
-		}
+		var ReloadResult = GetTree().ReloadCurrentScene();
+		GD.Print($"Reloading scene.\nReolad Result: {ReloadResult}");
+
+		Level.CurrentLevelState = Level.LevelState.Play;
 	}
 
 
