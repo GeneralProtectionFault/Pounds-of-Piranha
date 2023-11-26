@@ -276,5 +276,11 @@ public partial class Fish : AnimatedSprite2D
     }
 
 
+
+	public void ExitedScreen()
+	{
+		GD.Print("Fish exited screen!");
+		QueueFree();
+	}
 	
 }

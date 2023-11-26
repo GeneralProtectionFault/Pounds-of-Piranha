@@ -2,12 +2,14 @@
 
 [ext_resource type="Script" path="res://Scripts/Level.cs" id="1_5i0au"]
 [ext_resource type="PackedScene" uid="uid://ruo4xpphyqgw" path="res://Scenes/NumberSpawnLocations.tscn" id="2_q75m3"]
+[ext_resource type="AudioStream" uid="uid://cl6rba55xjtim" path="res://Audio/PiranhaDance.ogg" id="2_swx2u"]
 [ext_resource type="Texture2D" uid="uid://co5p7opdcjgmg" path="res://Graphics/Background1.png" id="4_47hxb"]
 [ext_resource type="Shader" path="res://Graphics/Shaders/Water.gdshader" id="4_qrgve"]
 [ext_resource type="PackedScene" uid="uid://cthqrcjuob4vq" path="res://Scenes/weight.tscn" id="6_bksep"]
 [ext_resource type="PackedScene" uid="uid://jcrnqotjmqcc" path="res://Scenes/scale.tscn" id="7_3e4ep"]
 [ext_resource type="PackedScene" uid="uid://d1v7hqlvp1ql7" path="res://Scenes/turn.tscn" id="9_1qekb"]
 [ext_resource type="PackedScene" uid="uid://cmdmxf1qlgiv0" path="res://Scenes/good_fish_2.tscn" id="9_rrhis"]
+[ext_resource type="PackedScene" uid="uid://dvss3jv7pjyb6" path="res://Scenes/BeachShelf.tscn" id="10_mgd6o"]
 [ext_resource type="PackedScene" uid="uid://cntr1ko2bgjfv" path="res://Scenes/bad_fish_2.tscn" id="10_y2uae"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_oormi"]
@@ -22,11 +24,6 @@ shader_parameter/water_color = Color(0, 0, 0, 0.227451)
 shader_parameter/scale = Vector2(18, 5)
 shader_parameter/noise = SubResource("NoiseTexture2D_e3wqu")
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yx308"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dcr1y"]
-size = Vector2(1370, 20)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2hvfy"]
 size = Vector2(418, 20)
 
@@ -34,6 +31,11 @@ size = Vector2(418, 20)
 script = ExtResource("1_5i0au")
 ShowGridLines = true
 metadata/Sequence = 0
+
+[node name="PiranhaDance" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_swx2u")
+volume_db = -26.164
+autoplay = true
 
 [node name="NumberSpawns" parent="." instance=ExtResource("2_q75m3")]
 position = Vector2(661, 532)
@@ -91,17 +93,6 @@ position = Vector2(938, 114)
 position = Vector2(1038, 114)
 Pounds = 5
 
-[node name="Shelf2" type="StaticBody2D" parent="."]
-
-[node name="Sprite2D" type="Sprite2D" parent="Shelf2"]
-position = Vector2(1219, 160.5)
-scale = Vector2(2.63281, 0.0566406)
-texture = SubResource("NoiseTexture2D_yx308")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Shelf2"]
-position = Vector2(1225, 158)
-shape = SubResource("RectangleShape2D_dcr1y")
-
 [node name="Shelf" type="StaticBody2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Shelf"]
@@ -118,6 +109,9 @@ position = Vector2(791, 453)
 
 [node name="BadFish2" parent="." instance=ExtResource("10_y2uae")]
 position = Vector2(534, 648)
+
+[node name="Shelf2" parent="." instance=ExtResource("10_mgd6o")]
+position = Vector2(1187, 198)
 
 [connection signal="tree_exiting" from="." to="." method="TreeExit"]
 [connection signal="pressed" from="TurnButton" to="." method="TestButtonPressed"]

@@ -26,4 +26,9 @@ collision_mask = 4
 position = Vector2(-0.5, -0.5)
 shape = SubResource("RectangleShape2D_14jma")
 
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." index="2"]
+position = Vector2(-6.5, 5.5)
+scale = Vector2(6.85, 2.55)
+
 [connection signal="tree_exiting" from="." to="." method="FishLeavingScene"]
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="ExitedScreen"]
