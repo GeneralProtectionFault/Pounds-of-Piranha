@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
+
+
 public partial class Level : Node2D
 {
 	[Export] public bool ShowGridLines = false;
@@ -169,7 +171,29 @@ public partial class Level : Node2D
 
 
 
-	
+	/// <summary>
+	/// Determine if a cell in the AstarGrid2D is on the "edge," as in outiside the numbers.
+	/// In the event this is the case and not the cell the fish started in, it can be considered the "goal"
+	/// </summary>
+	public static bool IsEdgeCell(Vector2I Cell)
+	{
+		var MaxX = Grid.Region.Size.X - 1;
+		var MaxY = Grid.Region.Size.Y - 1;
+
+		GD.Print($"MaxX: {MaxX}");
+		GD.Print($"MaxY: {MaxY}");
+		GD.Print($"CellX: {Cell.X}");
+		GD.Print($"CellY: {Cell.Y}");
+
+		if (Cell.X == 0 || Cell.X == MaxX ||
+		Cell.Y == 0 || Cell.Y == MaxY)
+			return true;
+		else
+			return false;
+	}
+
+
+
 	private async void SpawnNumber(object sender, int number)
 	{
 		// First, clear 'em

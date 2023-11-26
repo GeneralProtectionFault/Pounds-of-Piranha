@@ -21,7 +21,8 @@ public partial class Fish : AnimatedSprite2D
 
 	// Stores the navigation points to the target location
 	private Godot.Collections.Array<Vector2I> IDPath = new Godot.Collections.Array<Vector2I>();
-	
+	public Vector2I StartingGridCell { get; set; }
+	public bool ReachedGoal = false;
 
 	public void FishLeavingScene()
 	{
@@ -75,6 +76,8 @@ public partial class Fish : AnimatedSprite2D
 		NumberDetector = GetNode<RayCast2D>("NumberRayCast2D");
 		FishCollider = GetNode<Area2D>("Area2D");
 		SetFacingDirection(FishFacingDirection);
+
+		StartingGridCell = Level.CellFromCoordinates(GlobalPosition);
 	}
 
 
@@ -133,7 +136,11 @@ public partial class Fish : AnimatedSprite2D
 
     public override void _PhysicsProcess(double delta)
     {
-		if (Moving)
+		if (ReachedGoal)
+		{
+			GlobalPosition = GlobalPosition.MoveToward(GlobalPosition + FishFacingDirection * 225, 5);
+		}
+		else if (Moving)
 		{
 			// Fish consumption check
 			var OtherAreas = FishCollider.GetOverlappingAreas();
@@ -161,7 +168,6 @@ public partial class Fish : AnimatedSprite2D
 							Bad = OtherFish;
 							Good = this;
 						}
-
 
 						EatFish(Bad, Good);
 					}
@@ -206,6 +212,13 @@ public partial class Fish : AnimatedSprite2D
 			{
 				Moving = false;
 				SetFacingDirection(FishFacingDirection);
+
+				var CurrentCell = Level.CellFromCoordinates(GlobalPosition);
+
+				if (CurrentCell != StartingGridCell && Level.IsEdgeCell(Level.CellFromCoordinates(GlobalPosition)))
+				{
+					ReachedGoal = true;
+				}
 
 				if (Level.CurrentLevelState == Level.LevelState.FishMoving && !CheckMovingFish())
 					Level.CurrentLevelState = Level.LevelState.Play;
