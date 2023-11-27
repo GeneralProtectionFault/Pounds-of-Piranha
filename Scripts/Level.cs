@@ -65,6 +65,7 @@ public partial class Level : Node2D
 		}
 
 		SpawnNumber(this, 0);
+		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -266,6 +267,7 @@ public partial class Level : Node2D
 		DumbDelayTween1.TweenCallback(Callable.From(() => {
 				// await Task.Run(() => {  });
 				CreateGrid();
+				SnapAllFishToGrid();
 			}
         )).SetDelay(.15f);
 		
@@ -430,4 +432,22 @@ public partial class Level : Node2D
 		//GD.Print($"Converted Target Position: {Target}");
 		return Target;
 	}
+
+
+	private void SnapAllFishToGrid()
+	{
+		foreach (Fish fish in GetTree().GetNodesInGroup("GoodFish"))
+			SnapFishToGrid(fish);
+		foreach (Fish fish in GetTree().GetNodesInGroup("BadFish"))
+			SnapFishToGrid(fish);
+	}
+
+	private void SnapFishToGrid(Fish fish)
+	{
+		// Will return the cell regardless of if in the exact center
+		var Cell = CellFromCoordinates(fish.GlobalPosition);
+		// Set to exact center :)
+		fish.GlobalPosition = CoordinatesFromCell(Cell);
+	}
+
 }

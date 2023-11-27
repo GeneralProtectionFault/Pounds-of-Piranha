@@ -142,7 +142,7 @@ public partial class Fish : AnimatedSprite2D
 		}
 
 		GD.Print("Awaiting loop..");
-		await ToSignal(Consumer, "animation_looped");
+		await ToSignal(Consumer, "animation_changed");
 		GD.Print("Consuming fish and should be setting idle animation...");
 		Consumee.QueueFree();
 		SetFacingDirection(FishFacingDirection);

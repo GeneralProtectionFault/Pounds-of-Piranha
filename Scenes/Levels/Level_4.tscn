@@ -14,6 +14,7 @@ metadata/Sequence = 4
 
 [node name="LevelTemplate" parent="." instance=ExtResource("5_jn1cm")]
 position = Vector2(2, 3)
+ShowGridLines = true
 
 [node name="TutorialText" type="Control" parent="."]
 layout_mode = 3
