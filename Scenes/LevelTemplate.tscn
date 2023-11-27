@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bihk88eh15aay"]
+[gd_scene load_steps=19 format=3 uid="uid://bihk88eh15aay"]
 
 [ext_resource type="Script" path="res://Scripts/Level.cs" id="1_qx0ft"]
 [ext_resource type="PackedScene" uid="uid://dvss3jv7pjyb6" path="res://Scenes/BeachShelf.tscn" id="1_ynqq2"]
@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://cl6rba55xjtim" path="res://Audio/PiranhaDance.ogg" id="5_mnfa3"]
 [ext_resource type="PackedScene" uid="uid://ruo4xpphyqgw" path="res://Scenes/NumberSpawnLocations.tscn" id="6_7ok02"]
 [ext_resource type="PackedScene" uid="uid://jcrnqotjmqcc" path="res://Scenes/scale.tscn" id="7_c8y2g"]
+[ext_resource type="PackedScene" uid="uid://cctno57eqdnxe" path="res://Scenes/palm_tree.tscn" id="9_fuesr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_elr7a"]
 size = Vector2(1927, 1072)
@@ -76,6 +77,10 @@ shape = SubResource("RectangleShape2D_66ug5")
 
 [node name="BeachShelf" parent="." instance=ExtResource("1_ynqq2")]
 position = Vector2(1244, 210)
+
+[node name="PalmTree" parent="." instance=ExtResource("9_fuesr")]
+position = Vector2(1817, 84)
+scale = Vector2(0.775001, 0.775001)
 
 [node name="BeachSky" type="Sprite2D" parent="."]
 z_index = -1

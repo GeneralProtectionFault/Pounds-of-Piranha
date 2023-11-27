@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cctno57eqdnxe"]
+
+[ext_resource type="PackedScene" uid="uid://hgl0m6b6n7x2" path="res://Graphics/Aseprite/PalmTree.aseprite" id="1_ob37q"]
+
+[node name="PalmTree" instance=ExtResource("1_ob37q")]
+position = Vector2(0, -117)
+autoplay = "default"

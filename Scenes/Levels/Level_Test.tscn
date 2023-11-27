@@ -1,143 +1,22 @@
-[gd_scene load_steps=22 format=3 uid="uid://c1nenigsti0ha"]
+[gd_scene load_steps=7 format=3 uid="uid://c1nenigsti0ha"]
 
-[ext_resource type="Script" path="res://Scripts/Level.cs" id="1_5i0au"]
-[ext_resource type="PackedScene" uid="uid://ruo4xpphyqgw" path="res://Scenes/NumberSpawnLocations.tscn" id="2_q75m3"]
+[ext_resource type="PackedScene" uid="uid://bihk88eh15aay" path="res://Scenes/LevelTemplate.tscn" id="2_cfc66"]
 [ext_resource type="AudioStream" uid="uid://cl6rba55xjtim" path="res://Audio/PiranhaDance.ogg" id="2_swx2u"]
-[ext_resource type="Texture2D" uid="uid://co5p7opdcjgmg" path="res://Graphics/Background1.png" id="4_47hxb"]
-[ext_resource type="Shader" path="res://Graphics/Shaders/Water.gdshader" id="4_qrgve"]
 [ext_resource type="PackedScene" uid="uid://cthqrcjuob4vq" path="res://Scenes/weight.tscn" id="6_bksep"]
-[ext_resource type="PackedScene" uid="uid://jcrnqotjmqcc" path="res://Scenes/scale.tscn" id="7_3e4ep"]
 [ext_resource type="PackedScene" uid="uid://d1v7hqlvp1ql7" path="res://Scenes/turn.tscn" id="9_1qekb"]
 [ext_resource type="PackedScene" uid="uid://cmdmxf1qlgiv0" path="res://Scenes/good_fish_2.tscn" id="9_rrhis"]
-[ext_resource type="PackedScene" uid="uid://dvss3jv7pjyb6" path="res://Scenes/BeachShelf.tscn" id="10_mgd6o"]
 [ext_resource type="PackedScene" uid="uid://cntr1ko2bgjfv" path="res://Scenes/bad_fish_2.tscn" id="10_y2uae"]
-[ext_resource type="Texture2D" uid="uid://534ykx62iqce" path="res://Graphics/BeachSky2.png" id="12_5m2qv"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0uhgg"]
-size = Vector2(1927, 1072)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_yrk0d"]
-a = Vector2(2002, 1)
-b = Vector2(-64, 1)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_c0u8d"]
-a = Vector2(1924, 1113)
-b = Vector2(1921, -54)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_r8cgp"]
-a = Vector2(-2, 1133)
-b = Vector2(-4, -97)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_ii6wr"]
-a = Vector2(2050, 1080)
-b = Vector2(-65, 1077)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2hvfy"]
-size = Vector2(418, 20)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_oormi"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_eu1uy"]
-seamless = true
-noise = SubResource("FastNoiseLite_oormi")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3km26"]
-shader = ExtResource("4_qrgve")
-shader_parameter/water_color = Color(0, 0, 0, 0.227451)
-shader_parameter/scale = Vector2(18, 5)
-shader_parameter/noise = SubResource("NoiseTexture2D_eu1uy")
 
 [node name="Level_Test" type="Node2D"]
-script = ExtResource("1_5i0au")
-ShowGridLines = true
 metadata/Sequence = 0
 
-[node name="LevelBody" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelBody"]
-position = Vector2(963.5, 537)
-shape = SubResource("RectangleShape2D_0uhgg")
-
-[node name="LevelBoundary_StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelBoundary_StaticBody2D"]
-shape = SubResource("SegmentShape2D_yrk0d")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="LevelBoundary_StaticBody2D"]
-shape = SubResource("SegmentShape2D_c0u8d")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="LevelBoundary_StaticBody2D"]
-shape = SubResource("SegmentShape2D_r8cgp")
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="LevelBoundary_StaticBody2D"]
-shape = SubResource("SegmentShape2D_ii6wr")
-
-[node name="ScaleShelf" type="StaticBody2D" parent="."]
-
-[node name="Sprite2D" type="Sprite2D" parent="ScaleShelf"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ScaleShelf"]
-position = Vector2(206, 903)
-shape = SubResource("RectangleShape2D_2hvfy")
-
-[node name="BeachShelf" parent="." instance=ExtResource("10_mgd6o")]
-position = Vector2(1244, 210)
-
-[node name="BeachSky" type="Sprite2D" parent="."]
-z_index = -1
-position = Vector2(958, -114)
-texture = ExtResource("12_5m2qv")
-
-[node name="WaterBackground" type="Sprite2D" parent="."]
-z_index = -1
-material = SubResource("ShaderMaterial_3km26")
-position = Vector2(963, 632)
-scale = Vector2(1.00633, 0.861564)
-texture = ExtResource("4_47hxb")
+[node name="LevelTemplate" parent="." instance=ExtResource("2_cfc66")]
+position = Vector2(1, 2)
 
 [node name="PiranhaDance" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_swx2u")
 volume_db = -31.396
 autoplay = true
-
-[node name="NumberSpawns" parent="." instance=ExtResource("2_q75m3")]
-position = Vector2(661, 532)
-
-[node name="ResetButton" type="Button" parent="."]
-offset_right = 255.0
-offset_bottom = 51.0
-theme_override_colors/font_color = Color(1, 0.662745, 0.607843, 1)
-theme_override_font_sizes/font_size = 30
-text = "RESTART LEVEL!"
-
-[node name="TurnButton" type="Button" parent="."]
-visible = false
-offset_left = 1645.0
-offset_right = 1909.0
-offset_bottom = 65.0
-text = "Initiate Turn
-"
-
-[node name="NumberSetButton" type="Button" parent="."]
-visible = false
-offset_left = 1645.0
-offset_top = 84.0
-offset_right = 1802.0
-offset_bottom = 130.0
-text = "Set Number
-"
-
-[node name="NumberOverride" type="TextEdit" parent="."]
-visible = false
-offset_left = 1817.0
-offset_top = 84.0
-offset_right = 1907.0
-offset_bottom = 130.0
-text = "0
-"
-
-[node name="Scale" parent="." instance=ExtResource("7_3e4ep")]
-position = Vector2(206, 757)
 
 [node name="Turn" parent="." instance=ExtResource("9_1qekb")]
 position = Vector2(787, 649)
@@ -166,7 +45,3 @@ position = Vector2(791, 453)
 position = Vector2(534, 648)
 
 [connection signal="tree_exiting" from="." to="." method="TreeExit"]
-[connection signal="pressed" from="ResetButton" to="." method="RestartLevel"]
-[connection signal="pressed" from="TurnButton" to="." method="TestButtonPressed"]
-[connection signal="pressed" from="NumberSetButton" to="." method="NumberSetButtonPressed"]
-[connection signal="text_changed" from="NumberOverride" to="." method="TestNumberChanged"]
