@@ -10,6 +10,7 @@ public partial class Weight : RigidBody2D
 	private bool MouseOverWeight = false;
 
 	private Vector2 StartingPosition;
+	private Area2D ThisWeightsArea;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -21,6 +22,7 @@ public partial class Weight : RigidBody2D
 
 		FreezeMode = FreezeModeEnum.Kinematic;
 		StartingPosition = GlobalPosition;
+		ThisWeightsArea = GetNode<Area2D>("Area2D");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -29,6 +31,15 @@ public partial class Weight : RigidBody2D
 		if (MouseHeld)
 		{
 			GlobalPosition = GetGlobalMousePosition();
+		}
+
+		var StageBodyCheck = ThisWeightsArea.GetOverlappingAreas();
+		if (StageBodyCheck.Count == 0)
+		{
+			//SetDeferred("LinearVelocity", Vector2.Zero);
+			//SetDeferred("GlobalPosition", StartingPosition);
+			LinearVelocity = Vector2.Zero;
+			GlobalPosition = StartingPosition;
 		}
 	}
 
@@ -54,24 +65,20 @@ public partial class Weight : RigidBody2D
 
 	private void GrabWeight(object sender, int dummy)
 	{
-		// SetDeferred("MouseHeld", true);
-		// SetDeferred("Freeze", true);
-
 		foreach (var Weight in GetTree().GetNodesInGroup("Weights"))
 		{
 			if (Weight == this)
 				continue;
 			else
 			{
-				// If any other weights have the mouse held, don't pick up this weight
-				// if ((Weight as Weight).MouseHeld)
-				// 	return;
-
+				// If any other weights are moving, don't let 'em pick up the weight
 				if ((Weight as RigidBody2D).LinearVelocity.DistanceTo(Vector2.Zero) > .02f)
 					return;
 			}
 		}
 		
+		// SetDeferred("MouseHeld", true);
+		// SetDeferred("Freeze", true);
 		MouseHeld = true;
 		Freeze = true;
 	}

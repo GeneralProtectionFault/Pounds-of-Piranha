@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c1nenigsti0ha"]
+[gd_scene load_steps=22 format=3 uid="uid://c1nenigsti0ha"]
 
 [ext_resource type="Script" path="res://Scripts/Level.cs" id="1_5i0au"]
 [ext_resource type="PackedScene" uid="uid://ruo4xpphyqgw" path="res://Scenes/NumberSpawnLocations.tscn" id="2_q75m3"]
@@ -12,6 +12,9 @@
 [ext_resource type="PackedScene" uid="uid://dvss3jv7pjyb6" path="res://Scenes/BeachShelf.tscn" id="10_mgd6o"]
 [ext_resource type="PackedScene" uid="uid://cntr1ko2bgjfv" path="res://Scenes/bad_fish_2.tscn" id="10_y2uae"]
 [ext_resource type="Texture2D" uid="uid://534ykx62iqce" path="res://Graphics/BeachSky2.png" id="12_5m2qv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0uhgg"]
+size = Vector2(1927, 1072)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_oormi"]
 
@@ -48,6 +51,12 @@ b = Vector2(-65, 1077)
 script = ExtResource("1_5i0au")
 ShowGridLines = true
 metadata/Sequence = 0
+
+[node name="LevelBody" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelBody"]
+position = Vector2(963.5, 537)
+shape = SubResource("RectangleShape2D_0uhgg")
 
 [node name="PiranhaDance" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_swx2u")

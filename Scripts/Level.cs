@@ -47,6 +47,8 @@ public partial class Level : Node2D
 	// private static List<Line2D> GridDebugLines = new List<Line2D>();
 	public static bool LinesPopulated = false;
 
+	public Area2D LevelBody;
+
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -54,6 +56,7 @@ public partial class Level : Node2D
 		ScaleObject.WeightChanged += SpawnNumber;
 
 		NegativeSymbol = GetNode<Node2D>("NumberSpawns/Negative");
+		LevelBody = GetNode<Area2D>("LevelBody");
 
 		// This gets the nodes that are the spawn locations
 		foreach(Node2D SpawnNode in GetTree().GetNodesInGroup("NumberSpawns"))
