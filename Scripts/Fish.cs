@@ -166,32 +166,38 @@ public partial class Fish : AnimatedSprite2D
 		if (Type == FishType.Bad)
 		{
 			var OtherAreas = FishCollider.GetOverlappingAreas();
-			Area2D OtherArea = OtherAreas.Where(x => x.IsInGroup("GoodFishAreas")).FirstOrDefault();
+			var GoodAreas = OtherAreas.Where(x => x.IsInGroup("GoodFishAreas"));
 
-			if (OtherArea is not null)
+			if (GoodAreas is not null)
 			{
-				// Node OtherThing = OtherAreas.FirstOrDefault().GetParent();
-				var OtherFish = OtherArea.GetParent() as Fish;
-
-				if (this.Type != OtherFish.Type && !OtherFish.PendingConsumption)
+				foreach(Area2D FishArea in GoodAreas)
 				{
-					Fish Bad;
-					Fish Good;
-
-					if (this.Type == FishType.Bad)
+					if (FishArea is not null)
 					{
-						Bad = this;
-						Good = OtherFish;
-					}
-					else
-					{
-						Bad = OtherFish;
-						Good = this;
-					}
+						// Node OtherThing = OtherAreas.FirstOrDefault().GetParent();
+						var OtherFish = FishArea.GetParent() as Fish;
 
-					EatFish(Bad, Good);
+						if (this.Type != OtherFish.Type && !OtherFish.PendingConsumption)
+						{
+							Fish Bad;
+							Fish Good;
+
+							if (this.Type == FishType.Bad)
+							{
+								Bad = this;
+								Good = OtherFish;
+							}
+							else
+							{
+								Bad = OtherFish;
+								Good = this;
+							}
+
+							EatFish(Bad, Good);
+						}
+						
+					}
 				}
-				
 			}
 		}
 
