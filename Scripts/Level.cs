@@ -40,7 +40,7 @@ public partial class Level : Node2D
 
 
 	private static List<Node2D> NumberSpawnNodes = new List<Node2D>();
-	private static List<Node2D> NumberNodes = new List<Node2D>();
+	// private static List<Node2D> NumberNodes = new List<Node2D>();
 	private static Node2D NegativeSymbol;
 
 
@@ -87,7 +87,7 @@ public partial class Level : Node2D
 		GridTopLeft = new Vector2I(0,0);
 		GridBottomRight = new Vector2I(0,0);
 		NumberSpawnNodes = new List<Node2D>();
-		NumberNodes = new List<Node2D>();
+		// NumberNodes = new List<Node2D>();
 		LinesPopulated = false;
 
 		var ReloadResult = GetTree().ReloadCurrentScene();
@@ -201,16 +201,26 @@ public partial class Level : Node2D
 	private async void SpawnNumber(object sender, int number)
 	{
 		// First, clear 'em
-		if (NumberNodes.Count > 0)
+		// if (NumberNodes.Count > 0)
+		// {
+		// 	foreach(var Number in NumberNodes.ToList())
+		// 	{
+		// 		Number.QueueFree();
+		// 		await ToSignal(Number, "tree_exited");
+		// 	}
+		// }
+
+		foreach(Node2D Number in GetTree().GetNodesInGroup("NumberScenes"))
 		{
-			foreach(var Number in NumberNodes.ToList())
+			if (IsInstanceValid(Number))
 			{
 				Number.QueueFree();
 				await ToSignal(Number, "tree_exited");
 			}
+
 		}
 
-		NumberNodes.Clear();
+		// NumberNodes.Clear();
 		
 		//ParameterizedThreadStart NumbersStart = new ParameterizedThreadStart(RepopulateNumbers);
 
@@ -284,7 +294,7 @@ public partial class Level : Node2D
 	private async void PopulateSingleNumber(int number, char Digit, int NumberPosition)
 	{
 		var NumberScene = ResourceLoader.Load<PackedScene>($"res://Scenes/Numbers/{Digit}.tscn").Instantiate();
-		NumberNodes.Add((Node2D)NumberScene);
+		// NumberNodes.Add((Node2D)NumberScene);
 
 		NumberSpawnNodes[NumberPosition].AddChild(NumberScene);
 

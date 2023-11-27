@@ -83,6 +83,10 @@ position = Vector2(1244, 210)
 position = Vector2(1817, 84)
 scale = Vector2(0.775001, 0.775001)
 
+[node name="PalmTree2" parent="." instance=ExtResource("9_fuesr")]
+position = Vector2(1708, 114)
+scale = Vector2(0.775001, 0.775001)
+
 [node name="BeachSky" type="Sprite2D" parent="."]
 z_index = -1
 position = Vector2(958, -114)
