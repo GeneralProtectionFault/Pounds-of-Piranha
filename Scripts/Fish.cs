@@ -122,15 +122,22 @@ public partial class Fish : AnimatedSprite2D
 
 	private async void EatFish(Fish Consumer, Fish Consumee)
 	{
+		Consumee.Moving = false;
 	
 		if (Mathf.Sign(Consumer.FishFacingDirection.X) == -1 || Mathf.Sign(Consumer.FishFacingDirection.Y) == -1)
+		{
 			Consumer.Play("Eat_Left");
+		}
 		else if (Mathf.Sign(Consumer.FishFacingDirection.X) == 1 || Mathf.Sign(Consumer.FishFacingDirection.Y) == 1)
+		{
 			Consumer.Play("Eat_Right");
+			
+		}
 
-		await ToSignal(this, "animation_changed");
+		
+		await ToSignal(Consumer, "animation_changed");
+
 		SetFacingDirection(FishFacingDirection);
-
 		Consumee.QueueFree();
 
 		//Level.CurrentLevelState = Level.LevelState.Play;

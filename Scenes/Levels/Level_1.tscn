@@ -24,10 +24,10 @@ offset_bottom = 40.0
 
 [node name="DragWeights" type="Label" parent="TutorialText"]
 layout_mode = 0
-offset_left = 554.0
-offset_top = 16.0
-offset_right = 891.0
-offset_bottom = 64.0
+offset_left = 486.0
+offset_top = 40.0
+offset_right = 823.0
+offset_bottom = 88.0
 text = "1. Click and drag the weights."
 label_settings = SubResource("LabelSettings_b5nxn")
 horizontal_alignment = 1
