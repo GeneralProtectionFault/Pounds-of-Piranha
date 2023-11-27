@@ -92,7 +92,7 @@ public partial class Level : Node2D
 
 		var ReloadResult = GetTree().ReloadCurrentScene();
 		GD.Print($"Reloading scene.\nReolad Result: {ReloadResult}");
-
+		ScaleObject.WeightChanged -= SpawnNumber;
 		Level.CurrentLevelState = Level.LevelState.Play;
 	}
 
@@ -215,7 +215,7 @@ public partial class Level : Node2D
 			if (IsInstanceValid(Number))
 			{
 				Number.QueueFree();
-				await ToSignal(Number, "tree_exited");
+				// await ToSignal(Number, "tree_exited");
 			}
 
 		}
@@ -269,7 +269,8 @@ public partial class Level : Node2D
 		for (int i = 0; i < WeightDigits; i++)
 		{
 			var Digit = NumberAsString[i];
-			PopulateSingleNumber(number, Digit, i + ExtraDigits);
+			// PopulateSingleNumber(number, Digit, i + ExtraDigits);
+			CallDeferred("PopulateSingleNumber", number, Digit, i + ExtraDigits);
 		}
 
 
