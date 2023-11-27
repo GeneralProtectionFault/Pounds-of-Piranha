@@ -23,6 +23,7 @@ public partial class Fish : AnimatedSprite2D
 	private Godot.Collections.Array<Vector2I> IDPath = new Godot.Collections.Array<Vector2I>();
 	public Vector2I StartingGridCell { get; set; }
 	public bool ReachedGoal = false;
+	public bool PendingConsumption { get; set; } = false;
 
 	public void FishLeavingScene()
 	{
@@ -60,9 +61,15 @@ public partial class Fish : AnimatedSprite2D
         };
 
 		if (Moving || ReachedGoal)
+		{
+			GD.Print($"{Type} = Settomg swim animation");
 			this.Play(AnimationName_Moving);
+		}
 		else
+		{
+			GD.Print($"{Type} = Settomg idle animation");
 			this.Play(AnimationName_Idle);
+		}
 	}
 
 
@@ -122,7 +129,7 @@ public partial class Fish : AnimatedSprite2D
 
 	private async void EatFish(Fish Consumer, Fish Consumee)
 	{
-		Consumee.Moving = false;
+		Consumee.PendingConsumption = true;
 	
 		if (Mathf.Sign(Consumer.FishFacingDirection.X) == -1 || Mathf.Sign(Consumer.FishFacingDirection.Y) == -1)
 		{
@@ -134,12 +141,11 @@ public partial class Fish : AnimatedSprite2D
 			
 		}
 
-		
-		await ToSignal(Consumer, "animation_changed");
-
-		SetFacingDirection(FishFacingDirection);
+		GD.Print("Awaiting loop..");
+		await ToSignal(Consumer, "animation_looped");
+		GD.Print("Consuming fish and should be setting idle animation...");
 		Consumee.QueueFree();
-
+		SetFacingDirection(FishFacingDirection);
 		//Level.CurrentLevelState = Level.LevelState.Play;
 	}
 
@@ -155,9 +161,10 @@ public partial class Fish : AnimatedSprite2D
 		{
 			GlobalPosition = GlobalPosition.MoveToward(GlobalPosition + FishFacingDirection * 225, 5);
 		}
-		else if (Moving)
+
+		// Fish consumption check
+		if (Type == FishType.Bad)
 		{
-			// Fish consumption check
 			var OtherAreas = FishCollider.GetOverlappingAreas();
 
 			if (OtherAreas.Count > 0)
@@ -168,7 +175,7 @@ public partial class Fish : AnimatedSprite2D
 				{
 					var OtherFish = OtherThing as Fish;
 
-					if (this.Type != OtherFish.Type)
+					if (this.Type != OtherFish.Type && !OtherFish.PendingConsumption)
 					{
 						Fish Bad;
 						Fish Good;
@@ -188,8 +195,11 @@ public partial class Fish : AnimatedSprite2D
 					}
 				}
 			}
+		}
 
-			
+
+		if (Moving)
+		{			
 			// If there are more cells to navigate to...
 			if (IDPath.Count > 0)
 			{
@@ -199,9 +209,9 @@ public partial class Fish : AnimatedSprite2D
 				GlobalPosition = GlobalPosition.MoveToward(Level.CoordinatesFromCell(TargetPosition), 5);
 
 				// This means we've reached the next navigation point
-				if (GlobalPosition == Level.CoordinatesFromCell(TargetPosition))
+				if (GlobalPosition.DistanceTo(Level.CoordinatesFromCell(TargetPosition)) < .1)
 				{
-					if (NumberDetector.IsColliding())
+					if (NumberDetector.IsColliding() || PendingConsumption)
 					{
 						Moving = false;
 						SetFacingDirection(FishFacingDirection);
@@ -215,7 +225,7 @@ public partial class Fish : AnimatedSprite2D
 					IDPath = IDPath.Slice(1);
 
 
-					if (!NumberDetector.IsColliding() && Status == FishStatus.InPlay)
+					if (!NumberDetector.IsColliding() && Status == FishStatus.InPlay && !PendingConsumption)
 					{
 						MoveFish(this, EventArgs.Empty);
 
@@ -244,6 +254,12 @@ public partial class Fish : AnimatedSprite2D
 			
 		}
     }
+
+
+	private void FishConsumptionCheck()
+	{
+
+	}
 
 
 	public bool CheckMovingFish()
