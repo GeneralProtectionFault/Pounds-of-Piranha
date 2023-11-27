@@ -114,7 +114,7 @@ public partial class Fish : AnimatedSprite2D
 
 				Moving = true;
 				SetFacingDirection(FishFacingDirection);
-				Level.CurrentLevelState = Level.LevelState.FishMoving;
+				//Level.CurrentLevelState = Level.LevelState.FishMoving;
 			}
 		}
 	}
@@ -125,7 +125,7 @@ public partial class Fish : AnimatedSprite2D
 		// TODO:  Play an animation FFS
 		Consumee.QueueFree();
 
-		Level.CurrentLevelState = Level.LevelState.Play;
+		//Level.CurrentLevelState = Level.LevelState.Play;
 	}
 
 
@@ -191,7 +191,8 @@ public partial class Fish : AnimatedSprite2D
 						Moving = false;
 						SetFacingDirection(FishFacingDirection);
 
-						if (Level.CurrentLevelState == Level.LevelState.FishMoving && !CheckMovingFish())
+						if (//Level.CurrentLevelState == Level.LevelState.FishMoving && 
+						!CheckMovingFish())
 							Level.CurrentLevelState = Level.LevelState.Play;
 					}
 					
@@ -221,7 +222,8 @@ public partial class Fish : AnimatedSprite2D
 					SetFacingDirection(FishFacingDirection);
 				}
 
-				if (Level.CurrentLevelState == Level.LevelState.FishMoving && !CheckMovingFish())
+				if (//Level.CurrentLevelState == Level.LevelState.FishMoving && 
+				!CheckMovingFish())
 					Level.CurrentLevelState = Level.LevelState.Play;
 			}
 			
@@ -245,6 +247,9 @@ public partial class Fish : AnimatedSprite2D
 			if ((GoodFish as Fish).Moving)
 				FishStillMoving = true;
 		}
+
+		if (FishStillMoving)
+			GD.Print("FISH STILL MOVING DAMMIT!");
 
 		return FishStillMoving;
 	}
@@ -280,6 +285,10 @@ public partial class Fish : AnimatedSprite2D
 	public void ExitedScreen()
 	{
 		GD.Print("Fish exited screen!");
+		if (//Level.CurrentLevelState == Level.LevelState.FishMoving && 
+		!CheckMovingFish())
+			Level.CurrentLevelState = Level.LevelState.Play;
+		
 		QueueFree();
 	}
 	

@@ -6,9 +6,10 @@ public partial class Weight : RigidBody2D
 	[Export] public int Pounds = 0;
 
 
-	private bool MouseHeld = false;
+	public bool MouseHeld { get; set; } = false;
 	private bool MouseOverWeight = false;
 
+	private Vector2 StartingPosition;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -19,6 +20,7 @@ public partial class Weight : RigidBody2D
 		TheLabel.Text = Pounds.ToString();
 
 		FreezeMode = FreezeModeEnum.Kinematic;
+		StartingPosition = GlobalPosition;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -37,7 +39,8 @@ public partial class Weight : RigidBody2D
 		if (@event is InputEventMouseButton MouseEvent)
 		{
 			if (MouseEvent.ButtonIndex == MouseButton.Left && MouseEvent.Pressed && MouseOverWeight
-			&& Level.CurrentLevelState == Level.LevelState.Play)
+			// && Level.CurrentLevelState == Level.LevelState.Play
+			)
 			{
 				GrabWeight(this, 0);
 			}
@@ -53,6 +56,22 @@ public partial class Weight : RigidBody2D
 	{
 		// SetDeferred("MouseHeld", true);
 		// SetDeferred("Freeze", true);
+
+		foreach (var Weight in GetTree().GetNodesInGroup("Weights"))
+		{
+			if (Weight == this)
+				continue;
+			else
+			{
+				// If any other weights have the mouse held, don't pick up this weight
+				// if ((Weight as Weight).MouseHeld)
+				// 	return;
+
+				if ((Weight as RigidBody2D).LinearVelocity.DistanceTo(Vector2.Zero) > .02f)
+					return;
+			}
+		}
+		
 		MouseHeld = true;
 		Freeze = true;
 	}

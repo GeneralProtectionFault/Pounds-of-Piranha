@@ -71,7 +71,7 @@ public partial class Level : Node2D
 	}
 
 
-	public void RestartLevel()
+	public async void RestartLevel()
 	{
 		// GetTree().ChangeSceneToFile(GetTree().CurrentScene.SceneFilePath);
 		Grid = null;
@@ -84,7 +84,6 @@ public partial class Level : Node2D
 		GridBottomRight = new Vector2I(0,0);
 		NumberSpawnNodes = new List<Node2D>();
 		NumberNodes = new List<Node2D>();
-		NegativeSymbol = null;
 		LinesPopulated = false;
 
 		var ReloadResult = GetTree().ReloadCurrentScene();

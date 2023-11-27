@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c1nenigsti0ha"]
+[gd_scene load_steps=21 format=3 uid="uid://c1nenigsti0ha"]
 
 [ext_resource type="Script" path="res://Scripts/Level.cs" id="1_5i0au"]
 [ext_resource type="PackedScene" uid="uid://ruo4xpphyqgw" path="res://Scenes/NumberSpawnLocations.tscn" id="2_q75m3"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cmdmxf1qlgiv0" path="res://Scenes/good_fish_2.tscn" id="9_rrhis"]
 [ext_resource type="PackedScene" uid="uid://dvss3jv7pjyb6" path="res://Scenes/BeachShelf.tscn" id="10_mgd6o"]
 [ext_resource type="PackedScene" uid="uid://cntr1ko2bgjfv" path="res://Scenes/bad_fish_2.tscn" id="10_y2uae"]
+[ext_resource type="Texture2D" uid="uid://534ykx62iqce" path="res://Graphics/BeachSky2.png" id="12_5m2qv"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_oormi"]
 
@@ -26,6 +27,22 @@ shader_parameter/noise = SubResource("NoiseTexture2D_e3wqu")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2hvfy"]
 size = Vector2(418, 20)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_yrk0d"]
+a = Vector2(2002, 1)
+b = Vector2(-64, 1)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_c0u8d"]
+a = Vector2(1924, 1113)
+b = Vector2(1921, -54)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_r8cgp"]
+a = Vector2(-2, 1133)
+b = Vector2(-4, -97)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ii6wr"]
+a = Vector2(2050, 1080)
+b = Vector2(-65, 1077)
 
 [node name="Level_Test" type="Node2D"]
 script = ExtResource("1_5i0au")
@@ -81,9 +98,9 @@ OverrideBothFishTypes = true
 [node name="Background1" type="Sprite2D" parent="."]
 z_index = -1
 material = SubResource("ShaderMaterial_3km26")
-position = Vector2(960, 540)
+position = Vector2(963, 632)
+scale = Vector2(1.00633, 0.861564)
 texture = ExtResource("4_47hxb")
-metadata/_edit_lock_ = true
 
 [node name="Weight" parent="." instance=ExtResource("6_bksep")]
 position = Vector2(818, 115)
@@ -118,7 +135,26 @@ position = Vector2(791, 453)
 position = Vector2(534, 648)
 
 [node name="Shelf2" parent="." instance=ExtResource("10_mgd6o")]
-position = Vector2(1244, 198)
+position = Vector2(1244, 210)
+
+[node name="BeachSky2" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(958, -114)
+texture = ExtResource("12_5m2qv")
+
+[node name="LevelBoundary_StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelBoundary_StaticBody2D"]
+shape = SubResource("SegmentShape2D_yrk0d")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="LevelBoundary_StaticBody2D"]
+shape = SubResource("SegmentShape2D_c0u8d")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="LevelBoundary_StaticBody2D"]
+shape = SubResource("SegmentShape2D_r8cgp")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="LevelBoundary_StaticBody2D"]
+shape = SubResource("SegmentShape2D_ii6wr")
 
 [connection signal="tree_exiting" from="." to="." method="TreeExit"]
 [connection signal="pressed" from="ResetButton" to="." method="RestartLevel"]

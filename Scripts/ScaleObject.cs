@@ -36,6 +36,9 @@ public partial class ScaleObject : RigidBody2D
 
 			WeightChanged?.Invoke(this, Pounds);
 		}
+
+		Manager.LevelMoves += 1;
+		Manager.OverallMoves += 1;
 	}
 
 
@@ -51,6 +54,9 @@ public partial class ScaleObject : RigidBody2D
 
 			WeightChanged?.Invoke(this, Pounds);
 		}
+
+		Manager.LevelMoves += 1;
+		Manager.OverallMoves += 1;
 	}
 
 
