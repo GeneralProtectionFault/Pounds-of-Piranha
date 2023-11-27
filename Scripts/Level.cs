@@ -200,10 +200,13 @@ public partial class Level : Node2D
 	private async void SpawnNumber(object sender, int number)
 	{
 		// First, clear 'em
-		foreach(var Number in NumberNodes.ToList())
+		if (NumberNodes.Count > 0)
 		{
-			Number.QueueFree();
-			await ToSignal(Number, "tree_exited");
+			foreach(var Number in NumberNodes.ToList())
+			{
+				Number.QueueFree();
+				await ToSignal(Number, "tree_exited");
+			}
 		}
 
 		NumberNodes.Clear();
@@ -214,8 +217,9 @@ public partial class Level : Node2D
 		// NewNumbersThread = new Thread(Start);
 		// NewNumbersThread.Start(number);
 		
-		// RepopulateNumbers(number);
-		CallDeferred("RepopulateNumbers", number);
+		
+		RepopulateNumbers(number);
+		// CallDeferred("RepopulateNumbers", number);
 	}
 
 

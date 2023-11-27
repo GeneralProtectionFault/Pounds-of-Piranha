@@ -1,71 +1,15 @@
-[gd_scene load_steps=15 format=3 uid="uid://d0v6p7n5j6mjd"]
+[gd_scene load_steps=5 format=3 uid="uid://d0v6p7n5j6mjd"]
 
-[ext_resource type="Script" path="res://Scripts/Level.cs" id="1_5ayo3"]
-[ext_resource type="PackedScene" uid="uid://ruo4xpphyqgw" path="res://Scenes/NumberSpawnLocations.tscn" id="2_b6q58"]
-[ext_resource type="Shader" path="res://Graphics/Shaders/Water.gdshader" id="3_j0tei"]
-[ext_resource type="Texture2D" uid="uid://co5p7opdcjgmg" path="res://Graphics/Background1.png" id="4_dvcbu"]
+[ext_resource type="PackedScene" uid="uid://bihk88eh15aay" path="res://Scenes/LevelTemplate.tscn" id="2_sv66q"]
 [ext_resource type="PackedScene" uid="uid://cthqrcjuob4vq" path="res://Scenes/weight.tscn" id="5_qsntp"]
-[ext_resource type="PackedScene" uid="uid://jcrnqotjmqcc" path="res://Scenes/scale.tscn" id="6_xmld7"]
 [ext_resource type="PackedScene" uid="uid://cntr1ko2bgjfv" path="res://Scenes/bad_fish_2.tscn" id="7_p3orq"]
 [ext_resource type="PackedScene" uid="uid://cmdmxf1qlgiv0" path="res://Scenes/good_fish_2.tscn" id="8_g3c5k"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_oormi"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_e3wqu"]
-seamless = true
-noise = SubResource("FastNoiseLite_oormi")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3km26"]
-shader = ExtResource("3_j0tei")
-shader_parameter/water_color = Color(0, 0, 0, 0.227451)
-shader_parameter/scale = Vector2(18, 5)
-shader_parameter/noise = SubResource("NoiseTexture2D_e3wqu")
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yx308"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dcr1y"]
-size = Vector2(1370, 20)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2hvfy"]
-size = Vector2(418, 20)
-
 [node name="Level_8" type="Node2D"]
-script = ExtResource("1_5ayo3")
 metadata/Sequence = 8
 
-[node name="NumberSpawns" parent="." instance=ExtResource("2_b6q58")]
-position = Vector2(661, 532)
-
-[node name="TurnButton" type="Button" parent="."]
-offset_left = 1645.0
-offset_right = 1909.0
-offset_bottom = 65.0
-text = "Initiate Turn
-"
-
-[node name="NumberSetButton" type="Button" parent="."]
-visible = false
-offset_left = 1645.0
-offset_top = 84.0
-offset_right = 1802.0
-offset_bottom = 130.0
-text = "Set Number
-"
-
-[node name="NumberOverride" type="TextEdit" parent="."]
-visible = false
-offset_left = 1817.0
-offset_top = 84.0
-offset_right = 1907.0
-offset_bottom = 130.0
-text = "0
-"
-
-[node name="Background1" type="Sprite2D" parent="."]
-z_index = -1
-material = SubResource("ShaderMaterial_3km26")
-position = Vector2(960, 540)
-texture = ExtResource("4_dvcbu")
+[node name="LevelTemplate" parent="." instance=ExtResource("2_sv66q")]
+position = Vector2(1, -1)
 
 [node name="Weight" parent="." instance=ExtResource("5_qsntp")]
 position = Vector2(818, 115)
@@ -78,28 +22,6 @@ Pounds = 2
 [node name="Weight3" parent="." instance=ExtResource("5_qsntp")]
 position = Vector2(986, 115)
 Pounds = -1
-
-[node name="Shelf2" type="StaticBody2D" parent="."]
-
-[node name="Sprite2D" type="Sprite2D" parent="Shelf2"]
-position = Vector2(1219, 160.5)
-scale = Vector2(2.63281, 0.0566406)
-texture = SubResource("NoiseTexture2D_yx308")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Shelf2"]
-position = Vector2(1225, 158)
-shape = SubResource("RectangleShape2D_dcr1y")
-
-[node name="Shelf" type="StaticBody2D" parent="."]
-
-[node name="Sprite2D" type="Sprite2D" parent="Shelf"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Shelf"]
-position = Vector2(206, 903)
-shape = SubResource("RectangleShape2D_2hvfy")
-
-[node name="Scale" parent="." instance=ExtResource("6_xmld7")]
-position = Vector2(206, 757)
 
 [node name="BadFish" parent="." instance=ExtResource("7_p3orq")]
 position = Vector2(601, 799)
@@ -114,7 +36,3 @@ position = Vector2(787, 467)
 [node name="GoodFish2" parent="." instance=ExtResource("8_g3c5k")]
 position = Vector2(787, 967)
 FishFacingDirection = Vector2i(0, -1)
-
-[connection signal="pressed" from="TurnButton" to="." method="TestButtonPressed"]
-[connection signal="pressed" from="NumberSetButton" to="." method="NumberSetButtonPressed"]
-[connection signal="text_changed" from="NumberOverride" to="." method="TestNumberChanged"]

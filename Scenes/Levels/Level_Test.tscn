@@ -16,21 +16,6 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0uhgg"]
 size = Vector2(1927, 1072)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_oormi"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_e3wqu"]
-seamless = true
-noise = SubResource("FastNoiseLite_oormi")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3km26"]
-shader = ExtResource("4_qrgve")
-shader_parameter/water_color = Color(0, 0, 0, 0.227451)
-shader_parameter/scale = Vector2(18, 5)
-shader_parameter/noise = SubResource("NoiseTexture2D_e3wqu")
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2hvfy"]
-size = Vector2(418, 20)
-
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_yrk0d"]
 a = Vector2(2002, 1)
 b = Vector2(-64, 1)
@@ -47,6 +32,21 @@ b = Vector2(-4, -97)
 a = Vector2(2050, 1080)
 b = Vector2(-65, 1077)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2hvfy"]
+size = Vector2(418, 20)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_oormi"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_eu1uy"]
+seamless = true
+noise = SubResource("FastNoiseLite_oormi")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3km26"]
+shader = ExtResource("4_qrgve")
+shader_parameter/water_color = Color(0, 0, 0, 0.227451)
+shader_parameter/scale = Vector2(18, 5)
+shader_parameter/noise = SubResource("NoiseTexture2D_eu1uy")
+
 [node name="Level_Test" type="Node2D"]
 script = ExtResource("1_5i0au")
 ShowGridLines = true
@@ -57,6 +57,43 @@ metadata/Sequence = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelBody"]
 position = Vector2(963.5, 537)
 shape = SubResource("RectangleShape2D_0uhgg")
+
+[node name="LevelBoundary_StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelBoundary_StaticBody2D"]
+shape = SubResource("SegmentShape2D_yrk0d")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="LevelBoundary_StaticBody2D"]
+shape = SubResource("SegmentShape2D_c0u8d")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="LevelBoundary_StaticBody2D"]
+shape = SubResource("SegmentShape2D_r8cgp")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="LevelBoundary_StaticBody2D"]
+shape = SubResource("SegmentShape2D_ii6wr")
+
+[node name="ScaleShelf" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="ScaleShelf"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScaleShelf"]
+position = Vector2(206, 903)
+shape = SubResource("RectangleShape2D_2hvfy")
+
+[node name="BeachShelf" parent="." instance=ExtResource("10_mgd6o")]
+position = Vector2(1244, 210)
+
+[node name="BeachSky" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(958, -114)
+texture = ExtResource("12_5m2qv")
+
+[node name="WaterBackground" type="Sprite2D" parent="."]
+z_index = -1
+material = SubResource("ShaderMaterial_3km26")
+position = Vector2(963, 632)
+scale = Vector2(1.00633, 0.861564)
+texture = ExtResource("4_47hxb")
 
 [node name="PiranhaDance" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_swx2u")
@@ -99,17 +136,13 @@ offset_bottom = 130.0
 text = "0
 "
 
+[node name="Scale" parent="." instance=ExtResource("7_3e4ep")]
+position = Vector2(206, 757)
+
 [node name="Turn" parent="." instance=ExtResource("9_1qekb")]
 position = Vector2(787, 649)
 ArrowDirection = Vector2(1, 0)
 OverrideBothFishTypes = true
-
-[node name="Background1" type="Sprite2D" parent="."]
-z_index = -1
-material = SubResource("ShaderMaterial_3km26")
-position = Vector2(963, 632)
-scale = Vector2(1.00633, 0.861564)
-texture = ExtResource("4_47hxb")
 
 [node name="Weight" parent="." instance=ExtResource("6_bksep")]
 position = Vector2(818, 115)
@@ -126,44 +159,11 @@ position = Vector2(938, 114)
 position = Vector2(1038, 114)
 Pounds = 5
 
-[node name="Shelf" type="StaticBody2D" parent="."]
-
-[node name="Sprite2D" type="Sprite2D" parent="Shelf"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Shelf"]
-position = Vector2(206, 903)
-shape = SubResource("RectangleShape2D_2hvfy")
-
-[node name="Scale" parent="." instance=ExtResource("7_3e4ep")]
-position = Vector2(206, 757)
-
 [node name="GoodFish2" parent="." instance=ExtResource("9_rrhis")]
 position = Vector2(791, 453)
 
 [node name="BadFish2" parent="." instance=ExtResource("10_y2uae")]
 position = Vector2(534, 648)
-
-[node name="Shelf2" parent="." instance=ExtResource("10_mgd6o")]
-position = Vector2(1244, 210)
-
-[node name="BeachSky2" type="Sprite2D" parent="."]
-z_index = -1
-position = Vector2(958, -114)
-texture = ExtResource("12_5m2qv")
-
-[node name="LevelBoundary_StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelBoundary_StaticBody2D"]
-shape = SubResource("SegmentShape2D_yrk0d")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="LevelBoundary_StaticBody2D"]
-shape = SubResource("SegmentShape2D_c0u8d")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="LevelBoundary_StaticBody2D"]
-shape = SubResource("SegmentShape2D_r8cgp")
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="LevelBoundary_StaticBody2D"]
-shape = SubResource("SegmentShape2D_ii6wr")
 
 [connection signal="tree_exiting" from="." to="." method="TreeExit"]
 [connection signal="pressed" from="ResetButton" to="." method="RestartLevel"]

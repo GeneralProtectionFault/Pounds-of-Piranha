@@ -1,98 +1,20 @@
-[gd_scene load_steps=15 format=3 uid="uid://ds1jbwvuuoyy1"]
+[gd_scene load_steps=5 format=3 uid="uid://ds1jbwvuuoyy1"]
 
-[ext_resource type="Script" path="res://Scripts/Level.cs" id="1_5i0au"]
-[ext_resource type="PackedScene" uid="uid://ruo4xpphyqgw" path="res://Scenes/NumberSpawnLocations.tscn" id="2_q75m3"]
-[ext_resource type="Texture2D" uid="uid://co5p7opdcjgmg" path="res://Graphics/Background1.png" id="4_47hxb"]
-[ext_resource type="Shader" path="res://Graphics/Shaders/Water.gdshader" id="4_qrgve"]
+[ext_resource type="PackedScene" uid="uid://bihk88eh15aay" path="res://Scenes/LevelTemplate.tscn" id="4_3mjes"]
 [ext_resource type="PackedScene" uid="uid://cthqrcjuob4vq" path="res://Scenes/weight.tscn" id="6_bksep"]
-[ext_resource type="PackedScene" uid="uid://jcrnqotjmqcc" path="res://Scenes/scale.tscn" id="7_3e4ep"]
 [ext_resource type="PackedScene" uid="uid://cmdmxf1qlgiv0" path="res://Scenes/good_fish_2.tscn" id="7_tfjht"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_oormi"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_e3wqu"]
-seamless = true
-noise = SubResource("FastNoiseLite_oormi")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3km26"]
-shader = ExtResource("4_qrgve")
-shader_parameter/water_color = Color(0, 0, 0, 0.227451)
-shader_parameter/scale = Vector2(18, 5)
-shader_parameter/noise = SubResource("NoiseTexture2D_e3wqu")
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yx308"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dcr1y"]
-size = Vector2(1370, 20)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2hvfy"]
-size = Vector2(418, 20)
 
 [sub_resource type="LabelSettings" id="LabelSettings_b5nxn"]
 font_size = 24
 
 [node name="Level_1" type="Node2D"]
-script = ExtResource("1_5i0au")
 metadata/Sequence = 1
 
-[node name="NumberSpawns" parent="." instance=ExtResource("2_q75m3")]
-position = Vector2(661, 532)
-
-[node name="TurnButton" type="Button" parent="."]
-offset_left = 1645.0
-offset_right = 1909.0
-offset_bottom = 65.0
-text = "Initiate Turn
-"
-
-[node name="NumberSetButton" type="Button" parent="."]
-visible = false
-offset_left = 1645.0
-offset_top = 84.0
-offset_right = 1802.0
-offset_bottom = 130.0
-text = "Set Number
-"
-
-[node name="NumberOverride" type="TextEdit" parent="."]
-visible = false
-offset_left = 1817.0
-offset_top = 84.0
-offset_right = 1907.0
-offset_bottom = 130.0
-text = "0
-"
-
-[node name="Background1" type="Sprite2D" parent="."]
-z_index = -1
-material = SubResource("ShaderMaterial_3km26")
-position = Vector2(960, 540)
-texture = ExtResource("4_47hxb")
+[node name="LevelTemplate" parent="." instance=ExtResource("4_3mjes")]
+position = Vector2(3, 0)
 
 [node name="Weight" parent="." instance=ExtResource("6_bksep")]
 position = Vector2(818, 115)
-
-[node name="Shelf2" type="StaticBody2D" parent="."]
-
-[node name="Sprite2D" type="Sprite2D" parent="Shelf2"]
-position = Vector2(1219, 160.5)
-scale = Vector2(2.63281, 0.0566406)
-texture = SubResource("NoiseTexture2D_yx308")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Shelf2"]
-position = Vector2(1225, 158)
-shape = SubResource("RectangleShape2D_dcr1y")
-
-[node name="Shelf" type="StaticBody2D" parent="."]
-
-[node name="Sprite2D" type="Sprite2D" parent="Shelf"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Shelf"]
-position = Vector2(206, 903)
-shape = SubResource("RectangleShape2D_2hvfy")
-
-[node name="Scale" parent="." instance=ExtResource("7_3e4ep")]
-position = Vector2(206, 757)
 
 [node name="TutorialText" type="Control" parent="."]
 layout_mode = 3
@@ -134,9 +56,5 @@ label_settings = SubResource("LabelSettings_b5nxn")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GoodFish2" parent="." instance=ExtResource("7_tfjht")]
+[node name="GoodFish" parent="." instance=ExtResource("7_tfjht")]
 position = Vector2(787, 452)
-
-[connection signal="pressed" from="TurnButton" to="." method="TestButtonPressed"]
-[connection signal="pressed" from="NumberSetButton" to="." method="NumberSetButtonPressed"]
-[connection signal="text_changed" from="NumberOverride" to="." method="TestNumberChanged"]
