@@ -7,6 +7,7 @@
 [node name="Level_2" type="Node2D"]
 position = Vector2(2, 6)
 metadata/Sequence = 2
+metadata/Par = 3
 
 [node name="LevelTemplate" parent="." instance=ExtResource("4_ynlaf")]
 position = Vector2(1, 3)

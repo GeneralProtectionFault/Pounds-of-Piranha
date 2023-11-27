@@ -8,6 +8,7 @@
 [node name="Level_7" type="Node2D"]
 position = Vector2(-6, -7)
 metadata/Sequence = 7
+metadata/par = 5
 
 [node name="Weight" parent="." instance=ExtResource("5_6c140")]
 position = Vector2(818, 115)

@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://cmdmxf1qlgiv0" path="res://Scenes/good_fish_2.tscn" id="9_c7po3"]
 
 [node name="Level_15" type="Node2D"]
+metadata/par = 10
+metadata/Sequence = 15
 
 [node name="LevelTemplate" parent="." instance=ExtResource("1_sevkd")]
 position = Vector2(2, 1)
@@ -31,6 +33,10 @@ Pounds = 96
 [node name="Weight5" parent="." instance=ExtResource("5_kghrf")]
 position = Vector2(1151, 115)
 Pounds = 50
+
+[node name="Weight6" parent="." instance=ExtResource("5_kghrf")]
+position = Vector2(1236, 115)
+Pounds = 500
 
 [node name="GoodFish2" parent="." instance=ExtResource("9_c7po3")]
 position = Vector2(787, 444)

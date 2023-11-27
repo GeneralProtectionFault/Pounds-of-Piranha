@@ -9,6 +9,7 @@ font_size = 24
 
 [node name="Level_1" type="Node2D"]
 metadata/Sequence = 1
+metadata/Par = 1
 
 [node name="LevelTemplate" parent="." instance=ExtResource("4_3mjes")]
 position = Vector2(3, 0)
