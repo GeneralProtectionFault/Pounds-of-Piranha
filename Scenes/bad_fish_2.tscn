@@ -8,8 +8,7 @@ size = Vector2(92, 101)
 
 [node name="BadFish2" groups=["BadFish"] instance=ExtResource("1_tgtdc")]
 top_level = true
-animation = &"Idle_Right"
-frame_progress = 0.216903
+animation = &"Eat_Right"
 script = ExtResource("2_jara4")
 Type = 0
 

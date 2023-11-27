@@ -113,16 +113,24 @@ public partial class Fish : AnimatedSprite2D
 				GD.Print(IDPath);
 
 				Moving = true;
-				SetFacingDirection(FishFacingDirection);
+				
 				//Level.CurrentLevelState = Level.LevelState.FishMoving;
 			}
 		}
 	}
 
 
-	private void EatFish(Fish Consumer, Fish Consumee)
+	private async void EatFish(Fish Consumer, Fish Consumee)
 	{
-		// TODO:  Play an animation FFS
+	
+		if (Mathf.Sign(Consumer.FishFacingDirection.X) == -1 || Mathf.Sign(Consumer.FishFacingDirection.Y) == -1)
+			Consumer.Play("Eat_Left");
+		else if (Mathf.Sign(Consumer.FishFacingDirection.X) == 1 || Mathf.Sign(Consumer.FishFacingDirection.Y) == 1)
+			Consumer.Play("Eat_Right");
+
+		await ToSignal(this, "animation_changed");
+		SetFacingDirection(FishFacingDirection);
+
 		Consumee.QueueFree();
 
 		//Level.CurrentLevelState = Level.LevelState.Play;

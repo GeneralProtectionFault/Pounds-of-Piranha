@@ -60,7 +60,7 @@ shape = SubResource("RectangleShape2D_0uhgg")
 
 [node name="PiranhaDance" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_swx2u")
-volume_db = -26.164
+volume_db = -31.396
 autoplay = true
 
 [node name="NumberSpawns" parent="." instance=ExtResource("2_q75m3")]
