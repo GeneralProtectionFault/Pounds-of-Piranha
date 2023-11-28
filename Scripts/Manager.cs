@@ -6,14 +6,22 @@ using System.Linq;
 
 public partial class Manager : Node
 {
+    public static Manager Instance;
     public static int LevelMoves { get; set; } = 0;
     public static int OverallMoves { get; set; }= 0;
 
     public static Dictionary<int,string> LevelDictionary = new Dictionary<int,string>();
+    public static AudioStreamPlayer PiranhaDance;
+    public static AudioStreamPlayer Waves;
 
+    public static bool MusicStarted = false;
 
     public Manager()
     {
+        if (Instance is null)
+            Instance = this;
+
+
         var ext = new List<string> {".tscn"};
         var LevelFiles = Directory.EnumerateFiles(Path.Combine(Directory.GetCurrentDirectory(), "Scenes", "Levels"))
         .Where(s => ext.Contains(Path.GetExtension(s).TrimStart().ToLowerInvariant()) && !s.Contains("Test"));
@@ -43,9 +51,30 @@ public partial class Manager : Node
             }
         }
 
-        // foreach(var level in LevelDictionary)
-        // {
-        //     GD.Print(level);
-        // }
+        
+    
+    }
+
+    public async void InitializeMusic()
+    {
+        // Load ze' music here so it persists across scenes instead of a most irritating restart on level advancement
+        if (!MusicStarted)
+        {
+            var PiranhaDance = new AudioStreamPlayer();
+            var PiranhaDanceStream = new AudioStream();
+            var PiranhaDanceResource = ResourceLoader.Load<AudioStream>("res://Audio/PiranhaDance.ogg");
+            PiranhaDance.Stream = PiranhaDanceResource;
+            // GetTree().Root.AddChild(PiranhaDance);
+            GetTree().Root.CallDeferred("add_child", PiranhaDance);
+            await ToSignal(GetTree(), "process_frame");
+            PiranhaDance.Play();
+
+            
+
+            // var WavesFile = new AudioStream();
+            // WavesFile.ResourcePath = "res://Audio/mixkit-close-sea-waves-loop-1195.wav";
+
+            MusicStarted = true;
+        }
     }
 }

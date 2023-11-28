@@ -42,7 +42,7 @@ public partial class Level : Node2D
 
 
 
-	private static List<Node2D> NumberSpawnNodes = new List<Node2D>();
+	// private static List<Node2D> NumberSpawnNodes = new List<Node2D>();
 	// private static List<Node2D> NumberNodes = new List<Node2D>();
 	private static Node2D NegativeSymbol;
 
@@ -66,14 +66,18 @@ public partial class Level : Node2D
 		LevelLabel = GetNode<Label>("Label_Level/Label_Level_Number");
 		TotalLabel = GetNode<Label>("Label_Total/Label_Total_Number");
 
+		LevelLabel.Text = Manager.LevelMoves.ToString();
+		TotalLabel.Text = Manager.OverallMoves.ToString();
+
 		// This gets the nodes that are the spawn locations
-		foreach(Node2D SpawnNode in GetTree().GetNodesInGroup("NumberSpawns"))
-		{
-			NumberSpawnNodes.Add(SpawnNode);
-		}
+		// foreach(Node2D SpawnNode in GetTree().GetNodesInGroup("NumberSpawns"))
+		// {
+		// 	NumberSpawnNodes.Add(SpawnNode);
+		// }
 
 		SpawnNumber(this, 0);
-		
+
+		Manager.Instance.InitializeMusic();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -105,7 +109,7 @@ public partial class Level : Node2D
 		BottomRightNumber_Y = -1;
 		GridTopLeft = new Vector2I(0,0);
 		GridBottomRight = new Vector2I(0,0);
-		NumberSpawnNodes = new List<Node2D>();
+		// NumberSpawnNodes = new List<Node2D>();
 		// NumberNodes = new List<Node2D>();
 		LinesPopulated = false;
 
@@ -233,7 +237,6 @@ public partial class Level : Node2D
 				Number.QueueFree();
 				// await ToSignal(Number, "tree_exited");
 			}
-
 		}
 
 		// NumberNodes.Clear();
@@ -314,7 +317,9 @@ public partial class Level : Node2D
 		// NumberNodes.Add((Node2D)NumberScene);
 
 		// NumberSpawnNodes[NumberPosition].AddChild(NumberScene);
-		NumberSpawnNodes[NumberPosition].CallDeferred("add_child", NumberScene);
+		// NumberSpawnNodes[NumberPosition].CallDeferred("add_child", NumberScene);
+		var SpawnNode = GetNode<Node2D>($"NumberSpawns/Digit_{NumberPosition + 1}");
+		SpawnNode.CallDeferred("add_child", NumberScene);
 
 		// CallDeferred("add_child", NumberSpawnNodes[i]);
 
@@ -328,7 +333,7 @@ public partial class Level : Node2D
 			Sprite.Modulate = new Color(0xffffffff);
 		}
 
-		await ToSignal(GetTree(), "process_frame");
+		// await ToSignal(GetTree(), "process_frame");
 	}
 
 
