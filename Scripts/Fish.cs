@@ -62,12 +62,14 @@ public partial class Fish : AnimatedSprite2D
 
 		if (Moving || ReachedGoal)
 		{
-			GD.Print($"{Type} = Settomg swim animation");
+			// GD.Print($"{Type} = Settomg swim animation");
+			this.Stop();
 			this.Play(AnimationName_Moving);
 		}
 		else
 		{
-			GD.Print($"{Type} = Settomg idle animation");
+			// GD.Print($"{Type} = Settomg idle animation");
+			this.Stop();
 			this.Play(AnimationName_Idle);
 		}
 	}

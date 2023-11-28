@@ -19,7 +19,8 @@ public partial class Level : Node2D
 
 	public static event EventHandler CommenceTurn;
 
-
+	public static Label LevelLabel;
+	public static Label TotalLabel;
 	public static AStarGrid2D Grid;
 
 	public static int TopLeftNumber_X = -1;
@@ -57,6 +58,8 @@ public partial class Level : Node2D
 
 		NegativeSymbol = GetNode<Node2D>("NumberSpawns/Negative");
 		LevelBody = GetNode<Area2D>("LevelBody");
+		LevelLabel = GetNode<Label>("Label_Level/Label_Level_Number");
+		TotalLabel = GetNode<Label>("Label_Total/Label_Total_Number");
 
 		// This gets the nodes that are the spawn locations
 		foreach(Node2D SpawnNode in GetTree().GetNodesInGroup("NumberSpawns"))
@@ -89,6 +92,8 @@ public partial class Level : Node2D
 		NumberSpawnNodes = new List<Node2D>();
 		// NumberNodes = new List<Node2D>();
 		LinesPopulated = false;
+
+		ScaleObject.ResetLevelScore();
 
 		var ReloadResult = GetTree().ReloadCurrentScene();
 		GD.Print($"Reloading scene.\nReolad Result: {ReloadResult}");
@@ -297,7 +302,8 @@ public partial class Level : Node2D
 		var NumberScene = ResourceLoader.Load<PackedScene>($"res://Scenes/Numbers/{Digit}.tscn").Instantiate();
 		// NumberNodes.Add((Node2D)NumberScene);
 
-		NumberSpawnNodes[NumberPosition].AddChild(NumberScene);
+		// NumberSpawnNodes[NumberPosition].AddChild(NumberScene);
+		NumberSpawnNodes[NumberPosition].CallDeferred("add_child", NumberScene);
 
 		// CallDeferred("add_child", NumberSpawnNodes[i]);
 

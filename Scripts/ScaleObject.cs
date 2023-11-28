@@ -6,9 +6,9 @@ public partial class ScaleObject : RigidBody2D
 	public static event EventHandler<int> WeightChanged;
 
 
-
 	public static int Pounds = 0;
 	private static Area2D WeightArea;
+
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -26,6 +26,7 @@ public partial class ScaleObject : RigidBody2D
 
 	private void AddWeight(Node2D EnteringBody)
 	{
+		GD.Print("Adding WEIGHT");
 		Level.LinesPopulated = false;
 
 		if (EnteringBody.IsInGroup("Weights"))
@@ -37,13 +38,13 @@ public partial class ScaleObject : RigidBody2D
 			WeightChanged?.Invoke(this, Pounds);
 		}
 
-		Manager.LevelMoves += 1;
-		Manager.OverallMoves += 1;
+		UpdateScore(1);
 	}
 
 
 	private void RemoveWeight(Node2D LeavingBody)
 	{
+		GD.Print("Removing WEIGHT");
 		Level.LinesPopulated = false;
 		
 		if (LeavingBody.IsInGroup("Weights"))
@@ -55,11 +56,36 @@ public partial class ScaleObject : RigidBody2D
 			WeightChanged?.Invoke(this, Pounds);
 		}
 
-		Manager.LevelMoves += 1;
-		Manager.OverallMoves += 1;
+		UpdateScore(1);
 	}
 
 
+	public static void UpdateScore(int Increment)
+	{
+		Manager.LevelMoves += Increment;
+		Manager.OverallMoves += Increment;
 
+		Level.LevelLabel.Text = Manager.LevelMoves.ToString();
+		Level.TotalLabel.Text = Manager.OverallMoves.ToString();
+	}
+
+	public static void ResetLevelScore()
+	{
+		Manager.LevelMoves = 0;
+		Level.LevelLabel.Text = Manager.LevelMoves.ToString();
+	}
+
+	public static void ResetTotalScore()
+	{
+		Manager.OverallMoves = 0;
+		Level.TotalLabel.Text = Manager.OverallMoves.ToString();
+	}
+
+
+	public void TreeExiting()
+	{
+		WeightArea.BodyEntered -= AddWeight;
+		WeightArea.BodyExited -= RemoveWeight;
+	}
 
 }

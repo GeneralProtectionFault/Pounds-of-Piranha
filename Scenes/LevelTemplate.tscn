@@ -79,6 +79,36 @@ shape = SubResource("RectangleShape2D_66ug5")
 [node name="BeachShelf" parent="." instance=ExtResource("1_ynqq2")]
 position = Vector2(1244, 210)
 
+[node name="Label_Total" type="Label" parent="."]
+offset_left = 1645.0
+offset_top = 270.0
+offset_right = 1774.0
+offset_bottom = 293.0
+text = "Total Turns:"
+
+[node name="Label_Total_Number" type="Label" parent="Label_Total"]
+layout_mode = 0
+offset_left = 110.0
+offset_top = 1.0
+offset_right = 239.0
+offset_bottom = 24.0
+text = "0"
+
+[node name="Label_Level" type="Label" parent="."]
+offset_left = 1608.0
+offset_top = 306.0
+offset_right = 1737.0
+offset_bottom = 329.0
+text = "Turns This Level:"
+
+[node name="Label_Level_Number" type="Label" parent="Label_Level"]
+layout_mode = 0
+offset_left = 147.0
+offset_top = 1.0
+offset_right = 276.0
+offset_bottom = 24.0
+text = "0"
+
 [node name="PalmTree" parent="." instance=ExtResource("9_fuesr")]
 position = Vector2(1817, 84)
 scale = Vector2(0.775001, 0.775001)

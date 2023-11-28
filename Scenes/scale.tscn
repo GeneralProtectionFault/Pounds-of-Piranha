@@ -25,7 +25,10 @@ polygon = PackedVector2Array(-147, -122, -137, -120, -104, -46, -68, 3, -36, 24,
 shape = SubResource("SegmentShape2D_q66qh")
 
 [node name="Weight_Area2D" type="Area2D" parent="."]
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Weight_Area2D"]
 position = Vector2(0, -108)
 shape = SubResource("RectangleShape2D_xq4pc")
+
+[connection signal="tree_exiting" from="." to="." method="TreeExiting"]

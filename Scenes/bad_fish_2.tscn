@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/Fish.cs" id="2_jara4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_01lfc"]
-size = Vector2(92, 101)
+size = Vector2(76, 67)
 
 [node name="BadFish2" groups=["BadFish"] instance=ExtResource("1_tgtdc")]
 top_level = true
@@ -23,7 +23,7 @@ collision_layer = 4
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
-position = Vector2(-1, -0.5)
+position = Vector2(1, -0.5)
 shape = SubResource("RectangleShape2D_01lfc")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." index="2"]
