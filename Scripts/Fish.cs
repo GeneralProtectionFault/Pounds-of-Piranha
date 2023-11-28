@@ -152,6 +152,8 @@ public partial class Fish : AnimatedSprite2D
 
 
 		// A perfectly good fish has been consumed!  RESTART!
+		Level.AteFishSound.Play();
+
 		Tween AnotherDelayTween = GetTree().CreateTween();
 		AnotherDelayTween.TweenCallback(Callable.From(() => {
 				Level.LevelTemplateObject.RestartLevel();

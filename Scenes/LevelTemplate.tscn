@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://bihk88eh15aay"]
+[gd_scene load_steps=21 format=3 uid="uid://bihk88eh15aay"]
 
 [ext_resource type="Script" path="res://Scripts/Level.cs" id="1_qx0ft"]
 [ext_resource type="PackedScene" uid="uid://dvss3jv7pjyb6" path="res://Scenes/BeachShelf.tscn" id="1_ynqq2"]
 [ext_resource type="Texture2D" uid="uid://534ykx62iqce" path="res://Graphics/BeachSky2.png" id="2_q5dkl"]
 [ext_resource type="Shader" path="res://Graphics/Shaders/Water.gdshader" id="3_bdoyx"]
+[ext_resource type="AudioStream" uid="uid://d3xfrd5qrneos" path="res://Audio/350987__cabled_mess__lose_c_05.wav" id="4_4wq1u"]
 [ext_resource type="Texture2D" uid="uid://co5p7opdcjgmg" path="res://Graphics/Background1.png" id="4_pa011"]
 [ext_resource type="AudioStream" uid="uid://cl6rba55xjtim" path="res://Audio/PiranhaDance.ogg" id="5_mnfa3"]
 [ext_resource type="PackedScene" uid="uid://ruo4xpphyqgw" path="res://Scenes/NumberSpawnLocations.tscn" id="6_7ok02"]
@@ -55,6 +56,9 @@ stream = ExtResource("5_mnfa3")
 stream = ExtResource("8_v6v0p")
 volume_db = -20.0
 autoplay = true
+
+[node name="AteFishSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_4wq1u")
 
 [node name="LevelBody" type="Area2D" parent="."]
 
