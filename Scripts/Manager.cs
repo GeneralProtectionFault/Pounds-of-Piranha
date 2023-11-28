@@ -70,7 +70,7 @@ public partial class Manager : Node
             var Waves = new AudioStreamPlayer();
             var WavesResource = ResourceLoader.Load<AudioStream>("res://Audio/mixkit-close-sea-waves-loop-1195.wav");
             Waves.Stream = WavesResource;
-            Waves.VolumeDb = -20;
+            Waves.VolumeDb = -22;
             GetTree().Root.CallDeferred("add_child", Waves);
             await ToSignal(GetTree(), "process_frame");
             Waves.Play();

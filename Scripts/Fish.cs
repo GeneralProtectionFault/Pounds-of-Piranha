@@ -149,6 +149,14 @@ public partial class Fish : AnimatedSprite2D
 		Consumee.QueueFree();
 		SetFacingDirection(FishFacingDirection);
 		//Level.CurrentLevelState = Level.LevelState.Play;
+
+
+		// A perfectly good fish has been consumed!  RESTART!
+		Tween AnotherDelayTween = GetTree().CreateTween();
+		AnotherDelayTween.TweenCallback(Callable.From(() => {
+				Level.LevelTemplateObject.RestartLevel();
+			}
+        )).SetDelay(1f);
 	}
 
 
@@ -261,11 +269,6 @@ public partial class Fish : AnimatedSprite2D
 		}
     }
 
-
-	private void FishConsumptionCheck()
-	{
-
-	}
 
 
 	public bool CheckMovingFish()
