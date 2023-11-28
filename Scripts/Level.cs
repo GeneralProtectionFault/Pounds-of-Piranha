@@ -16,6 +16,8 @@ public partial class Level : Node2D
 	public enum LevelState {Play, FishMoving}
 	public static LevelState CurrentLevelState = LevelState.Play;
 
+	public static Node2D LevelObject;
+	public static Level LevelTemplateObject;
 
 	public static event EventHandler CommenceTurn;
 
@@ -54,6 +56,9 @@ public partial class Level : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		// Gets the level, NOT the level template
+		LevelObject = this.GetParent() as Node2D;
+		LevelTemplateObject = this;
 		ScaleObject.WeightChanged += SpawnNumber;
 
 		NegativeSymbol = GetNode<Node2D>("NumberSpawns/Negative");
@@ -78,9 +83,20 @@ public partial class Level : Node2D
 	}
 
 
-	public async void RestartLevel()
+	public void RestartLevel()
 	{
 		// GetTree().ChangeSceneToFile(GetTree().CurrentScene.SceneFilePath);
+		ResetLevelVariables();
+	
+		var ReloadResult = GetTree().ReloadCurrentScene();
+		GD.Print($"Reloading scene.\nReload Result: {ReloadResult}");
+		ScaleObject.WeightChanged -= SpawnNumber;
+		Level.CurrentLevelState = Level.LevelState.Play;
+	}
+
+
+	public void ResetLevelVariables()
+	{
 		Grid = null;
 
 		TopLeftNumber_X = -1;
@@ -94,18 +110,13 @@ public partial class Level : Node2D
 		LinesPopulated = false;
 
 		ScaleObject.ResetLevelScore();
-
-		var ReloadResult = GetTree().ReloadCurrentScene();
-		GD.Print($"Reloading scene.\nReolad Result: {ReloadResult}");
-		ScaleObject.WeightChanged -= SpawnNumber;
-		Level.CurrentLevelState = Level.LevelState.Play;
 	}
 
 
 
 	public void TreeExit()
 	{
-		GD.Print("Level exiting tree...");
+		// GD.Print("Level exiting tree...");
 		ScaleObject.WeightChanged -= SpawnNumber;
 	}
 
@@ -189,10 +200,10 @@ public partial class Level : Node2D
 		var MaxX = Grid.Region.Size.X - 1;
 		var MaxY = Grid.Region.Size.Y - 1;
 
-		GD.Print($"MaxX: {MaxX}");
-		GD.Print($"MaxY: {MaxY}");
-		GD.Print($"CellX: {Cell.X}");
-		GD.Print($"CellY: {Cell.Y}");
+		// GD.Print($"MaxX: {MaxX}");
+		// GD.Print($"MaxY: {MaxY}");
+		// GD.Print($"CellX: {Cell.X}");
+		// GD.Print($"CellY: {Cell.Y}");
 
 		if (Cell.X == 0 || Cell.X == MaxX ||
 		Cell.Y == 0 || Cell.Y == MaxY)
@@ -260,8 +271,8 @@ public partial class Level : Node2D
 		var WeightDigits = NumberAsString.Length;
 		var ExtraDigits = Digits - WeightDigits;
 
-		GD.Print($"Weight Digits: {WeightDigits}");
-		GD.Print($"Extra Digits: {ExtraDigits}");
+		// GD.Print($"Weight Digits: {WeightDigits}");
+		// GD.Print($"Extra Digits: {ExtraDigits}");
 
 		for (int i = 0; i < ExtraDigits; i++)
 		{
@@ -346,10 +357,10 @@ public partial class Level : Node2D
 		// Get the top-left number on the screen
 		foreach (var Number in GetTree().GetNodesInGroup("NumberScenes"))
 		{
-			GD.Print($"Number in NumberScenes that is in tree: {Number}");
+			// GD.Print($"Number in NumberScenes that is in tree: {Number}");
 
 			var NumberPosition = (Number as Node2D).GlobalPosition;
-			GD.Print($"{Number.Name} (Global) Position: {NumberPosition}");
+			// GD.Print($"{Number.Name} (Global) Position: {NumberPosition}");
 
 			if (TopLeftNumber_X == -1 || NumberPosition.X < TopLeftNumber_X)
 			{
@@ -375,11 +386,11 @@ public partial class Level : Node2D
 		}
 
 
-		GD.Print($"Top Left Number Scene: {TopLeftNumber.Name}");
-		GD.Print($"Top Left Number X Position: {TopLeftNumber_X}");
-		GD.Print($"Top Left Number Y Position: {TopLeftNumber_Y}");
-		GD.Print($"Bottom Right Number X Position: {BottomRightNumber_X}");
-		GD.Print($"Bottom Right Number Y Position: {BottomRightNumber_Y}");
+		// GD.Print($"Top Left Number Scene: {TopLeftNumber.Name}");
+		// GD.Print($"Top Left Number X Position: {TopLeftNumber_X}");
+		// GD.Print($"Top Left Number Y Position: {TopLeftNumber_Y}");
+		// GD.Print($"Bottom Right Number X Position: {BottomRightNumber_X}");
+		// GD.Print($"Bottom Right Number Y Position: {BottomRightNumber_Y}");
 
 		GridTopLeft = new Vector2I(TopLeftNumber_X - XResolution, TopLeftNumber_Y - YResolution);
 		// The "*2" is because the origin of the image/scene is the upper left, so this will effectively
@@ -395,11 +406,11 @@ public partial class Level : Node2D
 		
 		Grid.Update();
 
-		GD.Print($"Grid Region: {Grid.Region}");
-		GD.Print($"Grid Offset: {Grid.Offset}");
-		GD.Print($"Grid Cell Size: {Grid.CellSize}");
-		GD.Print($"Grid Top Left: {GridTopLeft}");
-		GD.Print($"Grid Bottom Right: {GridBottomRight}");	
+		// GD.Print($"Grid Region: {Grid.Region}");
+		// GD.Print($"Grid Offset: {Grid.Offset}");
+		// GD.Print($"Grid Cell Size: {Grid.CellSize}");
+		// GD.Print($"Grid Top Left: {GridTopLeft}");
+		// GD.Print($"Grid Bottom Right: {GridBottomRight}");	
 		
 		QueueRedraw();
 	}
@@ -423,14 +434,13 @@ public partial class Level : Node2D
 
 
 		var Cell = new Vector2I(XCellPosition, YCellPosition);
-		GD.Print($"Cell from Coordinates - {Coordinates} - {Cell}");
+		// GD.Print($"Cell from Coordinates - {Coordinates} - {Cell}");
 
 		return Cell;
 	}
 
 
 	
-
 
 	public static Vector2 CoordinatesFromCell(Vector2I Cell)
 	{

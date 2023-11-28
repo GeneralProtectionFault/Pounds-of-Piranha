@@ -103,7 +103,7 @@ public partial class Fish : AnimatedSprite2D
 		{
 			if (NumberDetector.IsColliding())
 			{
-				GD.Print("Fish cannot move, there is an impassable number in the way.");
+				// GD.Print("Fish cannot move, there is an impassable number in the way.");
 			}
 			else if (Status == FishStatus.InPlay)
 			{
@@ -285,8 +285,8 @@ public partial class Fish : AnimatedSprite2D
 				FishStillMoving = true;
 		}
 
-		if (FishStillMoving)
-			GD.Print("FISH STILL MOVING DAMMIT!");
+		// if (FishStillMoving)
+		// 	GD.Print("FISH STILL MOVING DAMMIT!");
 
 		return FishStillMoving;
 	}
@@ -303,7 +303,7 @@ public partial class Fish : AnimatedSprite2D
 				return;
 
 			// GD.Print($"Fish position: {GlobalPosition}");
-			GD.Print($"Mouse clicked at: {MouseEvent.Position}");
+			// GD.Print($"Mouse clicked at: {MouseEvent.Position}");
 
 			
 			// Need to get the cell by index-ey position, not coordinates, because that makes sense
@@ -326,6 +326,32 @@ public partial class Fish : AnimatedSprite2D
 		!CheckMovingFish())
 			Level.CurrentLevelState = Level.LevelState.Play;
 		
+
+		// Check if there are any more good fish
+		var GoodFish = GetTree().GetNodesInGroup("GoodFish");
+		var GoodFishCount = 0;
+
+		foreach(var Fish in GoodFish)
+		{
+			if (Fish == this)
+				continue;
+			
+			GoodFishCount += 1;
+		}
+
+		// If there are no other good fish, go to the next level!
+		if (GoodFishCount == 0)
+		{
+			var CurrentLevelSequence = (int)Level.LevelObject.GetMeta("Sequence");
+			var CurrentLevelPar = (int)Level.LevelObject.GetMeta("Par");
+			GD.Print($"SEQUENCE OF THIS LEVEL: {CurrentLevelSequence}");
+			GD.Print($"PAR OF THIS LEVEL: {CurrentLevelPar}");
+
+			// Load Next Level
+			Level.LevelTemplateObject.ResetLevelVariables();
+			GetTree().ChangeSceneToFile(Manager.LevelDictionary[CurrentLevelSequence + 1]);
+		}
+
 		QueueFree();
 	}
 	
