@@ -54,6 +54,7 @@ stream = ExtResource("5_mnfa3")
 [node name="Waves" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_v6v0p")
 volume_db = -20.0
+autoplay = true
 
 [node name="LevelBody" type="Area2D" parent="."]
 

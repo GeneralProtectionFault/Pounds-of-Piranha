@@ -11,8 +11,8 @@ public partial class Manager : Node
     public static int OverallMoves { get; set; }= 0;
 
     public static Dictionary<int,string> LevelDictionary = new Dictionary<int,string>();
-    public static AudioStreamPlayer PiranhaDance;
-    public static AudioStreamPlayer Waves;
+    // public static AudioStreamPlayer PiranhaDance;
+    // public static AudioStreamPlayer Waves;
 
     public static bool MusicStarted = false;
 
@@ -61,19 +61,21 @@ public partial class Manager : Node
         if (!MusicStarted)
         {
             var PiranhaDance = new AudioStreamPlayer();
-            var PiranhaDanceStream = new AudioStream();
             var PiranhaDanceResource = ResourceLoader.Load<AudioStream>("res://Audio/PiranhaDance.ogg");
             PiranhaDance.Stream = PiranhaDanceResource;
-            // GetTree().Root.AddChild(PiranhaDance);
             GetTree().Root.CallDeferred("add_child", PiranhaDance);
             await ToSignal(GetTree(), "process_frame");
             PiranhaDance.Play();
 
+            var Waves = new AudioStreamPlayer();
+            var WavesResource = ResourceLoader.Load<AudioStream>("res://Audio/mixkit-close-sea-waves-loop-1195.wav");
+            Waves.Stream = WavesResource;
+            Waves.VolumeDb = -20;
+            GetTree().Root.CallDeferred("add_child", Waves);
+            await ToSignal(GetTree(), "process_frame");
+            Waves.Play();
             
-
-            // var WavesFile = new AudioStream();
-            // WavesFile.ResourcePath = "res://Audio/mixkit-close-sea-waves-loop-1195.wav";
-
+            
             MusicStarted = true;
         }
     }
