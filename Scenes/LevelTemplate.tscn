@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bihk88eh15aay"]
+[gd_scene load_steps=20 format=3 uid="uid://bihk88eh15aay"]
 
 [ext_resource type="Script" path="res://Scripts/Level.cs" id="1_qx0ft"]
 [ext_resource type="PackedScene" uid="uid://dvss3jv7pjyb6" path="res://Scenes/BeachShelf.tscn" id="1_ynqq2"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://co5p7opdcjgmg" path="res://Graphics/Background1.png" id="4_pa011"]
 [ext_resource type="Shader" path="res://LevelWater.gdshader" id="5_y6sdh"]
 [ext_resource type="PackedScene" uid="uid://ruo4xpphyqgw" path="res://Scenes/NumberSpawnLocations.tscn" id="6_7ok02"]
+[ext_resource type="Shader" path="res://Bubbles.gdshader" id="7_7uqf3"]
 [ext_resource type="PackedScene" uid="uid://jcrnqotjmqcc" path="res://Scenes/scale.tscn" id="7_c8y2g"]
 [ext_resource type="PackedScene" uid="uid://cctno57eqdnxe" path="res://Scenes/palm_tree.tscn" id="9_fuesr"]
 
@@ -47,6 +48,13 @@ shader_parameter/refraction_strength = 0.023
 shader_parameter/water_tint = Color(0, 0.713726, 0.752941, 0.87451)
 shader_parameter/speed = 0.176
 shader_parameter/refraction_map = SubResource("NoiseTexture2D_gf6cm")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n78pc"]
+shader = ExtResource("7_7uqf3")
+shader_parameter/speed = 0.5
+shader_parameter/background_color = Color(0, 0, 0, 1)
+shader_parameter/grid_vec = Vector2(2, 2)
+shader_parameter/grid_bubbles = Vector2(20, 10)
 
 [node name="LevelTemplate" type="Node2D"]
 script = ExtResource("1_qx0ft")
@@ -148,6 +156,15 @@ material = SubResource("ShaderMaterial_ju15i")
 position = Vector2(962, 635)
 scale = Vector2(1.00633, 0.861564)
 texture = ExtResource("4_pa011")
+
+[node name="TextureRect" type="TextureRect" parent="WaterBackground"]
+z_index = 3
+material = SubResource("ShaderMaterial_n78pc")
+offset_left = -958.93
+offset_top = -523.467
+offset_right = -918.93
+offset_bottom = -483.467
+scale = Vector2(47.8604, 26.834)
 
 [node name="NumberSpawns" parent="." instance=ExtResource("6_7ok02")]
 position = Vector2(661, 532)

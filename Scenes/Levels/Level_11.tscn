@@ -8,7 +8,7 @@
 
 [node name="Level_11" type="Node2D"]
 metadata/Sequence = 11
-metadata/par = 6
+metadata/Par = 6
 
 [node name="LevelTemplate" parent="." instance=ExtResource("5_6jw8t")]
 position = Vector2(6, 0)

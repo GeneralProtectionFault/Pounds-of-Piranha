@@ -8,7 +8,7 @@
 
 [node name="Level_14" type="Node2D"]
 metadata/Sequence = 14
-metadata/par = 10
+metadata/Par = 10
 
 [node name="LevelTemplate" parent="." instance=ExtResource("1_sqv3j")]
 Digits = 2

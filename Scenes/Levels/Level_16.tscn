@@ -6,8 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://cntr1ko2bgjfv" path="res://Scenes/bad_fish_2.tscn" id="8_uwpfc"]
 
 [node name="Level_16" type="Node2D"]
-metadata/par = 15
-metadata/sequence = 16
+metadata/Sequence = 16
+metadata/Par = 15
 
 [node name="LevelTemplate" parent="." instance=ExtResource("1_d3qjk")]
 position = Vector2(4, 1)

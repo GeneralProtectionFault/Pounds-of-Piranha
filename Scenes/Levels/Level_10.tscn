@@ -11,7 +11,7 @@ font_size = 24
 
 [node name="Level_10" type="Node2D"]
 metadata/Sequence = 10
-metadata/par = 4
+metadata/Par = 4
 
 [node name="LevelTemplate" parent="." instance=ExtResource("5_24gpn")]
 position = Vector2(3, 0)
