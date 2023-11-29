@@ -26,6 +26,9 @@ public partial class ScaleObject : RigidBody2D
 
 	private void AddWeight(Node2D EnteringBody)
 	{
+		if (Level.CurrentLevelState == Level.LevelState.SwitchingLevels)
+			return;
+
 		GD.Print("Adding WEIGHT");
 		Level.LinesPopulated = false;
 
@@ -44,6 +47,9 @@ public partial class ScaleObject : RigidBody2D
 
 	private void RemoveWeight(Node2D LeavingBody)
 	{
+		if (Level.CurrentLevelState == Level.LevelState.SwitchingLevels)
+			return;
+			
 		GD.Print("Removing WEIGHT");
 		Level.LinesPopulated = false;
 		

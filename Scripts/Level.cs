@@ -13,7 +13,7 @@ public partial class Level : Node2D
 	[Export(PropertyHint.Range, "1,4")] public int Digits = 1;
 
 
-	public enum LevelState {Play, FishMoving}
+	public enum LevelState {Play, FishMoving, SwitchingLevels}
 	public static LevelState CurrentLevelState = LevelState.Play;
 
 	public static Node2D LevelObject;
@@ -83,6 +83,9 @@ public partial class Level : Node2D
 		SpawnNumber(this, 0);
 
 		Manager.Instance.InitializeMusic();
+
+		ScaleObject.Pounds = 0;
+		CurrentLevelState = Level.LevelState.Play;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -94,13 +97,13 @@ public partial class Level : Node2D
 
 	public void RestartLevel()
 	{
+		CurrentLevelState = LevelState.SwitchingLevels;
 		// GetTree().ChangeSceneToFile(GetTree().CurrentScene.SceneFilePath);
 		ResetLevelVariables();
 	
 		var ReloadResult = GetTree().ReloadCurrentScene();
 		GD.Print($"Reloading scene.\nReload Result: {ReloadResult}");
 		ScaleObject.WeightChanged -= SpawnNumber;
-		Level.CurrentLevelState = Level.LevelState.Play;
 	}
 
 

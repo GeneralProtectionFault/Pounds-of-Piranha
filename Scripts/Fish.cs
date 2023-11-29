@@ -146,7 +146,8 @@ public partial class Fish : AnimatedSprite2D
 		GD.Print("Awaiting loop..");
 		await ToSignal(Consumer, "animation_looped");
 		GD.Print("Consuming fish and should be setting idle animation...");
-		Consumee.QueueFree();
+		Consumee.CallDeferred("free");
+		
 		Consumer.Status = FishStatus.InPlay;
 		// SetFacingDirection(FishFacingDirection);
 		//Level.CurrentLevelState = Level.LevelState.Play;
@@ -358,6 +359,8 @@ public partial class Fish : AnimatedSprite2D
 		// If there are no other good fish, go to the next level!
 		if (GoodFishCount == 0)
 		{
+			Level.CurrentLevelState = Level.LevelState.SwitchingLevels;
+			
 			var CurrentLevelSequence = (int)Level.LevelObject.GetMeta("Sequence");
 			var CurrentLevelPar = (int)Level.LevelObject.GetMeta("Par");
 			GD.Print($"SEQUENCE OF THIS LEVEL: {CurrentLevelSequence}");
@@ -367,7 +370,6 @@ public partial class Fish : AnimatedSprite2D
 			Manager.LevelUpSound.Play();
 			Level.LevelTemplateObject.ResetLevelVariables();
 			GetTree().ChangeSceneToFile(Manager.LevelDictionary[CurrentLevelSequence + 1]);
-			
 		}
 
 		QueueFree();
