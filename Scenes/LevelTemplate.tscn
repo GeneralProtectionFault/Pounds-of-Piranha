@@ -107,6 +107,21 @@ offset_right = 276.0
 offset_bottom = 24.0
 text = "0"
 
+[node name="Label_Par" type="Label" parent="."]
+offset_left = 1662.0
+offset_top = 341.0
+offset_right = 1791.0
+offset_bottom = 364.0
+text = "Level Par:"
+
+[node name="Label_Par_Number" type="Label" parent="Label_Par"]
+layout_mode = 0
+offset_left = 93.0
+offset_top = 1.0
+offset_right = 222.0
+offset_bottom = 24.0
+text = "0"
+
 [node name="PalmTree" parent="." instance=ExtResource("9_fuesr")]
 position = Vector2(1817, 84)
 scale = Vector2(0.775001, 0.775001)

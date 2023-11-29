@@ -23,6 +23,7 @@ public partial class Level : Node2D
 
 	public static Label LevelLabel;
 	public static Label TotalLabel;
+	public static Label ParLabel;
 	public static AStarGrid2D Grid;
 
 	public static int TopLeftNumber_X = -1;
@@ -68,11 +69,14 @@ public partial class Level : Node2D
 		LevelBody = GetNode<Area2D>("LevelBody");
 		LevelLabel = GetNode<Label>("Label_Level/Label_Level_Number");
 		TotalLabel = GetNode<Label>("Label_Total/Label_Total_Number");
+		ParLabel = GetNode<Label>("Label_Par/Label_Par_Number");
 		// AteFishSound = GetNode<AudioStreamPlayer>("AteFishSound");
 		// LevelUpSound = GetNode<AudioStreamPlayer>("LevelUpSound");
 
 		LevelLabel.Text = Manager.LevelMoves.ToString();
 		TotalLabel.Text = Manager.OverallMoves.ToString();
+		ParLabel.Text = Level.LevelObject.GetMeta("Par").ToString();
+
 
 		// This gets the nodes that are the spawn locations
 		// foreach(Node2D SpawnNode in GetTree().GetNodesInGroup("NumberSpawns"))
@@ -84,6 +88,7 @@ public partial class Level : Node2D
 
 		Manager.Instance.InitializeMusic();
 
+		
 		ScaleObject.Pounds = 0;
 		CurrentLevelState = Level.LevelState.Play;
 	}
