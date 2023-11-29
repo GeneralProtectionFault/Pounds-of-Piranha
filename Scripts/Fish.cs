@@ -6,7 +6,7 @@ using System.Linq;
 
 public partial class Fish : AnimatedSprite2D
 {
-	public enum FishStatus {OnDeck, InPlay, Turning}
+	public enum FishStatus {OnDeck, InPlay, Turning, PendingConsumption, Consuming}
 	public enum FishType {Bad, Good}
 	
 	[Export] public int RayCastLength = 225;
@@ -23,7 +23,7 @@ public partial class Fish : AnimatedSprite2D
 	private Godot.Collections.Array<Vector2I> IDPath = new Godot.Collections.Array<Vector2I>();
 	public Vector2I StartingGridCell { get; set; }
 	public bool ReachedGoal = false;
-	public bool PendingConsumption { get; set; } = false;
+	// public bool PendingConsumption { get; set; } = false;
 
 	public void FishLeavingScene()
 	{
@@ -119,13 +119,9 @@ public partial class Fish : AnimatedSprite2D
 				IDPath = Level.Grid.GetIdPath(CurrentCell, DestinationCell);
 				// Removes the current position
 				IDPath = IDPath.Slice(1);
-
-			
 				GD.Print(IDPath);
 
 				Moving = true;
-				
-				
 				SetFacingDirection(FishFacingDirection);
 				//Level.CurrentLevelState = Level.LevelState.FishMoving;
 			}
@@ -135,7 +131,8 @@ public partial class Fish : AnimatedSprite2D
 
 	private async void EatFish(Fish Consumer, Fish Consumee)
 	{
-		Consumee.PendingConsumption = true;
+		Consumee.Status = FishStatus.PendingConsumption;
+		Consumer.Status = FishStatus.Consuming;
 	
 		if (Mathf.Sign(Consumer.FishFacingDirection.X) == -1 || Mathf.Sign(Consumer.FishFacingDirection.Y) == -1)
 		{
@@ -144,13 +141,13 @@ public partial class Fish : AnimatedSprite2D
 		else if (Mathf.Sign(Consumer.FishFacingDirection.X) == 1 || Mathf.Sign(Consumer.FishFacingDirection.Y) == 1)
 		{
 			Consumer.Play("Eat_Right");
-			
 		}
 
 		GD.Print("Awaiting loop..");
 		await ToSignal(Consumer, "animation_looped");
 		GD.Print("Consuming fish and should be setting idle animation...");
 		Consumee.QueueFree();
+		Consumer.Status = FishStatus.InPlay;
 		// SetFacingDirection(FishFacingDirection);
 		//Level.CurrentLevelState = Level.LevelState.Play;
 
@@ -193,7 +190,7 @@ public partial class Fish : AnimatedSprite2D
 						// Node OtherThing = OtherAreas.FirstOrDefault().GetParent();
 						var OtherFish = FishArea.GetParent() as Fish;
 
-						if (this.Type != OtherFish.Type && !OtherFish.PendingConsumption)
+						if (this.Type != OtherFish.Type && OtherFish.Status != FishStatus.PendingConsumption)
 						{
 							Fish Bad;
 							Fish Good;
@@ -220,6 +217,11 @@ public partial class Fish : AnimatedSprite2D
 
 		if (Moving)
 		{			
+			if (Status == FishStatus.PendingConsumption)
+			{
+				Moving = false;
+			}
+
 			// If there are more cells to navigate to...
 			if (IDPath.Count > 0)
 			{
@@ -231,10 +233,14 @@ public partial class Fish : AnimatedSprite2D
 				// This means we've reached the next navigation point
 				if (GlobalPosition.DistanceTo(Level.CoordinatesFromCell(TargetPosition)) < .1)
 				{
-					if (NumberDetector.IsColliding() || PendingConsumption)
+					
+
+					if (NumberDetector.IsColliding())
 					{
 						Moving = false;
-						SetFacingDirection(FishFacingDirection);
+
+						if (Status == FishStatus.InPlay)
+							SetFacingDirection(FishFacingDirection);
 
 						if (//Level.CurrentLevelState == Level.LevelState.FishMoving && 
 						!CheckMovingFish())
@@ -245,7 +251,7 @@ public partial class Fish : AnimatedSprite2D
 					IDPath = IDPath.Slice(1);
 
 
-					if (!NumberDetector.IsColliding() && Status == FishStatus.InPlay && !PendingConsumption)
+					if (!NumberDetector.IsColliding() && Status == FishStatus.InPlay && Status != FishStatus.PendingConsumption)
 					{
 						MoveFish(this, EventArgs.Empty);
 
@@ -257,7 +263,8 @@ public partial class Fish : AnimatedSprite2D
 			else
 			{
 				Moving = false;
-				SetFacingDirection(FishFacingDirection);
+				if (Status == FishStatus.InPlay)
+					SetFacingDirection(FishFacingDirection);
 
 				var CurrentCell = Level.CellFromCoordinates(GlobalPosition);
 
