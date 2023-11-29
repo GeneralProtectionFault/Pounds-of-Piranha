@@ -52,7 +52,8 @@ public partial class Level : Node2D
 
 	public Area2D LevelBody;
 
-	public static AudioStreamPlayer AteFishSound;
+	// public static AudioStreamPlayer AteFishSound;
+	// public static AudioStreamPlayer LevelUpSound;
 
 
 	// Called when the node enters the scene tree for the first time.
@@ -67,7 +68,8 @@ public partial class Level : Node2D
 		LevelBody = GetNode<Area2D>("LevelBody");
 		LevelLabel = GetNode<Label>("Label_Level/Label_Level_Number");
 		TotalLabel = GetNode<Label>("Label_Total/Label_Total_Number");
-		AteFishSound = GetNode<AudioStreamPlayer>("AteFishSound");
+		// AteFishSound = GetNode<AudioStreamPlayer>("AteFishSound");
+		// LevelUpSound = GetNode<AudioStreamPlayer>("LevelUpSound");
 
 		LevelLabel.Text = Manager.LevelMoves.ToString();
 		TotalLabel.Text = Manager.OverallMoves.ToString();

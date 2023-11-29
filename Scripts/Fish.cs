@@ -152,7 +152,7 @@ public partial class Fish : AnimatedSprite2D
 
 
 		// A perfectly good fish has been consumed!  RESTART!
-		Level.AteFishSound.Play();
+		Manager.AteFishSound.Play();
 
 		Tween AnotherDelayTween = GetTree().CreateTween();
 		AnotherDelayTween.TweenCallback(Callable.From(() => {
@@ -353,8 +353,10 @@ public partial class Fish : AnimatedSprite2D
 			GD.Print($"PAR OF THIS LEVEL: {CurrentLevelPar}");
 
 			// Load Next Level
+			Manager.LevelUpSound.Play();
 			Level.LevelTemplateObject.ResetLevelVariables();
 			GetTree().ChangeSceneToFile(Manager.LevelDictionary[CurrentLevelSequence + 1]);
+			
 		}
 
 		QueueFree();

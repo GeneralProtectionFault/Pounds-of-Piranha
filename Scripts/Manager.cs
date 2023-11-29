@@ -15,6 +15,10 @@ public partial class Manager : Node
     // public static AudioStreamPlayer Waves;
 
     public static bool MusicStarted = false;
+    public static AudioStreamPlayer PiranhaDance;
+    public static AudioStreamPlayer Waves;
+    public static AudioStreamPlayer AteFishSound;
+    public static AudioStreamPlayer LevelUpSound;
 
     public Manager()
     {
@@ -22,6 +26,8 @@ public partial class Manager : Node
             Instance = this;
 
 
+        // This mess will parse the actual text of the scene files to get the metadata w/o loading them
+        // We'll use the sequence to determine level order in case we want to muck about later without creating a file naming/referential mess.
         var ext = new List<string> {".tscn"};
         var LevelFiles = Directory.EnumerateFiles(Path.Combine(Directory.GetCurrentDirectory(), "Scenes", "Levels"))
         .Where(s => ext.Contains(Path.GetExtension(s).TrimStart().ToLowerInvariant()) && !s.Contains("Test"));
@@ -60,14 +66,14 @@ public partial class Manager : Node
         // Load ze' music here so it persists across scenes instead of a most irritating restart on level advancement
         if (!MusicStarted)
         {
-            var PiranhaDance = new AudioStreamPlayer();
+            PiranhaDance = new AudioStreamPlayer();
             var PiranhaDanceResource = ResourceLoader.Load<AudioStream>("res://Audio/PiranhaDance.ogg");
             PiranhaDance.Stream = PiranhaDanceResource;
             GetTree().Root.CallDeferred("add_child", PiranhaDance);
             await ToSignal(GetTree(), "process_frame");
             PiranhaDance.Play();
 
-            var Waves = new AudioStreamPlayer();
+            Waves = new AudioStreamPlayer();
             var WavesResource = ResourceLoader.Load<AudioStream>("res://Audio/mixkit-close-sea-waves-loop-1195.wav");
             Waves.Stream = WavesResource;
             Waves.VolumeDb = -22;
@@ -76,6 +82,19 @@ public partial class Manager : Node
             Waves.Play();
             
             
+            // Sound Effects
+            AteFishSound = new AudioStreamPlayer();
+            var AteFishSoundResource = ResourceLoader.Load<AudioStream>("res://Audio/350987__cabled_mess__lose_c_05.wav");
+            AteFishSound.Stream = AteFishSoundResource;
+            GetTree().Root.CallDeferred("add_child", AteFishSound);
+            await ToSignal(GetTree(), "process_frame");
+
+            LevelUpSound = new AudioStreamPlayer();
+            var LevelUpSoundResource = ResourceLoader.Load<AudioStream>("res://Audio/682633__bastianhallo__level-up.ogg");
+            LevelUpSound.Stream = LevelUpSoundResource;
+            GetTree().Root.CallDeferred("add_child", LevelUpSound);
+            await ToSignal(GetTree(), "process_frame");
+
             MusicStarted = true;
         }
     }
