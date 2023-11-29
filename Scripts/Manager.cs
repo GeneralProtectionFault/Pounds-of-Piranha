@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
+
+
 public partial class Manager : Node
 {
     public static Manager Instance;
@@ -11,8 +13,6 @@ public partial class Manager : Node
     public static int OverallMoves { get; set; }= 0;
 
     public static Dictionary<int,string> LevelDictionary = new Dictionary<int,string>();
-    // public static AudioStreamPlayer PiranhaDance;
-    // public static AudioStreamPlayer Waves;
 
     public static bool MusicStarted = false;
     public static AudioStreamPlayer PiranhaDance;
@@ -27,36 +27,43 @@ public partial class Manager : Node
 
 
         // This mess will parse the actual text of the scene files to get the metadata w/o loading them
-        // We'll use the sequence to determine level order in case we want to muck about later without creating a file naming/referential mess.
-        var ext = new List<string> {".tscn"};
-        var LevelFiles = Directory.EnumerateFiles(Path.Combine(Directory.GetCurrentDirectory(), "Scenes", "Levels"))
-        .Where(s => ext.Contains(Path.GetExtension(s).TrimStart().ToLowerInvariant()) && !s.Contains("Test"));
-        
-        foreach(var LevelFile in LevelFiles)
+        // We'll use the sequence to determine level order in case we want to muck about later without creating a file naming/referential mess. 
+        var LevelsFolder = DirAccess.Open("res://Scenes/Levels/");
+
+        if (LevelsFolder is not null)
         {
-            // GD.Print(file);
+            LevelsFolder.ListDirBegin();
+            string FileName = LevelsFolder.GetNext();
 
-            using(StreamReader file = new StreamReader(LevelFile)) 
+            while (FileName.Length > 0)
             {
-                string ln;
-
-                while ((ln = file.ReadLine()) != null) 
+                if (!LevelsFolder.CurrentIsDir() && FileName.EndsWith(".tscn") && !FileName.Contains("Test"))
                 {
-                    if (ln.Contains("metadata/Sequence"))
+                    GD.Print(FileName);
+                    var FullFilePath = "res://Scenes/Levels/" + FileName;
+
+                    var File = Godot.FileAccess.Open(FullFilePath, Godot.FileAccess.ModeFlags.Read);
+               
+                    // var FileLines = File.GetAsText().Split(System.Environment.NewLine, StringSplitOptions.TrimEntries);
+                    var FileText = File.GetAsText();
+                    if (FileText.Contains("metadata/Sequence"))
                     {
-                        int SequenceIndex = ln.IndexOf('=') + 2;
-                        var LevelSequence = Convert.ToInt32(ln.Substring(SequenceIndex));
+                        int SequenceIndex = File.GetAsText().IndexOf("metadata/Sequence =") + 20;
+                        var SequenceString = File.GetAsText().Substring(SequenceIndex,2);
+                        GD.Print(SequenceString);
+                        int LevelSequence = Convert.ToInt32(SequenceString);
                         // GD.Print(LevelSequence);
 
                         // Assign level file to dicitonary according the the sequence variable!
-                        LevelDictionary[LevelSequence] = LevelFile;
-                        break;
+                        LevelDictionary[LevelSequence] = FullFilePath;
+                        File.Close();
                     }
+                   
                 }
-                file.Close();
+                
+                FileName = LevelsFolder.GetNext();
             }
         }
-
         
     
     }

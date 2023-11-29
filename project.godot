@@ -14,6 +14,7 @@ config/name="Pounds of Piranha"
 run/main_scene="res://Scenes/Levels/Level_1.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://icon.svg"
+run/icon="res://icon.svg"
 
 [aseprite_importers]
 

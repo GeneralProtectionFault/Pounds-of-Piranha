@@ -90,6 +90,7 @@ public partial class Level : Node2D
 
 		
 		ScaleObject.Pounds = 0;
+
 		CurrentLevelState = Level.LevelState.Play;
 	}
 
