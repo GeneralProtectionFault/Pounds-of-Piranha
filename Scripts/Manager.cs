@@ -69,6 +69,7 @@ public partial class Manager : Node
             PiranhaDance = new AudioStreamPlayer();
             var PiranhaDanceResource = ResourceLoader.Load<AudioStream>("res://Audio/PiranhaDance.ogg");
             PiranhaDance.Stream = PiranhaDanceResource;
+            PiranhaDance.VolumeDb = -10;
             GetTree().Root.CallDeferred("add_child", PiranhaDance);
             await ToSignal(GetTree(), "process_frame");
             PiranhaDance.Play();

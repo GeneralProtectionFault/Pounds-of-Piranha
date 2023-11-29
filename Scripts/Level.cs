@@ -239,7 +239,7 @@ public partial class Level : Node2D
 		{
 			if (IsInstanceValid(Number))
 			{
-				Number.QueueFree();
+				Number.CallDeferred("free");
 				// await ToSignal(Number, "tree_exited");
 			}
 		}

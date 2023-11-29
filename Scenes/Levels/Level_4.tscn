@@ -14,7 +14,7 @@ metadata/Sequence = 4
 metadata/Par = 5
 
 [node name="LevelTemplate" parent="." instance=ExtResource("5_jn1cm")]
-position = Vector2(2, 3)
+position = Vector2(2, 0)
 
 [node name="TutorialText" type="Control" parent="."]
 layout_mode = 3

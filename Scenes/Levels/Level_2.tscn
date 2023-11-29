@@ -10,7 +10,7 @@ metadata/Sequence = 2
 metadata/Par = 3
 
 [node name="LevelTemplate" parent="." instance=ExtResource("4_ynlaf")]
-position = Vector2(1, 3)
+position = Vector2(-1, -6)
 
 [node name="Weight" parent="." instance=ExtResource("5_3063y")]
 position = Vector2(818, 115)

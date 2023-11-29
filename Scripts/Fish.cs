@@ -60,16 +60,16 @@ public partial class Fish : AnimatedSprite2D
             _ => "None"
         };
 
+		this.Stop();
+
 		if (Moving || ReachedGoal)
 		{
-			// GD.Print($"{Type} = Settomg swim animation");
-			this.Stop();
+			GD.Print($"{Type} = Settomg swim animation");
 			this.Play(AnimationName_Moving);
 		}
 		else
 		{
-			// GD.Print($"{Type} = Settomg idle animation");
-			this.Stop();
+			GD.Print($"{Type} = Settomg idle animation");
 			this.Play(AnimationName_Idle);
 		}
 	}
@@ -90,12 +90,14 @@ public partial class Fish : AnimatedSprite2D
 	}
 
 
-	private void MoveFish(object sender, EventArgs e)
+	private async void MoveFish(object sender, EventArgs e)
 	{
 		// Resume from turning status here, only after the event to move fires off again.
 		// This prevents the fish from moving immediately after changing direciton all in 1 turn
 		if (Status == FishStatus.Turning)
 			Status = FishStatus.InPlay;
+
+		// await ToSignal(GetTree().CreateTimer(.1f), "timeout");
 
 		// TODO:  Do a raycast in the direction the fish is facing.
 		// The raycast should be a chunk more than half the XResolution in order to reach into the next number, but not to the other side of it.
@@ -123,6 +125,8 @@ public partial class Fish : AnimatedSprite2D
 
 				Moving = true;
 				
+				
+				SetFacingDirection(FishFacingDirection);
 				//Level.CurrentLevelState = Level.LevelState.FishMoving;
 			}
 		}
@@ -147,7 +151,7 @@ public partial class Fish : AnimatedSprite2D
 		await ToSignal(Consumer, "animation_looped");
 		GD.Print("Consuming fish and should be setting idle animation...");
 		Consumee.QueueFree();
-		SetFacingDirection(FishFacingDirection);
+		// SetFacingDirection(FishFacingDirection);
 		//Level.CurrentLevelState = Level.LevelState.Play;
 
 
