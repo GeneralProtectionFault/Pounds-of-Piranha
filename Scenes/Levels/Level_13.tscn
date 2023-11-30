@@ -13,23 +13,23 @@ metadata/Par = 11
 Digits = 2
 
 [node name="Weight" parent="." instance=ExtResource("5_wjnib")]
-position = Vector2(818, 115)
+position = Vector2(818, 222)
 Pounds = -2
 
 [node name="Weight4" parent="." instance=ExtResource("5_wjnib")]
-position = Vector2(1055, 115)
+position = Vector2(1055, 222)
 Pounds = 2
 
 [node name="Weight5" parent="." instance=ExtResource("5_wjnib")]
-position = Vector2(737, 115)
+position = Vector2(737, 222)
 Pounds = 32
 
 [node name="Weight2" parent="." instance=ExtResource("5_wjnib")]
-position = Vector2(895, 115)
+position = Vector2(895, 222)
 Pounds = 10
 
 [node name="Weight3" parent="." instance=ExtResource("5_wjnib")]
-position = Vector2(977, 115)
+position = Vector2(977, 222)
 Pounds = 23
 
 [node name="BadFish" parent="." instance=ExtResource("8_c13kv")]

@@ -14,15 +14,15 @@ position = Vector2(5, 3)
 metadata/_edit_lock_ = true
 
 [node name="Weight" parent="." instance=ExtResource("5_oltrv")]
-position = Vector2(818, 115)
+position = Vector2(818, 219)
 Pounds = 5
 
 [node name="Weight2" parent="." instance=ExtResource("5_oltrv")]
-position = Vector2(906, 115)
+position = Vector2(906, 219)
 Pounds = -1
 
 [node name="Weight3" parent="." instance=ExtResource("5_oltrv")]
-position = Vector2(986, 115)
+position = Vector2(986, 219)
 Pounds = 2
 
 [node name="BadFish" parent="." instance=ExtResource("7_fs52n")]

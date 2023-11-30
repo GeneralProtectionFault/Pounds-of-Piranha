@@ -34,23 +34,23 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Weight2" parent="." instance=ExtResource("5_pjkxf")]
-position = Vector2(906, 115)
+position = Vector2(906, 224)
 Pounds = 6
 
 [node name="Weight3" parent="." instance=ExtResource("5_pjkxf")]
-position = Vector2(986, 115)
+position = Vector2(986, 224)
 Pounds = 2
 
 [node name="Weight4" parent="." instance=ExtResource("5_pjkxf")]
-position = Vector2(1062, 115)
+position = Vector2(1062, 224)
 Pounds = -4
 
 [node name="Weight5" parent="." instance=ExtResource("5_pjkxf")]
-position = Vector2(1143, 115)
+position = Vector2(1143, 224)
 Pounds = -4
 
 [node name="Weight6" parent="." instance=ExtResource("5_pjkxf")]
-position = Vector2(1220, 115)
+position = Vector2(1220, 224)
 Pounds = -1
 
 [node name="Turn" parent="." instance=ExtResource("9_4sy3m")]

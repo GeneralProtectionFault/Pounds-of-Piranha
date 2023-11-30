@@ -14,19 +14,19 @@ metadata/Par = 10
 Digits = 2
 
 [node name="Weight" parent="." instance=ExtResource("5_8bf08")]
-position = Vector2(818, 115)
+position = Vector2(818, 220)
 Pounds = 4
 
 [node name="Weight2" parent="." instance=ExtResource("5_8bf08")]
-position = Vector2(898, 115)
+position = Vector2(898, 220)
 Pounds = 48
 
 [node name="Weight3" parent="." instance=ExtResource("5_8bf08")]
-position = Vector2(972, 115)
+position = Vector2(972, 220)
 Pounds = 10
 
 [node name="Weight4" parent="." instance=ExtResource("5_8bf08")]
-position = Vector2(1047, 115)
+position = Vector2(1047, 220)
 Pounds = 20
 
 [node name="Turn" parent="." instance=ExtResource("9_nawh8")]

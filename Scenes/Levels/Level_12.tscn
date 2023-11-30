@@ -15,15 +15,15 @@ position = Vector2(2, 7)
 Digits = 2
 
 [node name="Weight" parent="." instance=ExtResource("5_h4udk")]
-position = Vector2(818, 115)
+position = Vector2(818, 229)
 Pounds = 54
 
 [node name="Weight2" parent="." instance=ExtResource("5_h4udk")]
-position = Vector2(902, 115)
+position = Vector2(902, 229)
 Pounds = 25
 
 [node name="Weight3" parent="." instance=ExtResource("5_h4udk")]
-position = Vector2(986, 117)
+position = Vector2(986, 231)
 Pounds = -17
 
 [node name="BadFish3" parent="." instance=ExtResource("7_7dvyb")]

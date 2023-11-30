@@ -492,4 +492,12 @@ public partial class Level : Node2D
 		fish.GlobalPosition = CoordinatesFromCell(Cell);
 	}
 
+
+
+
+	public void QuitGame()
+	{
+		GetTree().Quit();
+	}
+
 }

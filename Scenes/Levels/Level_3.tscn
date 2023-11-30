@@ -13,11 +13,11 @@ metadata/Par = 6
 position = Vector2(4, 11)
 
 [node name="Weight" parent="." instance=ExtResource("5_0wfid")]
-position = Vector2(818, 115)
+position = Vector2(818, 232)
 Pounds = 2
 
 [node name="Weight2" parent="." instance=ExtResource("5_0wfid")]
-position = Vector2(908, 115)
+position = Vector2(908, 232)
 Pounds = 2
 
 [node name="GoodFish" parent="." instance=ExtResource("7_nudni")]

@@ -11,14 +11,14 @@ metadata/Sequence = 5
 metadata/Par = 7
 
 [node name="Weight" parent="." instance=ExtResource("5_xu80h")]
-position = Vector2(818, 115)
+position = Vector2(818, 226)
 
 [node name="Weight2" parent="." instance=ExtResource("5_xu80h")]
-position = Vector2(907, 115)
+position = Vector2(907, 226)
 Pounds = 2
 
 [node name="Weight3" parent="." instance=ExtResource("5_xu80h")]
-position = Vector2(1004, 115)
+position = Vector2(1004, 226)
 Pounds = 4
 
 [node name="BadFish3" parent="." instance=ExtResource("7_q3bvq")]

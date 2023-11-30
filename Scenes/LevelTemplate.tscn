@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://Scripts/Level.cs" id="1_qx0ft"]
 [ext_resource type="PackedScene" uid="uid://dvss3jv7pjyb6" path="res://Scenes/BeachShelf.tscn" id="1_ynqq2"]
-[ext_resource type="Texture2D" uid="uid://534ykx62iqce" path="res://Graphics/BeachSky2.png" id="2_q5dkl"]
 [ext_resource type="Texture2D" uid="uid://co5p7opdcjgmg" path="res://Graphics/Background1.png" id="4_pa011"]
+[ext_resource type="Texture2D" uid="uid://codx3cr4181ng" path="res://Graphics/BeachSky.png" id="4_s04a8"]
 [ext_resource type="Shader" path="res://LevelWater.gdshader" id="5_y6sdh"]
 [ext_resource type="PackedScene" uid="uid://ruo4xpphyqgw" path="res://Scenes/NumberSpawnLocations.tscn" id="6_7ok02"]
 [ext_resource type="PackedScene" uid="uid://jcrnqotjmqcc" path="res://Scenes/scale.tscn" id="7_c8y2g"]
@@ -25,11 +25,11 @@ a = Vector2(-2, 1133)
 b = Vector2(-4, -97)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_ddwtb"]
-a = Vector2(2050, 1080)
+a = Vector2(2051, 1077)
 b = Vector2(-65, 1077)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_66ug5"]
-size = Vector2(418, 20)
+size = Vector2(395, 20)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_xs0u6"]
 
@@ -70,24 +70,29 @@ shape = SubResource("SegmentShape2D_ae0ki")
 shape = SubResource("SegmentShape2D_modd8")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="LevelBoundary_StaticBody2D"]
+position = Vector2(3, -7)
 shape = SubResource("SegmentShape2D_ddwtb")
 
+[node name="Scale" parent="." instance=ExtResource("7_c8y2g")]
+position = Vector2(206, 834)
+
 [node name="ScaleShelf" type="StaticBody2D" parent="."]
+position = Vector2(12, 67)
 
 [node name="Sprite2D" type="Sprite2D" parent="ScaleShelf"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ScaleShelf"]
-position = Vector2(206, 903)
+position = Vector2(194.5, 903)
 shape = SubResource("RectangleShape2D_66ug5")
 
 [node name="BeachShelf" parent="." instance=ExtResource("1_ynqq2")]
-position = Vector2(1244, 206)
+position = Vector2(1255, 309)
 
 [node name="Label_Total" type="Label" parent="."]
-offset_left = 1645.0
-offset_top = 270.0
-offset_right = 1774.0
-offset_bottom = 293.0
+offset_left = 1684.0
+offset_top = 375.0
+offset_right = 1813.0
+offset_bottom = 398.0
 text = "Total Turns:"
 
 [node name="Label_Total_Number" type="Label" parent="Label_Total"]
@@ -99,10 +104,10 @@ offset_bottom = 24.0
 text = "0"
 
 [node name="Label_Level" type="Label" parent="."]
-offset_left = 1608.0
-offset_top = 306.0
-offset_right = 1737.0
-offset_bottom = 329.0
+offset_left = 1647.0
+offset_top = 411.0
+offset_right = 1776.0
+offset_bottom = 434.0
 text = "Turns This Level:"
 
 [node name="Label_Level_Number" type="Label" parent="Label_Level"]
@@ -114,10 +119,10 @@ offset_bottom = 24.0
 text = "0"
 
 [node name="Label_Par" type="Label" parent="."]
-offset_left = 1662.0
-offset_top = 341.0
-offset_right = 1791.0
-offset_bottom = 364.0
+offset_left = 1701.0
+offset_top = 446.0
+offset_right = 1830.0
+offset_bottom = 469.0
 text = "Level Par:"
 
 [node name="Label_Par_Number" type="Label" parent="Label_Par"]
@@ -129,25 +134,29 @@ offset_bottom = 24.0
 text = "0"
 
 [node name="PalmTree" parent="." instance=ExtResource("9_fuesr")]
-position = Vector2(1817, 84)
+position = Vector2(1842, 189)
 scale = Vector2(0.775001, 0.775001)
 
 [node name="PalmTree2" parent="." instance=ExtResource("9_fuesr")]
-position = Vector2(1708, 114)
+position = Vector2(1731, 236)
 scale = Vector2(0.775001, 0.775001)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 
 [node name="BeachSky" type="Sprite2D" parent="."]
 z_index = -1
-position = Vector2(958, -110)
+position = Vector2(962, 25)
 scale = Vector2(1.04, 1)
-texture = ExtResource("2_q5dkl")
+texture = ExtResource("4_s04a8")
 
 [node name="WaterBackground" type="Sprite2D" parent="."]
 z_index = -1
 texture_repeat = 2
 material = SubResource("ShaderMaterial_ju15i")
-position = Vector2(965, 635)
-scale = Vector2(1.00633, 0.861564)
+position = Vector2(965, 675)
+scale = Vector2(1.00938, 0.760151)
 texture = ExtResource("4_pa011")
 
 [node name="NumberSpawns" parent="." instance=ExtResource("6_7ok02")]
@@ -159,6 +168,15 @@ offset_bottom = 51.0
 theme_override_colors/font_color = Color(1, 0.662745, 0.607843, 1)
 theme_override_font_sizes/font_size = 30
 text = "RESTART LEVEL!"
+
+[node name="QuitButton" type="Button" parent="."]
+offset_left = 1670.0
+offset_top = 992.0
+offset_right = 1925.0
+offset_bottom = 1043.0
+theme_override_colors/font_color = Color(1, 0.662745, 0.607843, 1)
+theme_override_font_sizes/font_size = 30
+text = "QUIT GAME!"
 
 [node name="TurnButton" type="Button" parent="."]
 visible = false
@@ -186,8 +204,6 @@ offset_bottom = 130.0
 text = "0
 "
 
-[node name="Scale" parent="." instance=ExtResource("7_c8y2g")]
-position = Vector2(206, 757)
-
 [connection signal="tree_exiting" from="." to="." method="TreeExit"]
 [connection signal="pressed" from="ResetButton" to="." method="RestartLevel"]
+[connection signal="pressed" from="QuitButton" to="." method="QuitGame"]

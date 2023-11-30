@@ -14,39 +14,39 @@ position = Vector2(4, 1)
 Digits = 4
 
 [node name="Weight" parent="." instance=ExtResource("5_hhc3l")]
-position = Vector2(818, 115)
+position = Vector2(818, 224)
 Pounds = 4000
 
 [node name="Weight9" parent="." instance=ExtResource("5_hhc3l")]
-position = Vector2(740, 115)
+position = Vector2(740, 224)
 Pounds = -1000
 
 [node name="Weight2" parent="." instance=ExtResource("5_hhc3l")]
-position = Vector2(906, 115)
+position = Vector2(906, 224)
 Pounds = 3000
 
 [node name="Weight3" parent="." instance=ExtResource("5_hhc3l")]
-position = Vector2(994, 115)
+position = Vector2(994, 224)
 Pounds = 720
 
 [node name="Weight4" parent="." instance=ExtResource("5_hhc3l")]
-position = Vector2(1087, 115)
+position = Vector2(1087, 224)
 Pounds = 300
 
 [node name="Weight5" parent="." instance=ExtResource("5_hhc3l")]
-position = Vector2(1179, 115)
+position = Vector2(1179, 224)
 Pounds = 55
 
 [node name="Weight6" parent="." instance=ExtResource("5_hhc3l")]
-position = Vector2(1265, 115)
+position = Vector2(1265, 224)
 Pounds = 46
 
 [node name="Weight7" parent="." instance=ExtResource("5_hhc3l")]
-position = Vector2(1340, 115)
+position = Vector2(1340, 224)
 Pounds = 3
 
 [node name="Weight8" parent="." instance=ExtResource("5_hhc3l")]
-position = Vector2(1424, 115)
+position = Vector2(1424, 224)
 Pounds = -2
 
 [node name="GoodFish2" parent="." instance=ExtResource("7_k3eud")]

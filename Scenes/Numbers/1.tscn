@@ -14,6 +14,7 @@ position = Vector2(124.5, 177)
 texture = ExtResource("1_rujds")
 
 [node name="NumberBoundary" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(123.5, 176)
 texture = ExtResource("2_b1sl2")
 
