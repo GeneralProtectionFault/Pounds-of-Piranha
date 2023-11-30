@@ -182,7 +182,7 @@ offset_left = 1701.0
 offset_top = 446.0
 offset_right = 1830.0
 offset_bottom = 469.0
-text = "Level Par:"
+text = "Gold Fish:"
 
 [node name="Label_Par_Number" type="Label" parent="Label_Par"]
 layout_mode = 0
@@ -260,6 +260,15 @@ theme_override_colors/font_color = Color(1, 0.662745, 0.607843, 1)
 theme_override_font_sizes/font_size = 30
 text = "QUIT GAME!"
 
+[node name="CheatLevelButton" type="Button" parent="."]
+visible = false
+offset_left = 930.0
+offset_right = 1185.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(1, 0.662745, 0.607843, 1)
+theme_override_font_sizes/font_size = 30
+text = "CHEAT!"
+
 [node name="TurnButton" type="Button" parent="."]
 visible = false
 offset_left = 1645.0
@@ -289,3 +298,4 @@ text = "0
 [connection signal="tree_exiting" from="." to="." method="TreeExit"]
 [connection signal="pressed" from="ResetButton" to="." method="RestartLevel"]
 [connection signal="pressed" from="QuitButton" to="." method="QuitGame"]
+[connection signal="pressed" from="CheatLevelButton" to="." method="AdvanceToNextLevel"]

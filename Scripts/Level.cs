@@ -99,7 +99,7 @@ public partial class Level : Node2D
 		// QueueRedraw();
 		BackLayer.MotionOffset += new Vector2(.1f,0);
 		MiddleLayer.MotionOffset += new Vector2(.3f,0);
-		FrontLayer.MotionOffset += new Vector2(1,0);
+		FrontLayer.MotionOffset += new Vector2(-.1f,0);
 
 	}
 
@@ -499,6 +499,33 @@ public partial class Level : Node2D
 		fish.GlobalPosition = CoordinatesFromCell(Cell);
 	}
 
+
+
+	public void AdvanceToNextLevel()
+	{
+		CurrentLevelState = LevelState.SwitchingLevels;
+		
+		// var CurrentLevelSequence = (int)Level.LevelObject.GetMeta("Sequence");
+		var CurrentLevelPar = (int)Level.LevelObject.GetMeta("Par");
+		
+		GD.Print($"PAR OF THIS LEVEL: {CurrentLevelPar}");
+
+		// Load Next Level
+		Manager.LevelUpSound.Play();
+		LevelTemplateObject.ResetLevelVariables();
+		// GetTree().ChangeSceneToFile(Manager.LevelDictionary[CurrentLevelSequence + 1]);
+
+		var LevelPathPrefix = "res://Scenes/Levels/";
+		var ThisLevel = Level.LevelObject.Name.ToString();
+		var UnderscorePosition = ThisLevel.IndexOf("_") + 1; // Add 1 to skip the underscore and get to the actual number
+		var CurrentLevel = Convert.ToInt32(ThisLevel.Substring(UnderscorePosition));
+		GD.Print($"Current level: {CurrentLevel}");
+
+		var NextLevelPath = $"{LevelPathPrefix}Level_{(CurrentLevel + 1).ToString()}.tscn";
+		GD.Print($"Next level path: {NextLevelPath}");
+
+		GetTree().ChangeSceneToFile(NextLevelPath);
+	}
 
 
 

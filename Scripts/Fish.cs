@@ -338,7 +338,7 @@ public partial class Fish : AnimatedSprite2D
 
 	public void ExitedScreen()
 	{
-		GD.Print("Fish exited screen!");
+		// GD.Print("Fish exited screen!");
 		if (//Level.CurrentLevelState == Level.LevelState.FishMoving && 
 		!CheckMovingFish())
 			Level.CurrentLevelState = Level.LevelState.Play;
@@ -353,34 +353,27 @@ public partial class Fish : AnimatedSprite2D
 			if (Fish == this)
 				continue;
 			
+			// If the other fish is not in the astargrid, then it's home free
+			// This check in case 2 fish exit at exactly the same time
+			var OccupyingCell = Level.CellFromCoordinates((Fish as Node2D).GlobalPosition);
+			if (!Level.Grid.IsInBounds(OccupyingCell.X, OccupyingCell.Y))
+				continue;
+				
 			GoodFishCount += 1;
 		}
 
 		// If there are no other good fish, go to the next level!
 		if (GoodFishCount == 0)
-		{
-			Level.CurrentLevelState = Level.LevelState.SwitchingLevels;
-			
-			// var CurrentLevelSequence = (int)Level.LevelObject.GetMeta("Sequence");
-			var CurrentLevelPar = (int)Level.LevelObject.GetMeta("Par");
-			
-			GD.Print($"PAR OF THIS LEVEL: {CurrentLevelPar}");
+			Level.LevelTemplateObject.AdvanceToNextLevel();
 
-			// Load Next Level
-			Manager.LevelUpSound.Play();
-			Level.LevelTemplateObject.ResetLevelVariables();
-			// GetTree().ChangeSceneToFile(Manager.LevelDictionary[CurrentLevelSequence + 1]);
 
-			var LevelPathPrefix = "res://Scenes/Levels/";
-			var ThisLevel = Level.LevelObject.Name.ToString();
-			var UnderscorePosition = ThisLevel.IndexOf("_") + 1; // Add 1 to skip the underscore and get to the actual number
-			var CurrentLevel = Convert.ToInt32(ThisLevel.Substring(UnderscorePosition));
-			// GD.Print($"Current level: {CurrentLevel}");
-			
-			GetTree().ChangeSceneToFile($"{LevelPathPrefix}Level_{(CurrentLevel + 1).ToString()}.tscn");
-		}
 
-		QueueFree();
+
+
+		CallDeferred("free");
 	}
+
+
+	
 	
 }
