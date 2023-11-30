@@ -1,9 +1,5 @@
 using Godot;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 
 
@@ -134,7 +130,7 @@ public partial class Level : Node2D
 
 	public void TreeExit()
 	{
-		// GD.Print("Level exiting tree...");
+		GD.Print("Level exiting tree...");
 		ScaleObject.WeightChanged -= SpawnNumber;
 	}
 

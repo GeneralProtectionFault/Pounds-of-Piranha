@@ -189,4 +189,5 @@ text = "0
 [node name="Scale" parent="." instance=ExtResource("7_c8y2g")]
 position = Vector2(206, 757)
 
+[connection signal="tree_exiting" from="." to="." method="TreeExit"]
 [connection signal="pressed" from="ResetButton" to="." method="RestartLevel"]
