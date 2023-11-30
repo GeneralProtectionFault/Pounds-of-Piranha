@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cmdmxf1qlgiv0" path="res://Scenes/good_fish_2.tscn" id="4_v75t0"]
 [ext_resource type="PackedScene" uid="uid://cntr1ko2bgjfv" path="res://Scenes/bad_fish_2.tscn" id="5_5twaq"]
 
-[node name="Level_10" type="Node2D"]
+[node name="Level_15" type="Node2D"]
 metadata/Sequence = 10
 metadata/Par = 4
 

@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cntr1ko2bgjfv" path="res://Scenes/bad_fish_2.tscn" id="7_7dvyb"]
 [ext_resource type="PackedScene" uid="uid://cmdmxf1qlgiv0" path="res://Scenes/good_fish_2.tscn" id="8_pulaj"]
 
-[node name="Level_12" type="Node2D"]
+[node name="Level_17" type="Node2D"]
 position = Vector2(0, -5)
 metadata/Sequence = 12
 metadata/Par = 9
