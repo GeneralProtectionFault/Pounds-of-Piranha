@@ -48,9 +48,10 @@ public partial class Level : Node2D
 	public static bool LinesPopulated = false;
 
 	public Area2D LevelBody;
-
-	// public static AudioStreamPlayer AteFishSound;
-	// public static AudioStreamPlayer LevelUpSound;
+	private ParallaxLayer BackLayer;
+	private ParallaxLayer MiddleLayer;
+	private ParallaxLayer FrontLayer;
+	
 
 
 	// Called when the node enters the scene tree for the first time.
@@ -66,12 +67,14 @@ public partial class Level : Node2D
 		LevelLabel = GetNode<Label>("Label_Level/Label_Level_Number");
 		TotalLabel = GetNode<Label>("Label_Total/Label_Total_Number");
 		ParLabel = GetNode<Label>("Label_Par/Label_Par_Number");
-		// AteFishSound = GetNode<AudioStreamPlayer>("AteFishSound");
-		// LevelUpSound = GetNode<AudioStreamPlayer>("LevelUpSound");
+		BackLayer = GetNode<ParallaxLayer>("ParallaxBackground/ParallaxLayer_Back");
+		MiddleLayer = GetNode<ParallaxLayer>("ParallaxBackground/ParallaxLayer_Middle");
+		FrontLayer = GetNode<ParallaxLayer>("ParallaxBackground/ParallaxLayer_Front");
 
 		LevelLabel.Text = Manager.LevelMoves.ToString();
 		TotalLabel.Text = Manager.OverallMoves.ToString();
-		ParLabel.Text = Level.LevelObject.GetMeta("Par").ToString();
+		ParLabel.Text = LevelObject.GetMeta("Par").ToString();
+		
 
 
 		// This gets the nodes that are the spawn locations
@@ -94,6 +97,10 @@ public partial class Level : Node2D
 	public override void _Process(double delta)
 	{
 		// QueueRedraw();
+		BackLayer.MotionOffset += new Vector2(.1f,0);
+		MiddleLayer.MotionOffset += new Vector2(.3f,0);
+		FrontLayer.MotionOffset += new Vector2(1,0);
+
 	}
 
 
