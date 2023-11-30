@@ -1,0 +1,77 @@
+[gd_scene load_steps=6 format=3 uid="uid://cw26fxtlk3p4h"]
+
+[ext_resource type="PackedScene" uid="uid://bihk88eh15aay" path="res://Scenes/LevelTemplate.tscn" id="1_sqv3j"]
+[ext_resource type="PackedScene" uid="uid://cthqrcjuob4vq" path="res://Scenes/weight.tscn" id="5_8bf08"]
+[ext_resource type="PackedScene" uid="uid://d1v7hqlvp1ql7" path="res://Scenes/turn.tscn" id="9_nawh8"]
+[ext_resource type="PackedScene" uid="uid://cmdmxf1qlgiv0" path="res://Scenes/good_fish_2.tscn" id="9_o4tpp"]
+[ext_resource type="PackedScene" uid="uid://cntr1ko2bgjfv" path="res://Scenes/bad_fish_2.tscn" id="10_fsg36"]
+
+[node name="Level_14" type="Node2D"]
+metadata/Sequence = 14
+metadata/Par = 10
+
+[node name="LevelTemplate" parent="." instance=ExtResource("1_sqv3j")]
+Digits = 2
+
+[node name="Weight" parent="." instance=ExtResource("5_8bf08")]
+position = Vector2(818, 220)
+Pounds = 4
+
+[node name="Weight2" parent="." instance=ExtResource("5_8bf08")]
+position = Vector2(898, 220)
+Pounds = 48
+
+[node name="Weight3" parent="." instance=ExtResource("5_8bf08")]
+position = Vector2(972, 220)
+Pounds = 10
+
+[node name="Weight4" parent="." instance=ExtResource("5_8bf08")]
+position = Vector2(1047, 220)
+Pounds = 20
+
+[node name="Turn" parent="." instance=ExtResource("9_nawh8")]
+position = Vector2(1025, 625)
+ArrowDirection = Vector2(-1, 0)
+OverrideBothFishTypes = true
+
+[node name="Turn2" parent="." instance=ExtResource("9_nawh8")]
+position = Vector2(777, 625)
+OverrideBothFishTypes = true
+
+[node name="Turn3" parent="." instance=ExtResource("9_nawh8")]
+position = Vector2(776, 784)
+ArrowDirection = Vector2(1, 0)
+OverrideBothFishTypes = true
+
+[node name="Turn4" parent="." instance=ExtResource("9_nawh8")]
+position = Vector2(1021, 784)
+OverrideBothFishTypes = true
+
+[node name="BadFish" parent="." instance=ExtResource("10_fsg36")]
+position = Vector2(587, 634)
+
+[node name="BadFish2" parent="." instance=ExtResource("10_fsg36")]
+position = Vector2(587, 790)
+
+[node name="BadFish3" parent="." instance=ExtResource("10_fsg36")]
+position = Vector2(760, 466)
+FishFacingDirection = Vector2i(0, 1)
+
+[node name="BadFish4" parent="." instance=ExtResource("10_fsg36")]
+position = Vector2(760, 956)
+FishFacingDirection = Vector2i(0, -1)
+
+[node name="BadFish5" parent="." instance=ExtResource("10_fsg36")]
+position = Vector2(1034, 953)
+FishFacingDirection = Vector2i(0, -1)
+
+[node name="BadFish6" parent="." instance=ExtResource("10_fsg36")]
+position = Vector2(1225, 625)
+FishFacingDirection = Vector2i(-1, 0)
+
+[node name="BadFish7" parent="." instance=ExtResource("10_fsg36")]
+position = Vector2(1224, 780)
+FishFacingDirection = Vector2i(-1, 0)
+
+[node name="GoodFish" parent="." instance=ExtResource("9_o4tpp")]
+position = Vector2(1033, 466)

@@ -1,78 +1,63 @@
-[gd_scene load_steps=5 format=3 uid="uid://owv8a06kicxh"]
+[gd_scene load_steps=6 format=3 uid="uid://c5jkh2es3av5u"]
 
-[ext_resource type="PackedScene" uid="uid://bihk88eh15aay" path="res://Scenes/LevelTemplate.tscn" id="1_d3qjk"]
-[ext_resource type="PackedScene" uid="uid://cthqrcjuob4vq" path="res://Scenes/weight.tscn" id="5_hhc3l"]
-[ext_resource type="PackedScene" uid="uid://cmdmxf1qlgiv0" path="res://Scenes/good_fish_2.tscn" id="7_k3eud"]
-[ext_resource type="PackedScene" uid="uid://cntr1ko2bgjfv" path="res://Scenes/bad_fish_2.tscn" id="8_uwpfc"]
+[ext_resource type="PackedScene" uid="uid://bihk88eh15aay" path="res://Scenes/LevelTemplate.tscn" id="5_6jw8t"]
+[ext_resource type="PackedScene" uid="uid://cthqrcjuob4vq" path="res://Scenes/weight.tscn" id="5_78dq5"]
+[ext_resource type="PackedScene" uid="uid://cntr1ko2bgjfv" path="res://Scenes/bad_fish_2.tscn" id="9_f5hys"]
+[ext_resource type="PackedScene" uid="uid://cmdmxf1qlgiv0" path="res://Scenes/good_fish_2.tscn" id="9_gwvov"]
+[ext_resource type="PackedScene" uid="uid://d1v7hqlvp1ql7" path="res://Scenes/turn.tscn" id="9_qvoom"]
 
-[node name="Level_16" type="Node2D"]
-metadata/Sequence = 16
-metadata/Par = 15
+[node name="Level_11" type="Node2D"]
+metadata/Sequence = 11
+metadata/Par = 6
 
-[node name="LevelTemplate" parent="." instance=ExtResource("1_d3qjk")]
-position = Vector2(4, 1)
-Digits = 4
+[node name="LevelTemplate" parent="." instance=ExtResource("5_6jw8t")]
+position = Vector2(6, 0)
 
-[node name="Weight" parent="." instance=ExtResource("5_hhc3l")]
-position = Vector2(818, 224)
-Pounds = 4000
+[node name="Weight" parent="." instance=ExtResource("5_78dq5")]
+position = Vector2(818, 220)
+Pounds = 2
 
-[node name="Weight9" parent="." instance=ExtResource("5_hhc3l")]
-position = Vector2(740, 224)
-Pounds = -1000
-
-[node name="Weight2" parent="." instance=ExtResource("5_hhc3l")]
-position = Vector2(906, 224)
-Pounds = 3000
-
-[node name="Weight3" parent="." instance=ExtResource("5_hhc3l")]
-position = Vector2(994, 224)
-Pounds = 720
-
-[node name="Weight4" parent="." instance=ExtResource("5_hhc3l")]
-position = Vector2(1087, 224)
-Pounds = 300
-
-[node name="Weight5" parent="." instance=ExtResource("5_hhc3l")]
-position = Vector2(1179, 224)
-Pounds = 55
-
-[node name="Weight6" parent="." instance=ExtResource("5_hhc3l")]
-position = Vector2(1265, 224)
-Pounds = 46
-
-[node name="Weight7" parent="." instance=ExtResource("5_hhc3l")]
-position = Vector2(1340, 224)
-Pounds = 3
-
-[node name="Weight8" parent="." instance=ExtResource("5_hhc3l")]
-position = Vector2(1424, 224)
+[node name="Weight3" parent="." instance=ExtResource("5_78dq5")]
+position = Vector2(729, 220)
 Pounds = -2
 
-[node name="GoodFish2" parent="." instance=ExtResource("7_k3eud")]
-position = Vector2(787, 438)
+[node name="Weight2" parent="." instance=ExtResource("5_78dq5")]
+position = Vector2(901, 220)
+Pounds = 4
 
-[node name="GoodFish3" parent="." instance=ExtResource("7_k3eud")]
-position = Vector2(1025, 951)
+[node name="Weight4" parent="." instance=ExtResource("5_78dq5")]
+position = Vector2(982, 220)
+Pounds = -5
+
+[node name="Weight5" parent="." instance=ExtResource("5_78dq5")]
+position = Vector2(1065, 220)
+
+[node name="Turn" parent="." instance=ExtResource("9_qvoom")]
+position = Vector2(781, 795)
+OverrideBothFishTypes = true
+
+[node name="Turn2" parent="." instance=ExtResource("9_qvoom")]
+position = Vector2(781, 630)
+ArrowDirection = Vector2(0, -1)
+OverrideBothFishTypes = true
+
+[node name="BadFish4" parent="." instance=ExtResource("9_f5hys")]
+position = Vector2(596, 632)
+
+[node name="BadFish5" parent="." instance=ExtResource("9_f5hys")]
+position = Vector2(602, 795)
+
+[node name="BadFish6" parent="." instance=ExtResource("9_f5hys")]
+position = Vector2(788, 969)
 FishFacingDirection = Vector2i(0, -1)
 
-[node name="GoodFish4" parent="." instance=ExtResource("7_k3eud")]
-position = Vector2(1269, 438)
+[node name="GoodFish" parent="." instance=ExtResource("9_gwvov")]
+position = Vector2(788, 441)
 
-[node name="GoodFish5" parent="." instance=ExtResource("7_k3eud")]
-position = Vector2(1523, 951)
-FishFacingDirection = Vector2i(0, -1)
-
-[node name="BadFish2" parent="." instance=ExtResource("8_uwpfc")]
-position = Vector2(535, 794)
-
-[node name="BadFish3" parent="." instance=ExtResource("8_uwpfc")]
-position = Vector2(533, 621)
-
-[node name="BadFish4" parent="." instance=ExtResource("8_uwpfc")]
-position = Vector2(1748, 790)
+[node name="GoodFish2" parent="." instance=ExtResource("9_gwvov")]
+position = Vector2(982, 630)
 FishFacingDirection = Vector2i(-1, 0)
 
-[node name="BadFish5" parent="." instance=ExtResource("8_uwpfc")]
-position = Vector2(1748, 614)
+[node name="GoodFish3" parent="." instance=ExtResource("9_gwvov")]
+position = Vector2(982, 794)
 FishFacingDirection = Vector2i(-1, 0)
