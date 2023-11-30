@@ -361,15 +361,23 @@ public partial class Fish : AnimatedSprite2D
 		{
 			Level.CurrentLevelState = Level.LevelState.SwitchingLevels;
 			
-			var CurrentLevelSequence = (int)Level.LevelObject.GetMeta("Sequence");
+			// var CurrentLevelSequence = (int)Level.LevelObject.GetMeta("Sequence");
 			var CurrentLevelPar = (int)Level.LevelObject.GetMeta("Par");
-			GD.Print($"SEQUENCE OF THIS LEVEL: {CurrentLevelSequence}");
+			
 			GD.Print($"PAR OF THIS LEVEL: {CurrentLevelPar}");
 
 			// Load Next Level
 			Manager.LevelUpSound.Play();
 			Level.LevelTemplateObject.ResetLevelVariables();
-			GetTree().ChangeSceneToFile(Manager.LevelDictionary[CurrentLevelSequence + 1]);
+			// GetTree().ChangeSceneToFile(Manager.LevelDictionary[CurrentLevelSequence + 1]);
+
+			var LevelPathPrefix = "res://Scenes/Levels/";
+			var ThisLevel = Level.LevelObject.Name.ToString();
+			var UnderscorePosition = ThisLevel.IndexOf("_") + 1; // Add 1 to skip the underscore and get to the actual number
+			var CurrentLevel = Convert.ToInt32(ThisLevel.Substring(UnderscorePosition));
+			// GD.Print($"Current level: {CurrentLevel}");
+			
+			GetTree().ChangeSceneToFile($"{LevelPathPrefix}Level_{(CurrentLevel + 1).ToString()}.tscn");
 		}
 
 		QueueFree();
