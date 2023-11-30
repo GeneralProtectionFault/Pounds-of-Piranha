@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://bihk88eh15aay"]
+[gd_scene load_steps=25 format=3 uid="uid://bihk88eh15aay"]
 
 [ext_resource type="Script" path="res://Scripts/Level.cs" id="1_qx0ft"]
 [ext_resource type="PackedScene" uid="uid://dvss3jv7pjyb6" path="res://Scenes/BeachShelf.tscn" id="1_ynqq2"]
+[ext_resource type="Texture2D" uid="uid://ciw8fj4h8frim" path="res://Graphics/Particles/ParticleRing.png" id="4_mks1y"]
 [ext_resource type="Texture2D" uid="uid://co5p7opdcjgmg" path="res://Graphics/Background1.png" id="4_pa011"]
 [ext_resource type="Texture2D" uid="uid://codx3cr4181ng" path="res://Graphics/BeachSky.png" id="4_s04a8"]
 [ext_resource type="Texture2D" uid="uid://ctwlmb4x4i41h" path="res://Graphics/BeachSky_Bottom.png" id="5_4o8bg"]
@@ -24,8 +25,8 @@ a = Vector2(1924, 1113)
 b = Vector2(1921, -54)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_modd8"]
-a = Vector2(-2, 1133)
-b = Vector2(-4, -97)
+a = Vector2(24, 1126)
+b = Vector2(23, -91)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_ddwtb"]
 a = Vector2(2051, 1077)
@@ -33,6 +34,33 @@ b = Vector2(-65, 1077)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_66ug5"]
 size = Vector2(395, 20)
+
+[sub_resource type="Curve" id="Curve_mal6x"]
+max_value = 0.5
+_data = [Vector2(0, 0.435915), 0.0, 0.0, 0, 0, Vector2(0.627907, 0.0627503), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_486cb"]
+curve = SubResource("Curve_mal6x")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kxe4m"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+angle_max = 10.0
+direction = Vector3(0, -1, 0)
+spread = 17.195
+initial_velocity_min = 90.91
+initial_velocity_max = 227.27
+gravity = Vector3(0, -60, 0)
+linear_accel_min = 4.88
+linear_accel_max = 7.32
+scale_min = 0.07
+scale_max = 0.07
+color = Color(0.596078, 0.992157, 0.992157, 1)
+alpha_curve = SubResource("CurveTexture_486cb")
+hue_variation_min = -0.02
+hue_variation_max = 0.05
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_xs0u6"]
 
@@ -70,6 +98,7 @@ shape = SubResource("SegmentShape2D_binq6")
 shape = SubResource("SegmentShape2D_ae0ki")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="LevelBoundary_StaticBody2D"]
+position = Vector2(0, -7)
 shape = SubResource("SegmentShape2D_modd8")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="LevelBoundary_StaticBody2D"]
@@ -90,6 +119,33 @@ shape = SubResource("RectangleShape2D_66ug5")
 
 [node name="BeachShelf" parent="." instance=ExtResource("1_ynqq2")]
 position = Vector2(1255, 309)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(12, 1077)
+amount = 6
+process_material = SubResource("ParticleProcessMaterial_kxe4m")
+texture = ExtResource("4_mks1y")
+lifetime = 5.0
+explosiveness = 0.3
+randomness = 0.11
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+position = Vector2(1255, 1117)
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_kxe4m")
+texture = ExtResource("4_mks1y")
+lifetime = 5.0
+explosiveness = 0.3
+randomness = 0.11
+
+[node name="GPUParticles2D3" type="GPUParticles2D" parent="."]
+position = Vector2(1552, 1077)
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_kxe4m")
+texture = ExtResource("4_mks1y")
+lifetime = 5.0
+explosiveness = 0.3
+randomness = 0.11
 
 [node name="Label_Total" type="Label" parent="."]
 offset_left = 1684.0
@@ -182,7 +238,7 @@ z_index = -1
 texture_repeat = 2
 material = SubResource("ShaderMaterial_ju15i")
 position = Vector2(965, 675)
-scale = Vector2(1.00938, 0.760151)
+scale = Vector2(1.01261, 0.744338)
 texture = ExtResource("4_pa011")
 
 [node name="NumberSpawns" parent="." instance=ExtResource("6_7ok02")]

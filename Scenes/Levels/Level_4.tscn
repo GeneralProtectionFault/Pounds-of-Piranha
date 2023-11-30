@@ -24,10 +24,10 @@ offset_bottom = 40.0
 
 [node name="PlaceOnScale" type="Label" parent="TutorialText"]
 layout_mode = 0
-offset_left = 317.0
-offset_top = 732.0
-offset_right = 654.0
-offset_bottom = 803.0
+offset_left = 360.0
+offset_top = 810.0
+offset_right = 697.0
+offset_bottom = 881.0
 text = "Bad fish eat good fish.
 Keep them away!"
 label_settings = SubResource("LabelSettings_b5nxn")
