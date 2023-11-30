@@ -8,23 +8,28 @@ public partial class ScaleObject : RigidBody2D
 
 	public static int Pounds = 0;
 	private static Area2D WeightArea;
+	private AnimationPlayer Player;
+	
 
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		WeightArea = GetNode<Area2D>("Weight_Area2D");
+		Player = GetNode<AnimationPlayer>("AnimationPlayer");
 		WeightArea.BodyEntered += AddWeight;
 		WeightArea.BodyExited += RemoveWeight;
-	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
+		Weight.HitScale += ObjectDroppedIn;
 	}
 
 
-	private void AddWeight(Node2D EnteringBody)
+    public override void _PhysicsProcess(double delta)
+    {
+        
+    }
+
+
+    private void AddWeight(Node2D EnteringBody)
 	{
 		if (Level.CurrentLevelState == Level.LevelState.SwitchingLevels)
 			return;
@@ -49,7 +54,7 @@ public partial class ScaleObject : RigidBody2D
 	{
 		if (Level.CurrentLevelState == Level.LevelState.SwitchingLevels)
 			return;
-			
+
 		GD.Print("Removing WEIGHT");
 		Level.LinesPopulated = false;
 		
@@ -64,6 +69,16 @@ public partial class ScaleObject : RigidBody2D
 
 		UpdateScore(1);
 	}
+
+
+
+	public void ObjectDroppedIn (object sender, EventArgs e)
+	{
+		GD.Print("Scale intruded!");
+		Player.Play("bounce");
+	}
+
+
 
 
 	public static void UpdateScore(int Increment)
@@ -92,6 +107,7 @@ public partial class ScaleObject : RigidBody2D
 	{
 		WeightArea.BodyEntered -= AddWeight;
 		WeightArea.BodyExited -= RemoveWeight;
+		Weight.HitScale -= ObjectDroppedIn;
 	}
 
 }

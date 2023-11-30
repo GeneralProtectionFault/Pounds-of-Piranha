@@ -13,6 +13,8 @@ outline_color = Color(0, 0.643137, 0.713726, 1)
 
 [node name="Weight" type="RigidBody2D" groups=["Weights"]]
 lock_rotation = true
+max_contacts_reported = 5
+contact_monitor = true
 script = ExtResource("1_lgt8h")
 Pounds = 1
 
@@ -37,5 +39,6 @@ polygon = PackedVector2Array(-64, -69, 63, -70, 123, 116, -123, 116)
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 polygon = PackedVector2Array(-16, -17, 16, -17, 31, 29, -31, 29)
 
+[connection signal="body_entered" from="Area2D" to="." method="TriggerScaleBounce"]
 [connection signal="mouse_entered" from="Area2D" to="." method="SetMouseInWeight"]
 [connection signal="mouse_exited" from="Area2D" to="." method="SetMouseOutOfWeight"]

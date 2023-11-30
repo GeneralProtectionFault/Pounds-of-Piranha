@@ -6,6 +6,9 @@ public partial class Weight : RigidBody2D
 	[Export] public int Pounds = 0;
 
 
+	public static event EventHandler HitScale;
+
+
 	public bool MouseHeld { get; set; } = false;
 	private bool MouseOverWeight = false;
 
@@ -60,6 +63,15 @@ public partial class Weight : RigidBody2D
 				ReleaseWeight(this, 0);
 			}
 		}
+	}
+
+
+	// public void TriggerScaleBounce(Rid rid, Node2D body, int body_shape_index, int local_shape_index)
+	public void TriggerScaleBounce(Node2D OtherObject)
+	{
+		if (OtherObject.Name == "Scale")
+			HitScale?.Invoke(this, EventArgs.Empty);
+		// GD.Print("Bounce that scale!");
 	}
 
 
