@@ -19,13 +19,14 @@ Pounds = 5
 
 [node name="Weight3" parent="." instance=ExtResource("2_g5lpf")]
 position = Vector2(986, 224)
-Pounds = 2
+Pounds = -4
 
 [node name="Weight4" parent="." instance=ExtResource("2_g5lpf")]
 position = Vector2(1062, 224)
 
 [node name="Turn" parent="." instance=ExtResource("3_a0r1h")]
 position = Vector2(781, 627)
+ArrowDirection = Vector2(1, 0)
 OverrideBothFishTypes = true
 
 [node name="GoodFish" parent="." instance=ExtResource("4_33wje")]
