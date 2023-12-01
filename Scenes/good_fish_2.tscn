@@ -7,6 +7,7 @@
 size = Vector2(92, 69)
 
 [node name="GoodFish2" groups=["GoodFish"] instance=ExtResource("1_gilg2")]
+z_index = 1
 animation = &"Idle_Right"
 frame_progress = 0.697208
 script = ExtResource("2_apjoj")

@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://c1nenigsti0ha"]
+[gd_scene load_steps=6 format=3 uid="uid://c1nenigsti0ha"]
 
 [ext_resource type="PackedScene" uid="uid://bihk88eh15aay" path="res://Scenes/LevelTemplate.tscn" id="2_cfc66"]
-[ext_resource type="AudioStream" uid="uid://cl6rba55xjtim" path="res://Audio/PiranhaDance.ogg" id="2_swx2u"]
 [ext_resource type="PackedScene" uid="uid://cthqrcjuob4vq" path="res://Scenes/weight.tscn" id="6_bksep"]
 [ext_resource type="PackedScene" uid="uid://d1v7hqlvp1ql7" path="res://Scenes/turn.tscn" id="9_1qekb"]
 [ext_resource type="PackedScene" uid="uid://cmdmxf1qlgiv0" path="res://Scenes/good_fish_2.tscn" id="9_rrhis"]
@@ -12,11 +11,6 @@ metadata/Sequence = 0
 
 [node name="LevelTemplate" parent="." instance=ExtResource("2_cfc66")]
 position = Vector2(1, 2)
-
-[node name="PiranhaDance" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_swx2u")
-volume_db = -31.396
-autoplay = true
 
 [node name="Turn" parent="." instance=ExtResource("9_1qekb")]
 position = Vector2(787, 649)

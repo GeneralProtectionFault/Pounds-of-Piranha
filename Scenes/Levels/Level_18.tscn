@@ -1,45 +1,44 @@
-[gd_scene load_steps=5 format=3 uid="uid://b6amh3lsd5joo"]
+[gd_scene load_steps=6 format=3 uid="uid://dx5ymp34b7eei"]
 
-[ext_resource type="PackedScene" uid="uid://bihk88eh15aay" path="res://Scenes/LevelTemplate.tscn" id="1_atoyb"]
-[ext_resource type="PackedScene" uid="uid://cthqrcjuob4vq" path="res://Scenes/weight.tscn" id="5_wjnib"]
-[ext_resource type="PackedScene" uid="uid://cmdmxf1qlgiv0" path="res://Scenes/good_fish_2.tscn" id="8_8o25j"]
-[ext_resource type="PackedScene" uid="uid://cntr1ko2bgjfv" path="res://Scenes/bad_fish_2.tscn" id="8_c13kv"]
+[ext_resource type="PackedScene" uid="uid://bihk88eh15aay" path="res://Scenes/LevelTemplate.tscn" id="1_n2uub"]
+[ext_resource type="PackedScene" uid="uid://cntr1ko2bgjfv" path="res://Scenes/bad_fish_2.tscn" id="2_3jgdk"]
+[ext_resource type="PackedScene" uid="uid://cmdmxf1qlgiv0" path="res://Scenes/good_fish_2.tscn" id="3_hi4pm"]
+[ext_resource type="PackedScene" uid="uid://cthqrcjuob4vq" path="res://Scenes/weight.tscn" id="4_rbb06"]
+[ext_resource type="PackedScene" uid="uid://d1v7hqlvp1ql7" path="res://Scenes/turn.tscn" id="5_x5ddj"]
 
 [node name="Level_18" type="Node2D"]
-metadata/Sequence = 13
-metadata/Par = 11
+metadata/Par = 8
 
-[node name="LevelTemplate" parent="." instance=ExtResource("1_atoyb")]
+[node name="LevelTemplate" parent="." instance=ExtResource("1_n2uub")]
 Digits = 2
 
-[node name="Weight" parent="." instance=ExtResource("5_wjnib")]
-position = Vector2(818, 222)
-Pounds = -2
+[node name="BadFish2" parent="." instance=ExtResource("2_3jgdk")]
+position = Vector2(530, 771)
 
-[node name="Weight4" parent="." instance=ExtResource("5_wjnib")]
-position = Vector2(1055, 222)
+[node name="GoodFish2" parent="." instance=ExtResource("3_hi4pm")]
+position = Vector2(1017, 471)
+
+[node name="Weight" parent="." instance=ExtResource("4_rbb06")]
+position = Vector2(724, 226)
 Pounds = 2
 
-[node name="Weight5" parent="." instance=ExtResource("5_wjnib")]
-position = Vector2(737, 222)
-Pounds = 32
+[node name="Weight2" parent="." instance=ExtResource("4_rbb06")]
+position = Vector2(822, 225)
+Pounds = 9
 
-[node name="Weight2" parent="." instance=ExtResource("5_wjnib")]
-position = Vector2(895, 222)
-Pounds = 10
+[node name="Weight3" parent="." instance=ExtResource("4_rbb06")]
+position = Vector2(619, 225)
+Pounds = 50
 
-[node name="Weight3" parent="." instance=ExtResource("5_wjnib")]
-position = Vector2(977, 222)
-Pounds = 23
+[node name="Weight4" parent="." instance=ExtResource("4_rbb06")]
+position = Vector2(927, 225)
+Pounds = 20
 
-[node name="BadFish" parent="." instance=ExtResource("8_c13kv")]
-position = Vector2(587, 634)
+[node name="Turn" parent="." instance=ExtResource("5_x5ddj")]
+position = Vector2(1012, 662)
+ArrowDirection = Vector2(-1, 0)
+OverrideBothFishTypes = true
 
-[node name="BadFish2" parent="." instance=ExtResource("8_c13kv")]
-position = Vector2(590, 790)
-
-[node name="GoodFish" parent="." instance=ExtResource("8_8o25j")]
-position = Vector2(789, 469)
-
-[node name="GoodFish2" parent="." instance=ExtResource("8_8o25j")]
-position = Vector2(1034, 469)
+[node name="Turn2" parent="." instance=ExtResource("5_x5ddj")]
+position = Vector2(783, 659)
+OverrideBothFishTypes = true

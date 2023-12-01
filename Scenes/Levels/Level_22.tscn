@@ -1,0 +1,74 @@
+[gd_scene load_steps=6 format=3 uid="uid://csagrrp6l1bc8"]
+
+[ext_resource type="PackedScene" uid="uid://bihk88eh15aay" path="res://Scenes/LevelTemplate.tscn" id="1_35flm"]
+[ext_resource type="PackedScene" uid="uid://cthqrcjuob4vq" path="res://Scenes/weight.tscn" id="2_k2gml"]
+[ext_resource type="PackedScene" uid="uid://cmdmxf1qlgiv0" path="res://Scenes/good_fish_2.tscn" id="3_m4sb6"]
+[ext_resource type="PackedScene" uid="uid://cntr1ko2bgjfv" path="res://Scenes/bad_fish_2.tscn" id="4_uenjx"]
+[ext_resource type="PackedScene" uid="uid://d1v7hqlvp1ql7" path="res://Scenes/turn.tscn" id="5_plw5h"]
+
+[node name="Level_22" type="Node2D"]
+metadata/Sequence = 15
+metadata/Par = 10
+
+[node name="LevelTemplate" parent="." instance=ExtResource("1_35flm")]
+position = Vector2(2, 1)
+Digits = 3
+
+[node name="Weight" parent="." instance=ExtResource("2_k2gml")]
+position = Vector2(818, 221)
+Pounds = 111
+
+[node name="Weight2" parent="." instance=ExtResource("2_k2gml")]
+position = Vector2(906, 221)
+Pounds = 201
+
+[node name="Weight3" parent="." instance=ExtResource("2_k2gml")]
+position = Vector2(988, 221)
+Pounds = 15
+
+[node name="Weight4" parent="." instance=ExtResource("2_k2gml")]
+position = Vector2(1070, 221)
+Pounds = 96
+
+[node name="Weight5" parent="." instance=ExtResource("2_k2gml")]
+position = Vector2(1151, 221)
+Pounds = 50
+
+[node name="Weight6" parent="." instance=ExtResource("2_k2gml")]
+position = Vector2(1236, 221)
+Pounds = 500
+
+[node name="GoodFish2" parent="." instance=ExtResource("3_m4sb6")]
+position = Vector2(787, 444)
+
+[node name="BadFish2" parent="." instance=ExtResource("4_uenjx")]
+position = Vector2(780, 956)
+FishFacingDirection = Vector2i(0, -1)
+
+[node name="BadFish3" parent="." instance=ExtResource("4_uenjx")]
+position = Vector2(1514, 793)
+FishFacingDirection = Vector2i(-1, 0)
+
+[node name="GoodFish3" parent="." instance=ExtResource("3_m4sb6")]
+position = Vector2(539, 785)
+FishFacingDirection = Vector2i(1, 0)
+
+[node name="Turn" parent="." instance=ExtResource("5_plw5h")]
+position = Vector2(787, 783)
+ArrowDirection = Vector2(1, 0)
+OverrideBothFishTypes = true
+
+[node name="Turn4" parent="." instance=ExtResource("5_plw5h")]
+position = Vector2(1037, 783)
+ArrowDirection = Vector2(0, -1)
+OverrideBothFishTypes = true
+
+[node name="Turn3" parent="." instance=ExtResource("5_plw5h")]
+position = Vector2(1274, 614)
+ArrowDirection = Vector2(-1, 0)
+OverrideBothFishTypes = true
+
+[node name="Turn2" parent="." instance=ExtResource("5_plw5h")]
+position = Vector2(1274, 783)
+ArrowDirection = Vector2(0, -1)
+OverrideBothFishTypes = true

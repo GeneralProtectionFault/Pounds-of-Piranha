@@ -10,6 +10,9 @@ position = Vector2(1, 1)
 metadata/Sequence = 5
 metadata/Par = 7
 
+[node name="LevelTemplate" parent="." instance=ExtResource("5_27n26")]
+position = Vector2(1, 1)
+
 [node name="Weight" parent="." instance=ExtResource("5_xu80h")]
 position = Vector2(818, 226)
 
@@ -30,6 +33,3 @@ FishFacingDirection = Vector2i(-1, 0)
 
 [node name="GoodFish2" parent="." instance=ExtResource("8_vd2yh")]
 position = Vector2(787, 452)
-
-[node name="LevelTemplate" parent="." instance=ExtResource("5_27n26")]
-position = Vector2(1, 1)
