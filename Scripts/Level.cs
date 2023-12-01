@@ -20,6 +20,8 @@ public partial class Level : Node2D
 
 	public static event EventHandler CommenceTurn;
 
+	
+	public static Label LevelNumberLabel;
 	public static Label LevelLabel;
 	public static Label TotalLabel;
 	public static Label ParLabel;
@@ -71,6 +73,7 @@ public partial class Level : Node2D
 
 		NegativeSymbol = GetNode<Node2D>("NumberSpawns/Negative");
 		LevelBody = GetNode<Area2D>("LevelBody");
+		LevelNumberLabel = GetNode<Label>("Level_Label");
 		LevelLabel = GetNode<Label>("Label_Level/Label_Level_Number");
 		TotalLabel = GetNode<Label>("Label_Total/Label_Total_Number");
 		ParLabel = GetNode<Label>("Label_Par/Label_Par_Number");
@@ -79,6 +82,12 @@ public partial class Level : Node2D
 		FrontLayer = GetNode<ParallaxLayer>("ParallaxBackground/ParallaxLayer_Front");
 		GoldFishGrid = GetNode<GridContainer>("GoldFishControl/GridContainer_GoldFish");
 		GoldFishScene = ResourceLoader.Load<PackedScene>("res://Scenes/goldfish.tscn");
+
+		var LevelName = GetParent().Name.ToString();
+		if (LevelName == "Level_24")
+			LevelNumberLabel.Text = "Good Job!";
+		else
+			LevelNumberLabel.Text = LevelName.Replace("_"," ");
 
 		LevelLabel.Text = Manager.LevelMoves.ToString();
 		TotalLabel.Text = Manager.OverallMoves.ToString();
