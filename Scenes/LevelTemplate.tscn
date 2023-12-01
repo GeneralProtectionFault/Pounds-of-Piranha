@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bihk88eh15aay"]
+[gd_scene load_steps=26 format=3 uid="uid://bihk88eh15aay"]
 
 [ext_resource type="Script" path="res://Scripts/Level.cs" id="1_qx0ft"]
 [ext_resource type="PackedScene" uid="uid://dvss3jv7pjyb6" path="res://Scenes/BeachShelf.tscn" id="1_ynqq2"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://b6gjla31ej3hi" path="res://Graphics/BeachSky_Top.png" id="7_6atvs"]
 [ext_resource type="PackedScene" uid="uid://jcrnqotjmqcc" path="res://Scenes/scale.tscn" id="7_c8y2g"]
 [ext_resource type="PackedScene" uid="uid://cctno57eqdnxe" path="res://Scenes/palm_tree.tscn" id="9_fuesr"]
+[ext_resource type="Script" path="res://Scripts/AudioStreamPlayerIntro.cs" id="13_et2me"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_elr7a"]
 size = Vector2(1927, 1072)
@@ -294,6 +295,9 @@ offset_right = 1907.0
 offset_bottom = 130.0
 text = "0
 "
+
+[node name="AudioStreamPlayerIntro" type="AudioStreamPlayer" parent="."]
+script = ExtResource("13_et2me")
 
 [connection signal="tree_exiting" from="." to="." method="TreeExit"]
 [connection signal="pressed" from="ResetButton" to="." method="RestartLevel"]

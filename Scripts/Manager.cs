@@ -73,10 +73,13 @@ public partial class Manager : Node
         // Load ze' music here so it persists across scenes instead of a most irritating restart on level advancement
         if (!MusicStarted)
         {
-            PiranhaDance = new AudioStreamPlayer();
+            PiranhaDance = new AudioStreamPlayerIntro();
             var PiranhaDanceResource = ResourceLoader.Load<AudioStream>("res://Audio/PiranhaDance.ogg");
             PiranhaDance.Stream = PiranhaDanceResource;
             PiranhaDance.VolumeDb = -10;
+            (PiranhaDance as AudioStreamPlayerIntro).IntroSeconds = 6.56f;
+            (PiranhaDance as AudioStreamPlayerIntro).HasIntro = true;
+            (PiranhaDance as AudioStreamPlayerIntro).TrimEndSeconds = 1.2f;
             GetTree().Root.CallDeferred("add_child", PiranhaDance);
             await ToSignal(GetTree(), "process_frame");
             PiranhaDance.Play();
