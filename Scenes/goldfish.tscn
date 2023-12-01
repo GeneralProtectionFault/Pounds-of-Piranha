@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://biy028wpqcehq"]
+
+[ext_resource type="Texture2D" uid="uid://bcq0ckmvkt1sk" path="res://Graphics/GoldFish.png" id="1_mohos"]
+
+[node name="GoldFishRect" type="TextureRect"]
+texture = ExtResource("1_mohos")
+stretch_mode = 4

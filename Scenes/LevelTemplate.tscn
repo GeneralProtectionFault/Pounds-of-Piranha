@@ -167,6 +167,7 @@ text = "Tune Volume"
 [node name="MusicVolumeSlider" type="HSlider" parent="VolumeSliderLabel"]
 material = SubResource("CanvasItemMaterial_xgl57")
 custom_minimum_size = Vector2(350, 0)
+layout_mode = 0
 offset_left = -114.0
 offset_top = 27.0
 offset_right = 236.0
@@ -177,10 +178,10 @@ max_value = 10.0
 tick_count = 50
 
 [node name="Label_Total" type="Label" parent="."]
-offset_left = 1684.0
-offset_top = 375.0
-offset_right = 1813.0
-offset_bottom = 398.0
+offset_left = 1606.0
+offset_top = 373.0
+offset_right = 1735.0
+offset_bottom = 396.0
 text = "Total Turns:"
 
 [node name="Label_Total_Number" type="Label" parent="Label_Total"]
@@ -192,10 +193,10 @@ offset_bottom = 24.0
 text = "0"
 
 [node name="Label_Level" type="Label" parent="."]
-offset_left = 1647.0
-offset_top = 411.0
-offset_right = 1776.0
-offset_bottom = 434.0
+offset_left = 1569.0
+offset_top = 409.0
+offset_right = 1698.0
+offset_bottom = 432.0
 text = "Turns This Level:"
 
 [node name="Label_Level_Number" type="Label" parent="Label_Level"]
@@ -207,18 +208,17 @@ offset_bottom = 24.0
 text = "0"
 
 [node name="Label_Par" type="Label" parent="."]
-offset_left = 1701.0
-offset_top = 446.0
-offset_right = 1830.0
-offset_bottom = 469.0
-text = "Gold Fish:"
+offset_left = 1504.0
+offset_top = 443.0
+offset_right = 1698.0
+offset_bottom = 466.0
+text = "Gold Fish Rating (Moves):"
 
 [node name="Label_Par_Number" type="Label" parent="Label_Par"]
 layout_mode = 0
-offset_left = 93.0
-offset_top = 1.0
-offset_right = 222.0
-offset_bottom = 24.0
+offset_left = 212.0
+offset_right = 341.0
+offset_bottom = 23.0
 text = "0"
 
 [node name="PalmTree" parent="." instance=ExtResource("9_fuesr")]
@@ -326,6 +326,19 @@ text = "0
 
 [node name="AudioStreamPlayerIntro" type="AudioStreamPlayer" parent="."]
 script = ExtResource("13_et2me")
+
+[node name="GoldFishControl" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1739.0
+offset_top = 437.0
+offset_right = 1779.0
+offset_bottom = 477.0
+
+[node name="GridContainer_GoldFish" type="GridContainer" parent="GoldFishControl"]
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 3
 
 [connection signal="tree_exiting" from="." to="." method="TreeExit"]
 [connection signal="value_changed" from="VolumeSliderLabel/MusicVolumeSlider" to="." method="MusicVolumeChanged"]

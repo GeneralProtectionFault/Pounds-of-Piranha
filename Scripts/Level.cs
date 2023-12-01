@@ -54,6 +54,10 @@ public partial class Level : Node2D
 	private ParallaxLayer BackLayer;
 	private ParallaxLayer MiddleLayer;
 	private ParallaxLayer FrontLayer;
+	private GridContainer GoldFishGrid;
+	private static PackedScene GoldFishScene;
+
+	private static int GoldFishCount = 0;
 	
 
 
@@ -73,6 +77,8 @@ public partial class Level : Node2D
 		BackLayer = GetNode<ParallaxLayer>("ParallaxBackground/ParallaxLayer_Back");
 		MiddleLayer = GetNode<ParallaxLayer>("ParallaxBackground/ParallaxLayer_Middle");
 		FrontLayer = GetNode<ParallaxLayer>("ParallaxBackground/ParallaxLayer_Front");
+		GoldFishGrid = GetNode<GridContainer>("GoldFishControl/GridContainer_GoldFish");
+		GoldFishScene = ResourceLoader.Load<PackedScene>("res://Scenes/goldfish.tscn");
 
 		LevelLabel.Text = Manager.LevelMoves.ToString();
 		TotalLabel.Text = Manager.OverallMoves.ToString();
@@ -86,10 +92,14 @@ public partial class Level : Node2D
 		// 	NumberSpawnNodes.Add(SpawnNode);
 		// }
 
+		for (int i = 0; i < GoldFishCount; i++)
+		{
+			// GoldFishGrid.AddChild(GoldFishScene.Instantiate());
+			GoldFishGrid.CallDeferred("add_child", GoldFishScene.Instantiate());
+		}
+
 		SpawnNumber(this, 0);
-
 		Manager.Instance.InitializeMusic();
-
 		
 		ScaleObject.Pounds = 0;
 
@@ -510,8 +520,15 @@ public partial class Level : Node2D
 		
 		// var CurrentLevelSequence = (int)Level.LevelObject.GetMeta("Sequence");
 		var CurrentLevelPar = (int)Level.LevelObject.GetMeta("Par");
-		
-		GD.Print($"PAR OF THIS LEVEL: {CurrentLevelPar}");
+		GD.Print($"GOLD FISH OF THIS LEVEL: {CurrentLevelPar}");
+
+		// Gold fish if under par...
+		if (Manager.LevelMoves <= CurrentLevelPar)
+		{
+			// GD.Print("Adding texture to grid");
+			// GoldFishGrid.AddChild(GoldFishScene.Instantiate());
+			GoldFishCount += 1;
+		}
 
 		// Load Next Level
 		Manager.LevelUpSound.Play();
