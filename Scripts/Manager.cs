@@ -26,6 +26,9 @@ public partial class Manager : Node
             Instance = this;
 
 
+        Level.TuneVolumeChanged += UpdateTuneVolume;
+
+
         // This mess will parse the actual text of the scene files to get the metadata w/o loading them
         // We'll use the sequence to determine level order in case we want to muck about later without creating a file naming/referential mess. 
         var LevelsFolder = DirAccess.Open("res://Scenes/Levels/");
@@ -68,6 +71,12 @@ public partial class Manager : Node
     
     }
 
+
+    ~Manager()
+    {
+        Level.TuneVolumeChanged -= UpdateTuneVolume;
+    }
+
     public async void InitializeMusic()
     {
         // Load ze' music here so it persists across scenes instead of a most irritating restart on level advancement
@@ -108,5 +117,11 @@ public partial class Manager : Node
 
             MusicStarted = true;
         }
+    }
+
+
+    private void UpdateTuneVolume(object sender, float NewValue)
+    {
+        PiranhaDance.VolumeDb = NewValue;
     }
 }

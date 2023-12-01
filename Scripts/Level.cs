@@ -5,6 +5,9 @@ using System;
 
 public partial class Level : Node2D
 {
+	public static event EventHandler<float> TuneVolumeChanged;
+
+
 	[Export] public bool ShowGridLines = false;
 	[Export(PropertyHint.Range, "1,4")] public int Digits = 1;
 
@@ -525,6 +528,13 @@ public partial class Level : Node2D
 		GD.Print($"Next level path: {NextLevelPath}");
 
 		GetTree().ChangeSceneToFile(NextLevelPath);
+	}
+
+
+
+	public void MusicVolumeChanged(float NewValue)
+	{
+		TuneVolumeChanged?.Invoke(this, NewValue);
 	}
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bihk88eh15aay"]
+[gd_scene load_steps=27 format=3 uid="uid://bihk88eh15aay"]
 
 [ext_resource type="Script" path="res://Scripts/Level.cs" id="1_qx0ft"]
 [ext_resource type="PackedScene" uid="uid://dvss3jv7pjyb6" path="res://Scenes/BeachShelf.tscn" id="1_ynqq2"]
@@ -62,6 +62,9 @@ color = Color(0.596078, 0.992157, 0.992157, 1)
 alpha_curve = SubResource("CurveTexture_486cb")
 hue_variation_min = -0.02
 hue_variation_max = 0.05
+
+[sub_resource type="FontVariation" id="FontVariation_ann8r"]
+variation_embolden = 0.95
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_xs0u6"]
 
@@ -147,6 +150,27 @@ texture = ExtResource("4_mks1y")
 lifetime = 5.0
 explosiveness = 0.3
 randomness = 0.11
+
+[node name="MusicVolumeSlider" type="HSlider" parent="."]
+custom_minimum_size = Vector2(350, 0)
+offset_left = 805.0
+offset_top = 28.0
+offset_right = 1155.0
+offset_bottom = 44.0
+size_flags_horizontal = 4
+min_value = -40.0
+max_value = 10.0
+tick_count = 50
+
+[node name="VolumeSliderLabel" type="Label" parent="."]
+offset_left = 919.0
+offset_top = 1.0
+offset_right = 1024.0
+offset_bottom = 24.0
+theme_override_colors/font_color = Color(0.392157, 0.992157, 0.564706, 1)
+theme_override_colors/font_shadow_color = Color(0.00784314, 0.14902, 0.47451, 1)
+theme_override_fonts/font = SubResource("FontVariation_ann8r")
+text = "Tune Volume"
 
 [node name="Label_Total" type="Label" parent="."]
 offset_left = 1684.0
@@ -300,6 +324,7 @@ text = "0
 script = ExtResource("13_et2me")
 
 [connection signal="tree_exiting" from="." to="." method="TreeExit"]
+[connection signal="value_changed" from="MusicVolumeSlider" to="." method="MusicVolumeChanged"]
 [connection signal="pressed" from="ResetButton" to="." method="RestartLevel"]
 [connection signal="pressed" from="QuitButton" to="." method="QuitGame"]
 [connection signal="pressed" from="CheatLevelButton" to="." method="AdvanceToNextLevel"]
